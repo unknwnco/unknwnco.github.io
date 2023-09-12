@@ -418,3 +418,215 @@ h3{
   text-shadow: 1px 1px 2px #427388; 
 }
 
+/* Media Queries Resposive */
+
+/*900*/
+@media screen and (max-width:80em){
+    .reel-video{
+        width: 1100px;
+        height: 625px;
+    }
+    .video{
+        width: 950px;
+        height: 450px;
+        margin: auto;
+    }
+    .video2{
+        height: 450px;
+        margin: auto;
+    }
+    .video3{
+        height: 450px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 500px;
+        height: 300px;
+        padding: 25px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 1100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:273px;
+    }
+    .publicidad2{
+        width:273px;
+    }
+    .animacion2{
+        width:273px;
+    }
+    .about2{
+        width:273px;
+    }
+    .reel{
+        width:220px;
+    }
+    .model{
+        width:220px;
+    }
+    .publicidad{
+        width:220px;
+    }
+    .animacion{
+        width:220px;
+    }
+    .about{
+        width:220px;
+    }
+}
+    
+/*@685px*/
+@media screen and (max-width: 75em){
+    .reel-video{
+        width: 900px;
+        height: 596px;
+    }
+    .video{
+        width: 850px;
+        height: 450px;
+        margin: auto;
+    }
+    .video2{
+        height: 450px;
+        margin: auto;
+    }
+    .video3{
+        height: 450px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 400px;
+        height: 200px;
+        padding: 10px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 900px;
+        height: 100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:223px;
+    }
+    .publicidad2{
+        width:223px;
+    }
+    .animacion2{
+        width:223px;
+    }
+    .about2{
+        width:223px;
+    }
+    .reel{
+        width:180px;
+    }
+    .model{
+        width:180px;
+    }
+    .publicidad{
+        width:180px;
+    }
+    .animacion{
+        width:180px;
+    }
+    .about{
+        width:180px;
+    }
+    
+    .active{
+        font-size: 24px;
+        font-weight: 580;
+    }
+}
+
+/*@480*/
+
+@media screen and (max-width:55em){
+    .reel-video{
+        width: 560px;
+        height: 425px;
+    }
+    .video{
+        width: 550px;
+        height: 300px;
+        margin: auto;
+    }
+    .video2{
+        height: 300px;
+        margin: auto;
+    }
+    .video3{
+        height: 300px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        display: flex;
+        margin: auto;
+        height: 200px;
+        padding: 10px 5px;
+    }
+    .video-select2{
+        width: 350px;
+        height: 200px;
+        display: flex;
+        padding: 10px 0;
+    }
+    .selector-bar{
+        height: 80px;
+        width: 560px;
+        font-size: 14px;
+    }
+    .model2{
+        width:138px;
+    }
+    .publicidad2{
+        width:138px;
+    }
+    .animacion2{
+        width:138px;
+    }
+    .about2{
+        width:138px;
+    }
+    .reel{
+        width:110px;
+    }
+    .model{
+        width:110px;
+    }
+    .publicidad{
+        width:110px;
+    }
+    .animacion{
+        width:110px;
+    }
+    .about{
+        width:110px;
+    }
+    
+    .active{
+        font-size: 18px;
+        font-weight: 590;
+    }
+}
