@@ -233,7 +233,8 @@ section{
 .active{
     font-size: 30px;
     outline: 5px solid white;
-    background-image: url(../img/BG_Cover.jpg);    
+    background-image: url(../img/BG_Cover.jpg);
+     z-index: 1;
 }
 
 .reel{
@@ -572,16 +573,16 @@ h3{
 
 @media screen and (max-width:40em){
     .reel-video{
-        width: 340px;
+        width: 342px;
         height: 625px;
     }
     .reel-video2{
-        width: 340px;
-        height: 325px;
+        width: 342px;
+        height: 275px;
     }
     .video{
         width: 330px;
-        height: 220px;
+        height: 170px;
         margin: auto;
     }
     .video2{
