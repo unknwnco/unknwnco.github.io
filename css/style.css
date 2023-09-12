@@ -495,25 +495,50 @@ h3{
     .about{
         width:220px;
     }
+    .about-cont{
+        height: 450px;
+    }
+    .about-parrafo{
+        
+        font-size: 16px;
+        text-align: center;
+    }
+    .foto{
+        width: 350px;
+        height: 432px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 60px;
+        height: 60px;
+    }
+    
 }
     
 /*@685px*/
 @media screen and (max-width: 75em){
     .reel-video{
         width: 900px;
-        height: 596px;
+        height: 542px;
+    }
+    .reel-video2{
+        width: 900px;
+        height: 493px;
     }
     .video{
         width: 850px;
-        height: 450px;
+        height: 350px;
         margin: auto;
     }
     .video2{
-        height: 450px;
+        height: 398px;
         margin: auto;
     }
     .video3{
-        height: 450px;
+        height: 398px;
         margin: auto;
         display: block;
         overflow: auto;   
@@ -532,7 +557,7 @@ h3{
     }
     .selector-bar{
         width: 900px;
-        height: 200px;
+        height: 100px;
         font-size: 18px;
     }
     .model2{
@@ -567,11 +592,133 @@ h3{
         font-size: 24px;
         font-weight: 580;
     }
+    .about-cont{
+        height: 398px;
+    }
+    .about-text{
+        
+    }
+    .about-parrafo{
+        width: 480px;
+        font-size: 15px;
+        text-align: center;
+    }
+    .foto{
+        width: 300px;
+        height: 370px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 60px;
+        height: 60px;
+    }
 }
+
+/*@685px*/
+@media screen and (max-width: 60em){
+    .reel-video{
+        width: 700px;
+        height: 500px;
+    }
+    .reel-video2{
+        width: 700px;
+        height: 493px;
+    }
+    .video{
+        width: 680px;
+        height: 350px;
+        margin: auto;
+    }
+    .video2{
+        height: 355px;
+        margin: auto;
+    }
+    .video3{
+        height: 398px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 300px;
+        height: 200px;
+        padding: 10px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 700px;
+        height: 100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:174px;
+    }
+    .publicidad2{
+        width:174px;
+    }
+    .animacion2{
+        width:174px;
+    }
+    .about2{
+        width:174px;
+    }
+    .reel{
+        width:140px;
+    }
+    .model{
+        width:140px;
+    }
+    .publicidad{
+        width:140px;
+    }
+    .animacion{
+        width:140px;
+    }
+    .about{
+        width:140px;
+    }
+    
+    .active{
+        font-size: 22px;
+        font-weight: 580;
+    }
+    .about-cont{
+        height: 357px;
+    }
+    .about-text{
+        
+    }
+    .about-parrafo{
+        width: 380px;
+        font-size: 14px;
+        text-align: center;
+    }
+    .foto{
+        width: 250px;
+        height: 308px;
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 40px;
+        height: 40px;
+    }
+}
+
 
 /*@480*/
 
-@media screen and (max-width:40em){
+@media screen and (max-width:45em){
     .reel-video{
         width: 342px;
         height: 625px;
@@ -642,14 +789,38 @@ h3{
         border: 1px solid #101010;
         width:339px;
     }
-    
     .active{
         font-size: 18px;
         font-weight: 590;
     }
-    
-    #scroll::-webkit-scrollbar
-{
+    #scroll::-webkit-scrollbar{
 	width: 5px;
-}
+    }
+    
+    .about-cont{
+        height: 398px;
+    }
+    .about-text{
+        flex-direction: column;
+    }
+    .about-parrafo{
+        order: 2;
+        width: 295px;
+        font-size: 13px;
+        text-align: center;
+    }
+    .foto{
+        order: 1;
+        width: 150px;
+        height: 185px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 40px;
+        height: 40px;
+    }
+    
 }
