@@ -90,6 +90,16 @@ section{
     border-radius: 3px;
 }
 
+.reel-video2{
+    display: inline-block;
+    margin: auto;
+    width: 1200px;
+    height: 675px;
+    background-color: #050505;
+    border: 5px solid #101010;
+    border-radius: 3px;
+}
+
 .logos{
     width: 60px;
     height: 60px;
@@ -521,7 +531,7 @@ h3{
     }
     .selector-bar{
         width: 900px;
-        height: 100px;
+        height: 200px;
         font-size: 18px;
     }
     .model2{
@@ -560,18 +570,22 @@ h3{
 
 /*@480*/
 
-@media screen and (max-width:55em){
+@media screen and (max-width:40em){
     .reel-video{
-        width: 560px;
-        height: 425px;
+        width: 340px;
+        height: 625px;
+    }
+    .reel-video2{
+        width: 340px;
+        height: 325px;
     }
     .video{
-        width: 550px;
-        height: 300px;
+        width: 330px;
+        height: 220px;
         margin: auto;
     }
     .video2{
-        height: 300px;
+        height: 400px;
         margin: auto;
     }
     .video3{
@@ -584,6 +598,7 @@ h3{
         display: flex;
         margin: auto;
         height: 200px;
+        width: 300px;
         padding: 10px 5px;
     }
     .video-select2{
@@ -593,40 +608,47 @@ h3{
         padding: 10px 0;
     }
     .selector-bar{
-        height: 80px;
-        width: 560px;
+        flex-wrap: wrap;
+        height: 60px;
+        width: 341px;
         font-size: 14px;
     }
     .model2{
-        width:138px;
+        width:84px;
     }
     .publicidad2{
-        width:138px;
+        width:84px;
     }
     .animacion2{
-        width:138px;
+        width:84px;
     }
     .about2{
-        width:138px;
+        width:84px;
     }
     .reel{
-        width:110px;
+        width:168px;
     }
     .model{
-        width:110px;
+        width:168px;
     }
     .publicidad{
-        width:110px;
+        width:168px;
     }
     .animacion{
-        width:110px;
+        width:168px;
     }
     .about{
-        width:110px;
+        border: 1px solid #101010;
+        width:339px;
     }
     
     .active{
         font-size: 18px;
         font-weight: 590;
     }
+    
+    #scroll::-webkit-scrollbar
+{
+	width: 5px;
+}
 }
