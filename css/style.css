@@ -22,7 +22,7 @@ body{
     width: 100%;
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: 2px;
     line-height: 1.em;
     font-family: 'Roboto', sans-serif;
 }
@@ -211,7 +211,7 @@ section{
     justify-content: space-between;
     list-style: none;
     align-self: flex-start;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .D{
@@ -231,7 +231,7 @@ section{
 }
 
 .active{
-    font-size: 30px;
+    font-size: 35px;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
      z-index: 1;
@@ -243,7 +243,7 @@ section{
 }
 
 .reel:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);    
@@ -256,7 +256,7 @@ section{
 
 .model:hover{
     font-family: '3d';
-    font-size: 35px;
+    font-size: 40px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
@@ -269,7 +269,7 @@ section{
 
 
 .publicidad:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
@@ -281,7 +281,7 @@ section{
 }
 
 .animacion:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
@@ -292,7 +292,7 @@ section{
 }
 
 .about:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
@@ -322,19 +322,19 @@ section{
     background-image: url(../img/BG_Cover.jpg);
 }
 .publicidad2:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
 }
 .animacion2:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
 }
 .about2:hover{
-    font-size: 25px;
+    font-size: 30px;
     transition: all 300ms ease-out;
     outline: 5px solid white;
     background-image: url(../img/BG_Cover.jpg);
@@ -713,6 +713,47 @@ h3{
         width: 40px;
         height: 40px;
     }
+    
+        /*hover*/
+    
+    .model2:hover{
+        font-size225px;
+        font-weight:590;
+    }
+    .publicidad2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .animacion2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .about2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+
+    .reel:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .model:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .publicidad:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .animacion:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .about:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    /*fin hover*/
 }
 
 
@@ -774,6 +815,48 @@ h3{
     .about2{
         width:84px;
     }
+    
+    /*hover*/
+    
+    .model2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .publicidad2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .animacion2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .about2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+
+    .reel:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .model:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .publicidad:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .animacion:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .about:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    /*fin hover*/
+    
     .reel{
         width:168px;
     }
