@@ -206,7 +206,7 @@ section{
     background-image: url(../img/gif/GMO_MOVE.gif);
 }
 .gif2:hover{
-   background-image: url(../img/gif/Lechera_Move.gif);
+    background-image: url(../img/gif/Lechera_Move.gif);
 }
 .gif3:hover{
     background-image: url(../img/gif/Xtime_Move.gif); 
@@ -990,20 +990,25 @@ h3{
     }
     
     .gif1{
+        pointer-events:none;
         margin:25px;
         height:157px;
         width:280px;
+        background-image: url(../img/gif/GMO_MOVE.gif);
     }
     .gif2{
+        pointer-events:none;
         margin:25px;
         height:157px;
         width:280px;
+        background-image: url(../img/gif/Lechera_Move.gif);
     }
     .gif3{
         pointer-events:none;
         margin:25px;
         height:157px;
         width:280px;
+        background-image: url(../img/gif/Xtime_Move.gif); 
     }
     
 }
