@@ -1,0 +1,1008 @@
+/* Estilos */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+@font-face{
+    font-family:'3d';
+    src:url(../fonts/Mockery3D.ttf);}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: white;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 2px;
+    line-height: 1.em;
+    font-family: 'Roboto', sans-serif;
+}
+
+p{
+    margin: auto;
+}
+
+.contenedor{
+    background-color: black;
+    background-image: url(../img/BG_Cover.jpg);
+    background-size: cover;
+}
+
+.a{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.32);
+}
+
+.b{
+    height: 93vh;
+    background-color: rgba(255, 255, 255, 0.02);
+    text-align: center;
+}
+
+.c{
+    height: 100vh;
+    background-color: azure;
+}
+
+.logo{
+    max-height: 80px;
+    padding: 1em;
+    
+}
+
+section{
+    height: 100vh;
+}
+
+
+.reel-pass{
+    margin: auto;
+    height: 91vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;  
+}
+
+.cont-reel{
+    display: flex;
+    height: 100vh;
+    background-color: #010101;
+}
+
+.reel-video{
+    display: inline-block;
+    margin: auto;
+    width: 1200px;
+    height: 675px;
+    background-color: #050505;
+    border: 5px solid #101010;
+    border-radius: 3px;
+}
+
+.reel-video2{
+    display: inline-block;
+    margin: auto;
+    width: 1200px;
+    height: 675px;
+    background-color: #050505;
+    border: 5px solid #101010;
+    border-radius: 3px;
+}
+
+.logos{
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
+.programas{
+    display: block;
+}
+
+.about-text{
+    height: 100%;
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    
+}
+
+.about-parrafo{
+    font-size: 15px;
+    margin: auto;
+}
+
+.foto{
+    align-self: center;
+    width: 400px;
+    height: 493px;
+    margin: 20px;
+}
+
+.video{
+    width: 100%;
+    display: flex;
+    height: 500px;
+    padding: 22px 0;
+}
+
+.about-cont{
+    display: flex;
+    width: 100%;
+    height: 500px;
+    padding: 22px 0;
+    align-items: flex-end;
+}
+
+.about-cont p{
+    flex-flow: column wrap;
+    width: 900px;
+    height: 200px;
+}
+
+.video2{
+    width: 100%;
+    display: block;
+    height: 480px;
+    padding: 22px 0;
+    overflow: auto;
+    margin: 10px 0;
+}
+
+.video3{
+    display: flex;
+    width: 100%;
+    height: 480px;
+    padding: 22px 0;
+    margin: 10px 0;
+    justify-content: space-between;
+}
+
+.video-select2{ 
+    margin: auto;
+    height: 300px;
+    width: 400px;
+    padding: 25px 10px;
+    cursor:pointer;
+}
+
+.gif1{
+    margin:auto;
+    height:214px;
+    width:380px;
+    background-image: url(../img/gif/GMO_Static.jpg);
+    background-size:cover;
+    cursor:pointer;
+}
+.gif2{
+    margin:auto;
+    height:214px;
+    width:380px;
+    background-image: url(../img/gif/Lechera_Static.jpg);
+    background-size:cover;
+    cursor:pointer;
+}
+.gif3{
+    margin:auto;
+    height:214px;
+    width:380px;
+    background-image: url(../img/gif/Xtime_Static.jpg);
+    background-size:cover;
+    cursor:pointer;
+}
+
+.gif1:hover{
+    background-image: url(../img/gif/GMO_MOVE.gif);
+}
+.gif2:hover{
+   background-image: url(../img/gif/Lechera_Move.gif);
+}
+.gif3:hover{
+    background-image: url(../img/gif/Xtime_Move.gif); 
+}
+
+
+
+#scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	
+}
+
+#scroll::-webkit-scrollbar
+{
+	width: 12px;
+}
+
+#scroll::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+
+.video-select{
+    height: 300px;
+    width: 570px;
+    padding: 25px 10px;
+}
+
+
+.selector-bar{
+    display: flex;
+    width: 100%;
+    height: 130px;
+    background-color: black;
+    justify-content: space-between;
+    list-style: none;
+    align-self: flex-start;
+    font-size: 25px;
+}
+
+.D{
+    font-size: 35px;
+    font-family: '3d';
+}
+
+.selector-bar a, li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.selector-bar h1{ 
+    margin: auto;  
+}
+
+.active{
+    font-size: 35px;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+     z-index: 1;
+}
+
+.reel{
+    width: 239px;
+    border-right: 1px solid #101010;  
+}
+
+.reel:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);    
+}
+
+.model{
+    width: 239px;
+    border-right: 1px solid #101010;
+}
+
+.model:hover{
+    font-family: '3d';
+    font-size: 40px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+
+.publicidad{
+    width: 239px;
+    border-right: 1px solid #101010;
+}
+
+
+.publicidad:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+
+.animacion{
+    width: 239px;
+    border-right: 1px solid #101010;
+}
+
+.animacion:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+
+.about{
+    width: 239px;    
+}
+
+.about:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+
+.model2{
+    width: 299px;
+    border-right: 1px solid #101010;
+}
+.publicidad2{
+    width: 299px;
+    border-right: 1px solid #101010;
+}
+.animacion2{
+    width: 299px;
+    border-right: 1px solid #101010;
+}
+.about2{
+    width: 299px;    
+}
+
+.model2:hover{
+    font-family: '3d';
+    font-size: 35px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+.publicidad2:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+.animacion2:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+.about2:hover{
+    font-size: 30px;
+    transition: all 300ms ease-out;
+    outline: 5px solid white;
+    background-image: url(../img/BG_Cover.jpg);
+}
+
+.parrafo{
+    margin: auto;
+    height: 91vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parrafo p{
+    padding: .5em;
+    margin: 0;
+    text-decoration: underline;
+}
+
+.parrafo h1{
+    font-size: 26px;
+}
+
+.parrafo h4{
+    font-weight: 500;
+}
+
+h3{
+    display: flex;
+    justify-content: center;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+}
+
+.space{
+    margin: .3em;
+}
+
+.redes{
+    filter: invert();
+}
+
+.sociales{
+    padding: 1em;
+    width: 30px;
+}
+
+.perfil{
+    max-height: 150px;
+    border-radius: 200px;
+}
+
+.under{
+    text-decoration: none;
+}
+
+.footer{
+    font-size: 15px;
+}
+
+.btn{
+    color: #fff;
+    cursor: pointer;
+    font-size:16px;
+    font-weight: 400;
+    line-height: 45px;
+    margin: .5em auto .5em auto;
+    max-width: 160px; 
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%; 
+    text-align: center;  
+}
+
+.btn-5 {
+    
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
+
+.btn-5:hover {
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388; 
+}
+
+/* Media Queries Resposive */
+
+/*900*/
+@media screen and (max-width:80em){
+    .reel-video{
+        width: 1100px;
+        height: 625px;
+    }
+    .video{
+        width: 950px;
+        height: 450px;
+        margin: auto;
+    }
+    .video2{
+        height: 450px;
+        margin: auto;
+    }
+    .video3{
+        height: 450px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 500px;
+        height: 300px;
+        padding: 25px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 1100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:273px;
+    }
+    .publicidad2{
+        width:273px;
+    }
+    .animacion2{
+        width:273px;
+    }
+    .about2{
+        width:273px;
+    }
+    .reel{
+        width:220px;
+    }
+    .model{
+        width:220px;
+    }
+    .publicidad{
+        width:220px;
+    }
+    .animacion{
+        width:220px;
+    }
+    .about{
+        width:220px;
+    }
+    .about-cont{
+        height: 450px;
+    }
+    .about-parrafo{
+        
+        font-size: 16px;
+        text-align: center;
+    }
+    .foto{
+        width: 350px;
+        height: 432px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 60px;
+        height: 60px;
+    }
+        .gif1{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif2{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif3{
+        height:304px;
+        width:540px;
+    }
+    
+}
+    
+/*@685px*/
+@media screen and (max-width: 75em){
+    .reel-video{
+        width: 900px;
+        height: 542px;
+    }
+    .reel-video2{
+        width: 900px;
+        height: 493px;
+    }
+    .video{
+        width: 850px;
+        height: 350px;
+        margin: auto;
+    }
+    .video2{
+        height: 398px;
+        margin: auto;
+    }
+    .video3{
+        height: 398px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 400px;
+        height: 200px;
+        padding: 10px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 900px;
+        height: 100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:223px;
+    }
+    .publicidad2{
+        width:223px;
+    }
+    .animacion2{
+        width:223px;
+    }
+    .about2{
+        width:223px;
+    }
+    .reel{
+        width:180px;
+    }
+    .model{
+        width:180px;
+    }
+    .publicidad{
+        width:180px;
+    }
+    .animacion{
+        width:180px;
+    }
+    .about{
+        width:180px;
+    }
+    
+    .active{
+        font-size: 24px;
+        font-weight: 580;
+    }
+    .about-cont{
+        height: 398px;
+    }
+    .about-text{
+        
+    }
+    .about-parrafo{
+        width: 480px;
+        font-size: 15px;
+        text-align: center;
+    }
+    .foto{
+        width: 300px;
+        height: 370px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 60px;
+        height: 60px;
+    }
+    
+    .gif1{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif2{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif3{
+        height:304px;
+        width:540px;
+    }
+}
+
+/*@685px*/
+@media screen and (max-width: 60em){
+    .reel-video{
+        width: 700px;
+        height: 500px;
+    }
+    .reel-video2{
+        width: 700px;
+        height: 493px;
+    }
+    .video{
+        width: 680px;
+        height: 350px;
+        margin: auto;
+    }
+    .video2{
+        height: 355px;
+        margin: auto;
+    }
+    .video3{
+        height: 355px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        flex-direction: row;
+        width: 300px;
+        height: 200px;
+        padding: 10px 20px;
+    }
+    .video-select2{
+        width: 650px;
+        height: 300px;
+        display: flex;
+        padding: 20px 0;
+    }
+    .selector-bar{
+        width: 700px;
+        height: 100px;
+        font-size: 18px;
+    }
+    .model2{
+        width:174px;
+    }
+    .publicidad2{
+        width:174px;
+    }
+    .animacion2{
+        width:174px;
+    }
+    .about2{
+        width:174px;
+    }
+    .reel{
+        width:140px;
+    }
+    .model{
+        width:140px;
+    }
+    .publicidad{
+        width:140px;
+    }
+    .animacion{
+        width:140px;
+    }
+    .about{
+        width:140px;
+    }
+    
+    .active{
+        font-size: 22px;
+        font-weight: 580;
+    }
+    .about-cont{
+        height: 357px;
+    }
+    .about-text{
+        
+    }
+    .about-parrafo{
+        width: 380px;
+        font-size: 14px;
+        text-align: center;
+    }
+    .foto{
+        width: 250px;
+        height: 308px;
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 40px;
+        height: 40px;
+    }
+    
+        /*hover*/
+    
+    .model2:hover{
+        font-size:25px;
+        font-weight:590;
+    }
+    .publicidad2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .animacion2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .about2:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+
+    .reel:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .model:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .publicidad:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .animacion:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    .about:hover{
+        font-size:22px;
+        font-weight:590;
+    }
+    /*fin hover*/
+    
+    .gif1{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif2{
+        height:304px;
+        width:540px;
+        margin-bottom: 20px;
+    }
+    .gif3{
+        height:304px;
+        width:540px;
+    }
+}
+
+
+/*@480*/
+
+@media screen and (max-width:45em){
+    .reel-video{
+        width: 342px;
+        height: 625px;
+    }
+    .reel-video2{
+        width: 342px;
+        height: 275px;
+    }
+    .video{
+        width: 330px;
+        height: 170px;
+        margin: auto;
+    }
+    .video2{
+        height: 400px;
+        margin: auto;
+    }
+    .video3{
+        width: 340px;
+        height: 400px;
+        margin: auto;
+        display: block;
+        overflow: auto;   
+    }
+    .video-select{
+        display: flex;
+        margin: auto;
+        height: 200px;
+        width: 300px;
+        padding: 10px 5px;
+    }
+    .video-select2{
+        width: 300px;
+        height: 200px;
+        display: flex;
+        padding: 10px 0;
+    }
+    .selector-bar{
+        flex-wrap: wrap;
+        height: 60px;
+        width: 341px;
+        font-size: 14px;
+    }
+    .model2{
+        width:84px;
+    }
+    .publicidad2{
+        width:84px;
+    }
+    .animacion2{
+        width:84px;
+    }
+    .about2{
+        width:84px;
+    }
+    
+    /*hover*/
+    
+    .model2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .publicidad2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .animacion2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .about2:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+
+    .reel:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .model:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .publicidad:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .animacion:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    .about:hover{
+        font-size:15px;
+        font-weight:590;
+    }
+    /*fin hover*/
+    
+    .reel{
+        width:168px;
+    }
+    .model{
+        width:168px;
+    }
+    .publicidad{
+        width:168px;
+    }
+    .animacion{
+        width:168px;
+    }
+    .about{
+        border: 1px solid #101010;
+        width:339px;
+    }
+    .active{
+        font-size: 18px;
+        font-weight: 590;
+    }
+    #scroll::-webkit-scrollbar{
+	width: 5px;
+    }
+    
+    .about-cont{
+        height: 398px;
+    }
+    .about-text{
+        flex-direction: column;
+    }
+    .about-parrafo{
+        order: 2;
+        width: 295px;
+        font-size: 13px;
+        text-align: center;
+    }
+    .foto{
+        order: 1;
+        width: 150px;
+        height: 185px;
+        margin: 
+    }
+    .programas{
+        margin-top: 10px;
+    }
+    .logos{
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gif1{
+        margin:25px;
+        height:157px;
+        width:280px;
+    }
+    .gif2{
+        margin:25px;
+        height:157px;
+        width:280px;
+    }
+    .gif3{
+        margin:25px;
+        height:157px;
+        width:280px;
+    }
+    
+}
