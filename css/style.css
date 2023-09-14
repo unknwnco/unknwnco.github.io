@@ -1000,6 +1000,7 @@ h3{
         width:280px;
     }
     .gif3{
+        pointer-events:none;
         margin:25px;
         height:157px;
         width:280px;
