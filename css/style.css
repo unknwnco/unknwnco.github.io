@@ -33,9 +33,12 @@ p{
 
 .flecha{
     width: 100%;
-    text-aling: center;
-    font-size: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 30px;
 }
+
+
 
 .contenedor{
     background-color: black;
@@ -400,7 +403,7 @@ section{
 
 .parrafo{
     margin: auto;
-    height: 91vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -410,6 +413,7 @@ section{
 .parrafo p{
     padding: .5em;
     margin: 0;
+    font-size: 20px;
     text-decoration: underline;
 }
 
@@ -421,11 +425,39 @@ section{
     font-weight: 500;
 }
 
+.parrafo2{
+    margin: auto;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parrafo2 p{
+    padding: .5em;
+    margin: 0;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.parrafo2 h1{
+    font-size: 26px;
+}
+
+.parrafo2 h4{
+    font-weight: 500;
+}
+
 h3{
     display: flex;
     font-weight: 100;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+}
+
+h4{
+    font-size: 20px;
 }
 
 
@@ -438,7 +470,7 @@ h3{
 }
 
 .sociales{
-    padding: 1em;
+    padding: 10em;
     width: 30px;
 }
 
