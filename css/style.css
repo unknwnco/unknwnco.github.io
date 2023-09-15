@@ -31,6 +31,9 @@ p{
     margin: auto;
 }
 
+.flecha{
+    text-aling: center;
+}
 .contenedor{
     background-color: black;
     background-image: url(../img/BG_Cover.jpg);
