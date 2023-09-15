@@ -33,7 +33,9 @@ p{
 
 .flecha{
     text-aling: center;
+    font-size: 15px;
 }
+
 .contenedor{
     background-color: black;
     background-image: url(../img/BG_Cover.jpg);
