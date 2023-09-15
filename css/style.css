@@ -63,6 +63,19 @@ section{
     height: 100vh;
 }
 
+.list{
+    flex-direction: column;
+    margin-top: 30px;    
+}
+
+.list a{
+    margin-left: 5px;   
+}
+
+.list a:hover{
+    color: crimson;
+}
+
 
 .reel-pass{
     margin: auto;
@@ -108,6 +121,7 @@ section{
 
 .programas{
     display: block;
+    margin-top: 20px;
 }
 
 .about-text{
@@ -119,7 +133,7 @@ section{
 }
 
 .about-parrafo{
-    font-size: 15px;
+    font-size: 20px;
     margin: auto;
 }
 
@@ -403,10 +417,11 @@ section{
 
 h3{
     display: flex;
-    justify-content: center;
     font-weight: 100;
     font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
+
 
 .space{
     margin: .3em;
@@ -567,7 +582,13 @@ h3{
         height:304px;
         width:540px;
     }
-    
+    h3{
+        font-size: 15px;
+        
+    }
+    .list{
+        margin-top: 10px;
+    }
 }
     
 /*@685px*/
@@ -1011,4 +1032,14 @@ h3{
         background-image: url(../img/gif/Xtime_Move.gif); 
     }
     
+    .youtube{
+        display:none;
+    }
+    .instagram{
+        display:none;
+    }
+    
+    .about-texto2{
+        display: none;
+    }
 }
