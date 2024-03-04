@@ -37,9 +37,18 @@ img{
     color: white;
     font-family: 'roboto';
     font-weight: 100;
-
 }
 
+
+.container2{
+  background-color: rgba(36, 36, 36, 0.733);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
+  width: 100vh;
+}
 .containerB {
     text-align: center;
   }

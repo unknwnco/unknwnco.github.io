@@ -13,7 +13,7 @@
           <div class="item">1</div>
           <div class="item three-js-container" id="three-js-container"></div>
           <div class="item">3</div>
-          <div class="item">4</div>
+          <div class="item " id="fbx-container"></div>
           <div class="item">5</div>
           <div class="item">6</div>
         </div>
@@ -21,6 +21,8 @@
       
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/FBXLoader.min.js"></script>
 <script>
   // Inicializar la escena de Three.js dentro del contenedor
   const container = document.getElementById('three-js-container');
@@ -46,6 +48,7 @@
 
   animate();
 </script>
+
 
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/FBXLoader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/TransformControls.js"></script>
+</head>
+<body>
+    <div class="container2"id="fbx-container"></div>
+    <script>
+        // Crear la escena Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(1000, 1000); // Tamaño de la celda
+        document.getElementById('fbx-container').appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+      
+        // Crear la luz
+        const ambientLight = new THREE.AmbientLight(0xffffff, .5);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(0, 1, 0);
+        scene.add(directionalLight);
+      
+        // Cargar el modelo FBX
+        const loader = new THREE.FBXLoader();
+        loader.load(
+          'Chair.fbx',
+          function (fbx) {
+            scene.add(fbx);
+          },
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% cargado');
+          },
+          function (error) {
+            console.error('Error al cargar el modelo FBX', error);
+          }
+        );
+      
+        // Posicionar y apuntar la cámara al modelo
+        camera.position.set(0, 0, 5);
+        camera.lookAt(0, 0, 0);
+
+                // Crear un TransformControls
+const controls = new THREE.TransformControls(camera, renderer.domElement);
+controls.attach(objeto); // objeto es tu objeto 3D al que deseas aplicar el gizmo
+
+// Añadir TransformControls a la escena
+scene.add(controls);
+
+// Habilitar controles de transformación
+controls.addEventListener('dragging-changed', function (event) {
+  orbitControls.enabled = !event.value;
+});
+      
+        // Renderizar la escena
+        function animate() {
+          requestAnimationFrame(animate);
+          renderer.render(scene, camera);
+        }
+        animate();
+
+
+
+
+
+        
+      </script>
+</body>
+</html>
