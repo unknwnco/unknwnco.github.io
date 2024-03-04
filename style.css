@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height: 100vh;
+    flex-wrap: wrap;
+    background-color: #111111;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+  }
+.bento_container{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+    background-color: aqua;
+}
+
+.bento{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+img{
+    width: 400px;
+}
+
+.card{
+    color: white;
+    font-family: 'roboto';
+    font-weight: 100;
+
+}
+
+.containerB {
+    text-align: center;
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .bento-box {
+    display: grid;
+    grid-template-columns: 100px 100px; /* 2 columnas con el mismo ancho */
+    grid-template-rows: repeat(3, 200px); /* 3 filas de 100px de altura cada una */
+    gap: 10px; /* Espacio entre los elementos */
+  }
+  
+  .item {
+    background-color: rgba(36, 36, 36, 0.733);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
