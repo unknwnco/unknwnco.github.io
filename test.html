@@ -1,80 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js Bento Box</title>
+  <style>
+    .bento-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+      gap: 10px;
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/FBXLoader.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/TransformControls.js"></script>
+    .item {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Para que el renderizador no se desborde de la celda */
+    }
+  </style>
 </head>
 <body>
-    <div class="container2"id="fbx-container"></div>
-    <script>
-        // Crear la escena Three.js
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(1000, 1000); // Tamaño de la celda
-        document.getElementById('fbx-container').appendChild(renderer.domElement);
+  <div class="bento-box">
+    <div class="item-text">RIGGING FULL BODY</div>
+    <div class="item" id="item1"></div>
+    <div class="item-text">PROP</div>
+    <div class="item" id="item2"></div>
+    <div class="item-text">WORLD</div>
+    <div class="item" id="item3"></div>
+  </div>
 
-        const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
-      
-        // Crear la luz
-        const ambientLight = new THREE.AmbientLight(0xffffff, .5);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(0, 1, 0);
-        scene.add(directionalLight);
-      
-        // Cargar el modelo FBX
-        const loader = new THREE.FBXLoader();
-        loader.load(
-          'Chair.fbx',
-          function (fbx) {
-            scene.add(fbx);
-          },
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% cargado');
-          },
-          function (error) {
-            console.error('Error al cargar el modelo FBX', error);
-          }
-        );
-      
-        // Posicionar y apuntar la cámara al modelo
-        camera.position.set(0, 0, 5);
-        camera.lookAt(0, 0, 0);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.min.js"></script>
+  <script>
+    // Función para cargar un modelo GLTF y agregarlo a la escena
+    function cargarModelo(url, contenedor) {
+      const loader = new THREE.GLTFLoader();
+      loader.load(url, function (gltf) {
+        console.log('Modelo cargado:', gltf);
+        const object = gltf.scene.children[0];
+        object.material.transparent = true;
+        object.material.opacity = 1; // Ajusta la opacidad según lo necesites
+        contenedor.appendChild(object);
+      }, undefined, function (error) {
+        console.error('Error al cargar el modelo GLTF', error);
+      });
+    }
 
-                // Crear un TransformControls
-const controls = new THREE.TransformControls(camera, renderer.domElement);
-controls.attach(objeto); // objeto es tu objeto 3D al que deseas aplicar el gizmo
+    // Inicializar la escena Three.js dentro del contenedor
+    function inicializar() {
+      const container1 = document.getElementById('item1');
+      const container2 = document.getElementById('item2');
+      const container3 = document.getElementById('item3');
 
-// Añadir TransformControls a la escena
-scene.add(controls);
+      const scene1 = new THREE.Scene();
+      const scene2 = new THREE.Scene();
+      const scene3 = new THREE.Scene();
 
-// Habilitar controles de transformación
-controls.addEventListener('dragging-changed', function (event) {
-  orbitControls.enabled = !event.value;
-});
-      
-        // Renderizar la escena
-        function animate() {
-          requestAnimationFrame(animate);
-          renderer.render(scene, camera);
-        }
-        animate();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+      const renderer1 = new THREE.WebGLRenderer();
+      const renderer2 = new THREE.WebGLRenderer();
+      const renderer3 = new THREE.WebGLRenderer();
 
+      renderer1.setSize(container1.clientWidth, container1.clientHeight);
+      renderer2.setSize(container2.clientWidth, container2.clientHeight);
+      renderer3.setSize(container3.clientWidth, container3.clientHeight);
 
+      container1.appendChild(renderer1.domElement);
+      container2.appendChild(renderer2.domElement);
+      container3.appendChild(renderer3.domElement);
 
+      // Añadir controles de órbita a la cámara
+      const controls1 = new THREE.OrbitControls(camera, renderer1.domElement);
+      const controls2 = new THREE.OrbitControls(camera, renderer2.domElement);
+      const controls3 = new THREE.OrbitControls(camera, renderer3.domElement);
 
-        
-      </script>
+      // Configurar posición de la cámara
+      camera.position.z = 5;
+
+      // Añadir una luz a la escena para iluminar los objetos
+      const light = new THREE.PointLight(0xffffff, 1);
+      scene1.add(light);
+      scene2.add(light.clone()); // Clonar la luz para las otras escenas
+      scene3.add(light.clone());
+
+      // Cargar y agregar modelos a los contenedores
+      cargarModelo('modelo1.glb', container1); // Reemplaza 'modelo1.glb' con la ruta a tu modelo GLB para la casilla 2
+      cargarModelo('modelo2.glb', container2); // Reemplaza 'modelo2.glb' con la ruta a tu modelo GLB para la casilla 4
+      cargarModelo('modelo3.glb', container3); // Reemplaza 'modelo3.glb' con la ruta a tu modelo GLB para la casilla 6
+
+      // Función de renderizado
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer1.render(scene1, camera);
+        renderer2.render(scene2, camera);
+        renderer3.render(scene3, camera);
+        controls1.update();
+        controls2.update();
+        controls3.update();
+      }
+      animate();
+    }
+
+    // Llamar a la función de inicialización cuando el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', inicializar);
+  </script>
 </body>
 </html>

@@ -5,16 +5,48 @@ body {
     justify-content:center;
     align-items:center;
     height: 100vh;
-    flex-wrap: wrap;
+    font-family: 'Roboto';
     background-color: #111111;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+  background-color: aqua;
+}
+
+#avatar-container {
+  width: 500px;
+  height: 500px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+}
+
+#avatar-loading {
+  font-size: 3em;
+}
+
+
+
 .container {
     display: flex;
+    flex-direction: column;
+    width: 70%;
     justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+    align-items: center; /* Centra verticalmente */ /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+    background-color: rgb(43, 43, 43);
+    border-radius: 10px;
   }
+
+.title{
+  
+}
 .bento_container{
     display: flex;
     justify-content: center; /* Centra horizontalmente */
@@ -24,7 +56,7 @@ body {
 }
 
 .bento{
-    width: 100px;
+    width: 200px;
     height: 100px;
     background-color: red;
 }
@@ -50,6 +82,10 @@ img{
   width: 100vh;
 }
 .containerB {
+  
+  padding: 10px;
+  align-content: center;
+  
     text-align: center;
   }
   
@@ -59,18 +95,41 @@ img{
   }
   
   .bento-box {
+    
+    justify-content: center;
     display: grid;
-    grid-template-columns: 100px 100px; /* 2 columnas con el mismo ancho */
-    grid-template-rows: repeat(3, 200px); /* 3 filas de 100px de altura cada una */
+    grid-template-columns: 100px 400px; /* 2 columnas con el mismo ancho */
+    grid-template-rows: repeat(3, 250px); /* 3 filas de 100px de altura cada una */
     gap: 10px; /* Espacio entre los elementos */
   }
   
   .item {
-    background-color: rgba(36, 36, 36, 0.733);
-    border-radius: 10px;
+    /*background-color: rgba(36, 36, 36, 0.733);
+    border-radius: 10px;*/
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.4px);
+    -webkit-backdrop-filter: blur(19.4px);
+    border: 1px solid rgba(255, 255, 255, 0.04); 
+  }
+
+  .item-text{
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
   
+  .gizmo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
