@@ -12,9 +12,9 @@ function loadModel() {
       document.getElementById('avatar-loading').style.display = 'none';
     }, 
     (xhr) => {
-      const percentCompletion = Math.round((xhr.loaded / xhr.total) * 100);
-      document.getElementById('avatar-loading').innerText = `LOADING... ${percentCompletion}%`
-      console.log(`Loading model... ${percentCompletion}%`);
+      //const percentCompletion = Math.round((xhr.loaded / xhr.total) * 100);
+      //document.getElementById('avatar-loading').innerText = `LOADING... ${percentCompletion}%`
+      //console.log(`Loading model... ${percentCompletion}%`);
     }, 
     (error) => {
       console.log(error);
@@ -41,7 +41,7 @@ function setupScene(gltf) {
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
       45, container.clientWidth / container.clientHeight);
-    camera.position.set(0.2, 0.5, 1);
+    camera.position.set(0.2, 0.5, 4);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -50,7 +50,7 @@ function setupScene(gltf) {
     controls.minDistance = 3;
     controls.minPolarAngle = 1.4;
     controls.maxPolarAngle = 1.4;
-    controls.target = new THREE.Vector3(0, 0.75, 0);
+    controls.target = new THREE.Vector3(0, 1.2, 0);
     controls.update();
 
     // Scene setup
