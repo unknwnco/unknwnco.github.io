@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: 'Roboto';
+    background-color: #050505;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+  background-color: aqua;
+}
+
+#avatar-container {
+  width: 500px;
+  height: 500px;
+  background-color: red;
+  overflow: hidden;
+}
+
+#avatar-loading {
+  font-size: 3em;
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */ /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+    
+    border-radius: 10px;
+  }
+
+.title{
+  
+}
+.bento_container{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Opcional: para que el contenedor ocupe toda la altura de la ventana */
+    background-color: aqua;
+}
+
+.bento{
+    width: 200px;
+    height: 100px;
+    background-color: red;
+}
+
+img{
+    width: 400px;
+}
+
+.card{
+    color: white;
+    font-family: 'roboto';
+    font-weight: 100;
+}
+
+
+.container2{
+  background-color: rgba(36, 36, 36, 0.733);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
+  width: 100vh;
+}
+.containerB {
+  
+  padding: 10px;
+  align-content: center;
+  
+    text-align: center;
+  }
+  
+  .price{
+    
+    width: 250px;
+    height: 320px;
+    display: flex;
+    align-items: flex-end;
+    border: 10px solid white;
+    border-radius: 16px;
+    font-size: 1.3em;
+    overflow: hidden;
+  }
+
+  .price span{
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+
+  .span-text{
+    background-color: red;
+    width: 55px;
+    height: 55px;
+    border-radius: 0 35px 0 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .title {
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .bento-box {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 300px 250px; /* 2 columnas con el mismo ancho */
+    grid-template-rows: repeat(3, 340px); /* 3 filas de 100px de altura cada una */
+    gap: 10px; /* Espacio entre los elementos */
+  }
+  
+  .item {
+    /*background-color: rgba(36, 36, 36, 0.733);
+    border-radius: 10px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.4px);
+    -webkit-backdrop-filter: blur(19.4px);
+    border: 1px solid rgba(255, 255, 255, 0.04); 
+    overflow: hidden;
+  }
+
+  .item-text{
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .gizmo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
