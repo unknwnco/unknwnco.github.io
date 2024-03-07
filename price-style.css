@@ -33,18 +33,6 @@ body {
   background-color: aqua;
 }
 
-#avatar-container {
-  width: 500px;
-  height: 500px;
-  background-color: red;
-  overflow: hidden;
-}
-
-#avatar-loading {
-  font-size: 3em;
-}
-
-
 
 .container {
     display: flex;
@@ -152,6 +140,11 @@ img{
     margin: 20px;
   }
 
+  .item img{
+    width: 230px;
+    height: 320px;
+  }
+
   .item-text{
     width: 230px;
     height: 320px;   
@@ -160,6 +153,7 @@ img{
     justify-content: center;
     align-items: center;
     margin: 20px;
+    font-size: 1.5em;
   }
   
 
@@ -213,6 +207,10 @@ img{
   .containerB{
     width: 100%;
     
+  }
+
+  .item-text{
+    font-weight: bold;
   }
 
 }
