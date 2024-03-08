@@ -146,6 +146,7 @@ img{
     overflow: hidden;
   }
 
+  
   .item img{
     margin-top: 40px;
     width: 330px;
@@ -216,11 +217,6 @@ img{
 
   .item-text p{
     display: none;
-  }
-
-  .container{
-    width: 100%;
-    
   }
 
   .containerB{
