@@ -19,7 +19,7 @@ body {
     font-family: 'Roboto';
     background-color: #000000;
     margin: 0 0 2em 0;
-    overflow: hidden;
+    
 }
 
 
@@ -68,7 +68,7 @@ img{
 }
 
 .containerB {
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(55,55,55,1) 35%, rgba(0,212,255,0) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0, 5, 22) 50%, rgba(0,212,255,0) 100%);
   width: 600px;
   border-radius: 16px;
   padding: 10px;
