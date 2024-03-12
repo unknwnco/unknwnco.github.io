@@ -91,7 +91,7 @@ img{
   }
 
   .price span{
-    color: #797979;
+    color: #161616;
   }
 
   .span-text{
@@ -105,7 +105,7 @@ img{
   }
 
   .overlay-price{
-    color: #797979;
+    color: #0f0f0f;
     position: absolute;
     display: flex;
     align-self: flex-start;
