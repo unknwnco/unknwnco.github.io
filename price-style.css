@@ -13,7 +13,6 @@ html{
 
 
 body {
-    
     margin: 0;
     padding: 0;
     font-family: 'Roboto';
@@ -216,11 +215,6 @@ img{
 
   .item-text p{
     display: none;
-  }
-
-  .containerB{
-    
-    
   }
 
   .item-text{
