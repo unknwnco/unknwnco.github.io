@@ -235,8 +235,10 @@ img{
 /*@480*/
 
 @media screen and (max-width:45em){
-
-
+  .header{
+    width: 240px;
+    font-size: .7em;
+  }
 
 
   .bento-box{
