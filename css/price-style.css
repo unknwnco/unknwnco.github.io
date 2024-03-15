@@ -111,6 +111,10 @@ img{
     width: 400px;
 }
 
+.fix_img{
+  width: 100px;
+}
+
 .containerB {
   background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0, 9, 39) 50%, rgba(0,212,255,0) 100%);
   width: 600px;
@@ -174,6 +178,7 @@ img{
   }
   
   .item {
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -191,11 +196,35 @@ img{
     box-shadow: 0px 0px 20px 0px rgba(255,255,255,0.9);
   }
 
-  
+
   .item img{
     margin-top: 40px;
     width: 330px;
     height: 450px;
+  }
+
+  .item2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 288px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(19.4px);
+    border: 1px solid rgba(255, 255, 255, 0.04); 
+    filter: drop-shadow(2px 0px 6px #000000);
+    border-radius: 16px;
+    margin: 20px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px 0px rgba(255,255,255,0.9);
+  }
+  
+
+  .item2 img{
+    margin-top: 28px;
+    height: 190px;
   }
 
   .item-text{
@@ -209,9 +238,30 @@ img{
     margin: 20px;
     font-size: 1.5em;
     font-weight: bolder;
+    align-self: center;
   }
 
   .item-text p{
+    font-size:medium;
+    margin: 10px;
+    font-weight: 400;
+  }
+
+  .item-text2{
+    width: 230px;
+    height: 200px;   
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    align-self: center;
+  }
+
+  .item-text2 p{
     font-size:medium;
     margin: 10px;
     font-weight: 400;
@@ -252,18 +302,32 @@ img{
     flex-direction: column;
     align-content: center;
   }
-
+  
   .item-text{
     height: 50px;
-  }
-
-  .item-text p{
-    display: none;
-  }
-
-  .item-text{
+    width: 300px;
     font-weight: bold;
   }
+  .item-text p{
+    font-size: .6em;
+    /*display: none;*/
+  }
+
+  .item-text2{
+    height: 50px;
+    width: 300px;
+    font-weight: bold;
+  }
+  .item-text2 p{
+    font-size: .6em;
+    /*display: none;*/
+  }
+
+  .item,.item2{
+    margin-bottom: 50px;
+  }
+
+
 
   .containerB {
   width: 95%;
