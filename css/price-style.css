@@ -15,7 +15,6 @@ footer{
   align-items: center;
   height: 40px;
   color: white;
-  width: 500px;
   margin: 5px 0 5px 0;
   font-size: small;
   justify-content: center;
@@ -116,7 +115,7 @@ img{
 }
 
 .containerB {
-  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0, 9, 39) 50%, rgba(0,212,255,0) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0, 14, 59) 50%, rgba(0,212,255,0) 100%);
   width: 600px;
   border-radius: 16px;
   padding: 10px;
