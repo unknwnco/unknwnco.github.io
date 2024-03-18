@@ -6,7 +6,7 @@ window.onload = () => loadModel();
 
 function loadModel() {
   const loader = new GLTFLoader();
-  loader.load('../avatar.glb',
+  loader.load('avatar.glb',
     (gltf) => {
       setupScene(gltf);
       document.getElementById('avatar-loading').style.display = 'none';
@@ -141,5 +141,3 @@ function setupScene(gltf) {
     animate();
     waveAction.play();
 }
-
-
