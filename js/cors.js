@@ -9,7 +9,7 @@ fetch(proxyUrl + url)
   .then(response => response.json())
   .then(data => {
     // Procesa los datos recibidos
-    console.log(data);
+    console.log(data);a
   })
   .catch(error => {
     // Maneja errores
