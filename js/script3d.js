@@ -80,11 +80,31 @@
           const model1 = gltf.scene;
           scene1.add(model1);
         
-          // Agregar una luz direccional al modelo
-          const light = new THREE.DirectionalLight(0xffffff, 4); // Color blanco y intensidad 1
-          light.position.set(0, 5, 0); // Posición de la luz
-          scene3.add(light);          
-
+          // Recorrer todos los materiales del modelo y configurarlos como ToonMaterial
+          model1.traverse((child) => {
+            if (child.isMesh) {
+              const toonMaterial = new THREE.MeshToonMaterial({
+                color: child.material.color, // Mantener el color original del material
+                specular: new THREE.Color(0x000000), // Especificar un color negro para el componente especular
+              });
+              child.material = toonMaterial; // Reemplazar el material existente por el nuevo material toon
+            }
+          });       
+        
+          // Crear un objeto para agrupar la luz y luego rotarlo
+          const lightGroup = new THREE.Object3D();
+        
+          // Agregar una luz direccional al grupo de luces
+          const light = new THREE.DirectionalLight(0xffffff, 1); // Color blanco y intensidad 5
+          light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
+          lightGroup.add(light);
+        
+          // Rotar el grupo de luces en el eje Z
+          lightGroup.rotateZ(Math.PI / 2); // Rotar la luz 45 grados en el eje Z
+          
+          // Agregar el grupo de luces a la escena
+          scene1.add(lightGroup);
+        
           // Posicionar la cámara y los controles orbitales para el modelo1
           camera1.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
           // Mover el objetivo de la cámara
@@ -111,11 +131,11 @@
         
           // Agregar una luz direccional al grupo de luces
           const light = new THREE.DirectionalLight(0xffffff, 1); // Color blanco y intensidad 5
-          light.position.set(0, 5, 0); // Posición de la luz respecto al grupo
+          light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
           lightGroup.add(light);
         
           // Rotar el grupo de luces en el eje Z
-          lightGroup.rotateZ(Math.PI / 5); // Rotar la luz 45 grados en el eje Z
+          lightGroup.rotateZ(Math.PI / 2); // Rotar la luz 45 grados en el eje Z
           
           // Agregar el grupo de luces a la escena
           scene2.add(lightGroup);
