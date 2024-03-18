@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-app.use(cors({origin:'*'}))
+app.use(cors({origin:'https://unknwnco.github.io/Price2.html'}))
 
 window.onload = () => loadModel();
 
