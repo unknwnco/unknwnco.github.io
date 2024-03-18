@@ -3,47 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNKNWN-PRICE</title>
-    <link rel="stylesheet" href="/css/price-style.css">
-    <link rel="stylesheet" href="/css/style2.css">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@v0.158.0/build/three.module.js",
-          "three/addons/":"https://unpkg.com/three@v0.158.0/examples/jsm/"
-        }
-      }
-    </script>
-  <script type="module" src="/js/avatar.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <img src="/img/Logo_vtuber.svg" alt="" class="logo">
-      <div class="tittle"> Comissions<div class="Comissions"></div></div>
-    </div>
-     
+     <div class="title"><h2>Precios</h2></div>
     <div class="containerB">
+        
       <div class="bento-box">
-        <div class="item-text">RIGGING FULL BODY <p>Full modeling + Textured + Rigging + (include one outfit)</p></div>
-        <div class="item"><div id='avatar-container'><div id='avatar-loading'></div></div></div>
-        <div class="item-text">OUTFIT FULL MODEL <p>Full modeling + Textured + Rigging (matching your character model)</p></div>
-        <div class="item"><img src="/img/Outfit.gif" alt=""><div class="price"><div class="span-text"><span>2</span></div></div><div class="overlay-price">$150 - $...?</div></div>
-        <div class="item-text">PROP<p>Additional individual objects Modeling + Textured </p></div>
-        <div class="item"><img src="/img/prop.gif" alt=""><div class="price"><div class="span-text"><span>3</span></div></div><div class="overlay-price">$10 - $50</div></div>
-        <div class="item-text2">ROOM SCENE<p>Non-interactive custom room Modeling + Textured</p></div>
-        <div class="item2"><img src="/img/Room_Miniatura.png" alt=""><div class="price"><div class="span-text"><span>4</span></div></div><div class="overlay-price">$200 - $...?</div></div>
+        <div class="item-text">RIGGING FULL BODY</div>
+        <div class="item" id="item1"></div>
+        <div class="item-text">PROP</div>
+        <div class="item" id="item2"></div>
+        <div class="item-text">WORLD</div>
+        <div class="item" id="item3"></div>
       </div>
-      <p class="caution">*Los precios aqui nombrados son el precio base de cada item, el precio puede variar dependiendo la complejidad del modelo que solicites.</p>
+      </div>
     </div>
-    <footer>© 2024 UNKNWNCO •
-      <a href="https://www.twitch.tv/unknwnco" target="_blank" rel="noopener noreferrer"><img src="/redes/twitch.svg" alt="" class="redes"></a>
-      <a href="https://www.instagram.com/parzival_co/" target="_blank" rel="noopener noreferrer"><img src="/redes/instagram_dark.svg" alt="" class="redes"></a>
-      <!--<a href="#"><img src="/redes/github.svg" alt="" class="redes github" ></a>-->
-    </footer>
-  </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+      // Inicializar la escena Three.js dentro del contenedor
+      function inicializar() {
+        const container1 = document.getElementById('item1');
+        const container2 = document.getElementById('item2');
+        const container3 = document.getElementById('item3');
+  
+        const scene1 = new THREE.Scene();
+        const scene2 = new THREE.Scene();
+        const scene3 = new THREE.Scene();
+  
+        const renderer1 = new THREE.WebGLRenderer({ alpha: true }); // Configurar el fondo del renderizador como transparente
+        const renderer2 = new THREE.WebGLRenderer({ alpha: true });
+        const renderer3 = new THREE.WebGLRenderer({ alpha: true });
+  
+        renderer1.setSize(container1.clientWidth, container1.clientHeight);
+        renderer2.setSize(container2.clientWidth, container2.clientHeight);
+        renderer3.setSize(container3.clientWidth, container3.clientHeight);
+  
+        container1.appendChild(renderer1.domElement);
+        container2.appendChild(renderer2.domElement);
+        container3.appendChild(renderer3.domElement);
+  
+        const loader = new THREE.GLTFLoader();
+
+        loader.load('avatar.glb', function (gltf) {
+          const model1 = gltf.scene;
+          scene1.add(model1);
+        });
+
+        loader.load('avatar.glb', function (gltf) {
+          const model2 = gltf.scene;
+          scene2.add(model2);
+        });
+
+        loader.load('avatar.glb', function (gltf) {
+          const model3 = gltf.scene;
+          scene3.add(model3);
+        });
+
+        // Configurar cámaras para cada escena
+        const camera1 = new THREE.PerspectiveCamera(45, container1.clientWidth / container1.clientHeight, 0.1, 1000);
+        const camera2 = new THREE.PerspectiveCamera(45, container2.clientWidth / container2.clientHeight, 0.1, 1000);
+        const camera3 = new THREE.PerspectiveCamera(45, container3.clientWidth / container3.clientHeight, 0.1, 1000);
+
+        // Posicionar cada cámara
+        camera1.position.set(5, 2, 5);
+        camera2.position.set(5, 2, 5);
+        camera3.position.set(5, 2, 5);
+
+        // Crear controles orbitales para cada cámara
+        const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
+        const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
+        const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
+  
+        // Crear un GridHelper para visualizar el suelo
+        const gridHelper1 = new THREE.GridHelper(100, 10); // Tamaño del grid y espaciado entre líneas
+        const gridHelper2 = new THREE.GridHelper(100, 10);
+        const gridHelper3 = new THREE.GridHelper(100, 10);
+        scene1.add(gridHelper1); // Agregar el GridHelper a la escena
+        scene2.add(gridHelper2);
+        scene3.add(gridHelper3);
+
+        // Función de renderizado y animación
+        function animate() {
+          requestAnimationFrame(animate);
+  
+          renderer1.render(scene1, camera1);
+          renderer2.render(scene2, camera2);
+          renderer3.render(scene3, camera3);
+  
+          // Actualizar los controles orbitales
+          controls1.update();
+          controls2.update();
+          controls3.update();
+        }
+        animate();
+      }
+  
+      // Llamar a la función de inicialización cuando el DOM esté completamente cargado
+      document.addEventListener('DOMContentLoaded', inicializar);
+    </script>
 </body>
 </html>
