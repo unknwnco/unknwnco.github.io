@@ -61,22 +61,22 @@
         controls3.maxDistance = 10;
         controls3.minPolarAngle = 1.4;
         controls3.maxPolarAngle = 1.4;
-        controls3.target = new THREE.Vector3(0, 1.4, 0);
+        controls3.target = new THREE.Vector3(0, 1.4, );
         controls3.update();
 
         const camera4 = new THREE.PerspectiveCamera(45, container4.clientWidth / container4.clientHeight, 0.1, 1000); // Nueva cámara
         const controls4 = new THREE.OrbitControls(camera4, renderer4.domElement); // Nuevos controles
-        controls4.enableDamping = true;
+        controls4.enableDamping = false;
         controls4.enablePan = false;
         controls4.enableZoom = true; // Habilitar zoom para el último modelo
         controls4.minDistance = 1;
-        controls4.maxDistance = 4.5; // Límite de zoom
+        controls4.maxDistance = 4; // Límite de zoom
         controls4.minPolarAngle = 1.4;
         controls4.maxPolarAngle = 1.4;
-        controls4.target = new THREE.Vector3(0, 1.4, 0);
+        controls4.target = new THREE.Vector3(0, .9, 0);
         controls4.update();
 
-        loader.load('avatar.glb', function (gltf) {
+        loader.load('/3dmodels/avatar.glb', function (gltf) {
           const model1 = gltf.scene;
           scene1.add(model1);
         
@@ -95,7 +95,7 @@
           const lightGroup = new THREE.Object3D();
         
           // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 1); // Color blanco y intensidad 5
+          const light = new THREE.DirectionalLight(0xffffff, 2); // Color blanco y intensidad 5
           light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
           lightGroup.add(light);
         
@@ -111,7 +111,7 @@
           controls1.update(); // Actualizar los controles
         });
 
-        loader.load('outfit.glb', function (gltf) {
+        loader.load('/3dmodels/outfit.glb', function (gltf) {
           const model2 = gltf.scene;
           scene2.add(model2);
         
@@ -147,7 +147,7 @@
         });
         
 
-        loader.load('prop.glb', function (gltf) {
+        loader.load('/3dmodels/prop.glb', function (gltf) {
           const model3 = gltf.scene;
           scene3.add(model3);
         
@@ -177,17 +177,30 @@
           scene3.add(lightGroup);
         
           // Posicionar la cámara y los controles orbitales para el modelo3
-          camera3.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
+          camera3.position.set(-0.1, 0, 2); // Mover la cámara hacia abajo en el eje Z
           // Mover el objetivo de la cámara
           controls3.update(); // Actualizar los controles
         });
         
-        loader.load('avatar.glb', function (gltf) {
+        loader.load('/3dmodels/world.glb', function (gltf) {
           const model4 = gltf.scene;
           scene4.add(model4);
 
+          // Recorrer todos los materiales del modelo y ajustar su reflectividad
+          model4.traverse((child) => {
+            if (child.isMesh) {
+              child.material.reflectivity = 0; // Establecer reflectividad a 0 para eliminar el componente especular
+            }
+          });
+        
+          // Agregar una luz direccional al modelo sin sombras
+          const light = new THREE.DirectionalLight(0xffffff, 3); // Color blanco y intensidad 1
+          light.position.set(10, 1, 10); // Posición de la luz
+          light.castShadow = false; // Desactivar sombras
+          scene4.add(light);
+
           // Posicionar la cámara y los controles orbitales para el nuevo modelo
-          camera4.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
+          camera4.position.set(.7, 4, 1); // Mover la cámara hacia abajo en el eje Z
           // Mover el objetivo de la cámara
           controls4.update(); // Actualizar los controles
         });
