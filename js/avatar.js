@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+app.use(cors({origin:'*'}))
+
 window.onload = () => loadModel();
 
 function loadModel() {
@@ -143,15 +145,3 @@ function setupScene(gltf) {
 }
 
 
-function CORSSolve(){
-  const xhttp = new XMLHttpRequest()
-  xhttp.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      document.getElementById('data').innerText = xhttp.responseText
-    }
-  }
-  xhttp.open("GET","https://cors-anywhere.herokuapp.com/https://tiny-news-api.herokuapp.com/api/news",true)
-  xhttp.send()
-}
-
-CORSSolve ()
