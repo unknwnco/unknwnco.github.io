@@ -10,10 +10,10 @@
         const scene3 = new THREE.Scene();
         const scene4 = new THREE.Scene(); // Nueva escena
 
-        const renderer1 = new THREE.WebGLRenderer({ alpha: true }); // Configurar el fondo del renderizador como transparente
-        const renderer2 = new THREE.WebGLRenderer({ alpha: true });
-        const renderer3 = new THREE.WebGLRenderer({ alpha: true });
-        const renderer4 = new THREE.WebGLRenderer({ alpha: true }); // Nuevo renderizador
+        const renderer1 = new THREE.WebGLRenderer({ alpha: true,antialias: true }); // Configurar el fondo del renderizador como transparente
+        const renderer2 = new THREE.WebGLRenderer({ alpha: true,antialias: true });
+        const renderer3 = new THREE.WebGLRenderer({ alpha: true,antialias: true });
+        const renderer4 = new THREE.WebGLRenderer({ alpha: true,antialias: true }); // Nuevo renderizador
 
         renderer1.setSize(container1.clientWidth, container1.clientHeight);
         renderer2.setSize(container2.clientWidth, container2.clientHeight);
@@ -69,8 +69,8 @@
         controls4.enableDamping = true;
         controls4.enablePan = false;
         controls4.enableZoom = true; // Habilitar zoom para el último modelo
-        controls4.minDistance = 3;
-        controls4.maxDistance = 6; // Límite de zoom
+        controls4.minDistance = 1;
+        controls4.maxDistance = 4.5; // Límite de zoom
         controls4.minPolarAngle = 1.4;
         controls4.maxPolarAngle = 1.4;
         controls4.target = new THREE.Vector3(0, 1.4, 0);
