@@ -51,44 +51,70 @@
   
         const loader = new THREE.GLTFLoader();
 
+        // Definir cámaras y controles orbitales fuera de las funciones de carga de modelos
+        const camera1 = new THREE.PerspectiveCamera(45, container1.clientWidth / container1.clientHeight, 0.1, 1000);
+        const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
+        controls1.enableDamping = true;
+        controls1.enablePan = false;
+        controls1.enableZoom = false;
+        controls1.minDistance = 3;
+        controls1.minPolarAngle = 1.4;
+        controls1.maxPolarAngle = 1.4;
+        controls1.target = new THREE.Vector3(0, 1.2, 0);
+        controls1.update();
+        
+        const camera2 = new THREE.PerspectiveCamera(45, container2.clientWidth / container2.clientHeight, 0.1, 1000);
+        const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
+        controls2.enableDamping = true;
+        controls2.enablePan = false;
+        controls2.enableZoom = false;
+        controls2.minDistance = 3;
+        controls2.minPolarAngle = 1.4;
+        controls2.maxPolarAngle = 1.4;
+        controls2.target = new THREE.Vector3(0, 1.2, 0);
+        controls2.update();
+        
+        const camera3 = new THREE.PerspectiveCamera(45, container3.clientWidth / container3.clientHeight, 0.1, 1000);
+        const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
+        controls3.enableDamping = true;
+        controls3.enablePan = false;
+        controls3.enableZoom = false;
+        controls3.minDistance = 3;
+        controls3.minPolarAngle = 1.4;
+        controls3.maxPolarAngle = 1.4;
+        controls3.target = new THREE.Vector3(0, 1.2, 0);
+        controls3.update();
+
         loader.load('avatar.glb', function (gltf) {
           const model1 = gltf.scene;
           scene1.add(model1);
+
+          // Posicionar la cámara y los controles orbitales para el modelo1
+          camera1.position.set(-.1, 4, 2); // Mover la cámara hacia arriba en el eje Z
+           // Mover el objetivo de la cámara
+          controls1.update(); // Actualizar los controles
         });
 
         loader.load('avatar.glb', function (gltf) {
           const model2 = gltf.scene;
           scene2.add(model2);
+
+          // Posicionar la cámara y los controles orbitales para el modelo2
+          camera2.position.set(-.1, 4, 2); // Mover la cámara hacia arriba en el eje Z
+           // Mover el objetivo de la cámara
+          controls2.update(); // Actualizar los controles
         });
 
         loader.load('avatar.glb', function (gltf) {
           const model3 = gltf.scene;
           scene3.add(model3);
+
+          // Posicionar la cámara y los controles orbitales para el modelo3
+          camera3.position.set(-.1, 4, 2); // Mover la cámara hacia arriba en el eje Z
+          // Mover el objetivo de la cámara
+          controls3.update(); // Actualizar los controles
         });
-
-        // Configurar cámaras para cada escena
-        const camera1 = new THREE.PerspectiveCamera(45, container1.clientWidth / container1.clientHeight, 0.1, 1000);
-        const camera2 = new THREE.PerspectiveCamera(45, container2.clientWidth / container2.clientHeight, 0.1, 1000);
-        const camera3 = new THREE.PerspectiveCamera(45, container3.clientWidth / container3.clientHeight, 0.1, 1000);
-
-        // Posicionar cada cámara
-        camera1.position.set(5, 2, 5);
-        camera2.position.set(5, 2, 5);
-        camera3.position.set(5, 2, 5);
-
-        // Crear controles orbitales para cada cámara
-        const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
-        const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
-        const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
   
-        // Crear un GridHelper para visualizar el suelo
-        const gridHelper1 = new THREE.GridHelper(100, 10); // Tamaño del grid y espaciado entre líneas
-        const gridHelper2 = new THREE.GridHelper(100, 10);
-        const gridHelper3 = new THREE.GridHelper(100, 10);
-        scene1.add(gridHelper1); // Agregar el GridHelper a la escena
-        scene2.add(gridHelper2);
-        scene3.add(gridHelper3);
-
         // Función de renderizado y animación
         function animate() {
           requestAnimationFrame(animate);
@@ -96,11 +122,6 @@
           renderer1.render(scene1, camera1);
           renderer2.render(scene2, camera2);
           renderer3.render(scene3, camera3);
-  
-          // Actualizar los controles orbitales
-          controls1.update();
-          controls2.update();
-          controls3.update();
         }
         animate();
       }
