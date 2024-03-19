@@ -117,7 +117,7 @@
           scene2.add(model2);
         
           // Recorrer todos los materiales del modelo y configurarlos como ToonMaterial
-          mode2.traverse((child) => {
+          model2.traverse((child) => {
             if (child.isMesh) {
               const toonMaterial = new THREE.MeshToonMaterial({
                 color: child.material.color, // Mantener el color original del material
@@ -131,7 +131,7 @@
           const lightGroup = new THREE.Object3D();
         
           // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 10); // Color blanco y intensidad 5
+          const light = new THREE.DirectionalLight(0xffffff, 2); // Color blanco y intensidad 5
           light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
           lightGroup.add(light);
         
@@ -139,14 +139,13 @@
           lightGroup.rotateZ(Math.PI / 2); // Rotar la luz 45 grados en el eje Z
           
           // Agregar el grupo de luces a la escena
-          scen2.add(lightGroup);
+          scene2.add(lightGroup);
         
           // Posicionar la cámara y los controles orbitales para el modelo1
-          camera2.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
+          camera2.position.set(-0.1, 4.5, 1.8); // Mover la cámara hacia abajo en el eje Z
           // Mover el objetivo de la cámara
-          control2.update(); // Actualizar los controles
+          controls2.update(); // Actualizar los controles
         });
-        
         
 
         loader.load('/3dmodels/prop.glb', function (gltf) {
