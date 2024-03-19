@@ -32,9 +32,9 @@
         const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
         controls1.enableDamping = true;
         controls1.enablePan = false;
-        controls1.enableZoom = false; // Deshabilitar el zoom para los primeros tres modelos
-        controls1.minDistance = 3;
-        controls1.maxDistance = 10; // Límite de zoom
+        controls1.enableZoom = true; // Deshabilitar el zoom para los primeros tres modelos
+        controls1.minDistance = 3.5;
+        controls1.maxDistance = 4.5; // Límite de zoom
         controls1.minPolarAngle = 1.4;
         controls1.maxPolarAngle = 1.4;
         controls1.target = new THREE.Vector3(0, 1.4, 0);
@@ -44,9 +44,9 @@
         const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
         controls2.enableDamping = true;
         controls2.enablePan = false;
-        controls2.enableZoom = false;
-        controls2.minDistance = 3;
-        controls2.maxDistance = 10;
+        controls2.enableZoom = true;
+        controls2.minDistance = 3.5;
+        controls2.maxDistance = 4.5;
         controls2.minPolarAngle = 1.4;
         controls2.maxPolarAngle = 1.4;
         controls2.target = new THREE.Vector3(0, 1.4, 0);
@@ -56,9 +56,9 @@
         const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
         controls3.enableDamping = true;
         controls3.enablePan = false;
-        controls3.enableZoom = false;
-        controls3.minDistance = 3;
-        controls3.maxDistance = 10;
+        controls3.enableZootrue;
+        controls3.minDistance = 3.5;
+        controls3.maxDistance = 4.5;
         controls3.minPolarAngle = 1.4;
         controls3.maxPolarAngle = 1.4;
         controls3.target = new THREE.Vector3(0, 1.4, );
