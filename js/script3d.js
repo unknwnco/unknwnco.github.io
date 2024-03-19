@@ -1,5 +1,58 @@
-      // Inicializar la escena Three.js dentro del contenedor
+
+
+// Inicializar la escena Three.js dentro del contenedor
       function inicializar() {
+
+    // Obtener la barra de progreso interna y el preloader
+    const progressBar = document.querySelector('.progress-bar-inner');
+    const preloader = document.getElementById('preloader-container');
+
+    // Definir el tiempo de simulación del preloader (en milisegundos)
+    const simulatedLoadTime = 1500; // Por ejemplo, 2 segundos
+
+    // Simular el progreso de carga durante el tiempo especificado
+    let startTime = null;
+    function animateProgressBar(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / simulatedLoadTime, 1);
+        progressBar.style.width = `${progress * 100}%`;
+        if (progress < 1) {
+            requestAnimationFrame(animateProgressBar);
+        } else {
+            // Una vez completada la simulación de carga, desvanece el preloader
+            fadeOut(preloader, 500); // Desvanecer el preloader en 1 segundo (1000 milisegundos)
+        }
+    }
+
+    // Iniciar la animación de la barra de progreso
+    requestAnimationFrame(animateProgressBar);
+
+    // Función para desvanecer un elemento HTML
+    function fadeOut(element, duration) {
+        const interval = 10; // Intervalo de tiempo para actualizar la opacidad (en milisegundos)
+        const steps = duration / interval; // Número de pasos de animación
+        let currentStep = 0;
+
+        const opacityStep = 1 / steps; // Paso de opacidad en cada intervalo
+
+        // Función para actualizar la opacidad en cada intervalo
+        function updateOpacity() {
+            currentStep++;
+            element.style.opacity = 1 - (currentStep * opacityStep);
+
+            // Si se alcanza el último paso, ocultar el elemento
+            if (currentStep >= steps) {
+                element.style.display = 'none';
+            } else {
+                // De lo contrario, continuar la animación
+                setTimeout(updateOpacity, interval);
+            }
+        }
+
+        // Iniciar la animación
+        updateOpacity();
+    }
+        
         const container1 = document.getElementById('item1');
         const container2 = document.getElementById('item2');
         const container3 = document.getElementById('item3');
@@ -35,22 +88,23 @@
         controls1.enableZoom = true; // Deshabilitar el zoom para los primeros tres modelos
         controls1.minDistance = 3.5;
         controls1.maxDistance = 4.5; // Límite de zoom
-        controls1.minPolarAngle = 1.4;
-        controls1.maxPolarAngle = 1.4;
+        controls1.minPolarAngle = 1.7;
+        controls1.maxPolarAngle = 1.7;
         controls1.target = new THREE.Vector3(0, 1.4, 0);
         controls1.update();
         
         const camera2 = new THREE.PerspectiveCamera(45, container2.clientWidth / container2.clientHeight, 0.1, 1000);
         const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
         controls2.enableDamping = true;
-        controls2.enablePan = false;
+        controls2.enablePan = true;
         controls2.enableZoom = true;
-        controls2.minDistance = 3.5;
+        controls2.minDistance = 2;
         controls2.maxDistance = 4.5;
-        controls2.minPolarAngle = 1.4;
-        controls2.maxPolarAngle = 1.4;
-        controls2.target = new THREE.Vector3(0, 1.4, 0);
+        controls2.minPolarAngle = 1.4; // Ángulo mínimo de 45 grados (en radianes)
+        controls2.maxPolarAngle = (3 * Math.PI) / 5; // Ángulo máximo de 135 grados (en radianes)
+        controls2.target = new THREE.Vector3(0, 1.3, 0);
         controls2.update();
+        
         
         const camera3 = new THREE.PerspectiveCamera(45, container3.clientWidth / container3.clientHeight, 0.1, 1000);
         const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
