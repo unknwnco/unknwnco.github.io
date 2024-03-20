@@ -99,7 +99,7 @@
         controls2.enablePan = false;
         controls2.enableZoom = true;
         controls2.minDistance = 2;
-        controls2.maxDistance = 4.5;
+        controls2.maxDistance = 3.8;
         controls2.minPolarAngle = 1.4; // Ángulo mínimo de 45 grados (en radianes)
         controls2.maxPolarAngle = (3 * Math.PI) / 5; // Ángulo máximo de 135 grados (en radianes)
         controls2.target = new THREE.Vector3(0, 1.3, 0);
@@ -110,7 +110,7 @@
         const controls3 = new THREE.OrbitControls(camera3, renderer3.domElement);
         controls3.enableDamping = true;
         controls3.enablePan = false;
-        controls3.enableZootrue;
+        controls3.enableZoom = false;
         controls3.minDistance = 1;
         controls3.maxDistance = 4.5;
         controls3.minPolarAngle = 1.4;
