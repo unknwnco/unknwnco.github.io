@@ -147,7 +147,7 @@ img{
   align-self: center;
   pointer-events: none;
   opacity: 0; /* Inicialmente transparente */
-  background-image: url('/img/desplazamiento.png');
+  background-image: url('/img/desplazamiento.svg');
   background-size: cover;
 }
 
