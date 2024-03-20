@@ -96,7 +96,7 @@
         const camera2 = new THREE.PerspectiveCamera(45, container2.clientWidth / container2.clientHeight, 0.1, 1000);
         const controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
         controls2.enableDamping = true;
-        controls2.enablePan = true;
+        controls2.enablePan = false;
         controls2.enableZoom = true;
         controls2.minDistance = 2;
         controls2.maxDistance = 4.5;
@@ -111,11 +111,11 @@
         controls3.enableDamping = true;
         controls3.enablePan = false;
         controls3.enableZootrue;
-        controls3.minDistance = 3.5;
+        controls3.minDistance = 1;
         controls3.maxDistance = 4.5;
         controls3.minPolarAngle = 1.4;
         controls3.maxPolarAngle = 1.4;
-        controls3.target = new THREE.Vector3(0, 1.4, );
+        controls3.target = new THREE.Vector3(0, 1.4, 0);
         controls3.update();
 
         const camera4 = new THREE.PerspectiveCamera(45, container4.clientWidth / container4.clientHeight, 0.1, 1000); // Nueva cámara
@@ -185,7 +185,7 @@
           const lightGroup = new THREE.Object3D();
         
           // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 2); // Color blanco y intensidad 5
+          const light = new THREE.DirectionalLight(0xffffff, 1.6); // Color blanco y intensidad 5
           light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
           lightGroup.add(light);
         
@@ -221,7 +221,7 @@
           const lightGroup = new THREE.Object3D();
         
           // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 10); // Color blanco y intensidad 5
+          const light = new THREE.DirectionalLight(0xffffff, 12); // Color blanco y intensidad 5
           light.position.set(0, 5, 0); // Posición de la luz respecto al grupo
           lightGroup.add(light);
         
