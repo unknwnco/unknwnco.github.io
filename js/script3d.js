@@ -1,3 +1,22 @@
+// Obtener referencias de elementos del DOM
+var modal = document.getElementById("myModal");
+var closeModalBtn = document.getElementsByClassName("close")[0];
+
+// Función para cerrar el modal al clicar en la "x" o fuera del modal
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Función para cerrar el modal al clicar en la "x"
+closeModalBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Mostrar el modal al cargar la página
+modal.style.display = "block";
+
 
 
 // Inicializar la escena Three.js dentro del contenedor
