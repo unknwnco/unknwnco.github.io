@@ -167,17 +167,13 @@ body.style.overflow = "hidden"; // Desactivar el scroll
             }
           });       
         
-          // Crear un objeto para agrupar la luz y luego rotarlo
+          // Crear un objeto para agrupar la luz
           const lightGroup = new THREE.Object3D();
         
-          // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 2); // Color blanco y intensidad 5
-          light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
-          lightGroup.add(light);
+          // Agregar una luz de ambiente al grupo de luces
+          const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color blanco y intensidad 0.5
+          lightGroup.add(ambientLight);
         
-          // Rotar el grupo de luces en el eje Z
-          lightGroup.rotateZ(Math.PI / 2); // Rotar la luz 45 grados en el eje Z
-          
           // Agregar el grupo de luces a la escena
           scene1.add(lightGroup);
         
@@ -186,6 +182,7 @@ body.style.overflow = "hidden"; // Desactivar el scroll
           // Mover el objetivo de la cámara
           controls1.update(); // Actualizar los controles
         });
+        
 
 
         loader.load('/3dmodels/outfit.glb', function (gltf) {
@@ -203,13 +200,19 @@ body.style.overflow = "hidden"; // Desactivar el scroll
             }
           });       
         
-          // Crear un objeto para agrupar la luz y luego rotarlo
+          // Crear un objeto para agrupar las luces
           const lightGroup = new THREE.Object3D();
-        
-          // Agregar una luz direccional al grupo de luces
-          const light = new THREE.DirectionalLight(0xffffff, 1.6); // Color blanco y intensidad 5
+          
+          // Agregar la luz direccional principal al grupo de luces
+          const light = new THREE.DirectionalLight(0xffffff, 1.4); // Color blanco y intensidad 1.6
           light.position.set(2, 1, 2); // Posición de la luz respecto al grupo
+          light.shadow.softness = 1; // Suavidad de las sombras
           lightGroup.add(light);
+          
+          // Agregar una luz direccional trasera más tenue al grupo de luces
+          const backLight = new THREE.DirectionalLight(0xffffff, 0.7); // Color blanco y intensidad 0.8
+          backLight.position.set(-2, -1, -2); // Posición opuesta a la luz principal
+          lightGroup.add(backLight);
         
           // Rotar el grupo de luces en el eje Z
           lightGroup.rotateZ(Math.PI / 2); // Rotar la luz 45 grados en el eje Z
@@ -222,6 +225,7 @@ body.style.overflow = "hidden"; // Desactivar el scroll
           // Mover el objetivo de la cámara
           controls2.update(); // Actualizar los controles
         });
+        
         
 
         loader.load('/3dmodels/prop.glb', function (gltf) {
@@ -284,26 +288,43 @@ body.style.overflow = "hidden"; // Desactivar el scroll
 
 
         // Función de renderizado y animación
-        function animate() {
-          requestAnimationFrame(animate);
+        //function animate() {
+        //  requestAnimationFrame(animate);
 
           // Rotar los modelos sobre sí mismos en sentido opuesto
-          if (scene1.children.length > 0) {
-            scene1.children[0].rotation.y -= 0.01;
-          }
-          if (scene2.children.length > 0) {
-            scene2.children[0].rotation.y -= 0.01;
-          }
-          if (scene3.children.length > 0) {
-            scene3.children[0].rotation.y -= 0.01;
-          }
+        //  if (scene1.children.length > 0) {
+        //    scene1.children[0].rotation.y -= 0.01;
+        //  }
+        //  if (scene2.children.length > 0) {
+        //    scene2.children[0].rotation.y -= 0.01;
+        //  }
+        //  if (scene3.children.length > 0) {
+        //    scene3.children[0].rotation.y -= 0.01;
+        //  }
 
+        //  renderer1.render(scene1, camera1);
+        //  renderer2.render(scene2, camera2);
+        //  renderer3.render(scene3, camera3);
+        //  renderer4.render(scene4, camera4);
+        //}
+        //animate();
+
+        // Función de renderizado y animación
+        function animate() {
+          requestAnimationFrame(animate);
+        
+          // Rotar la escena en lugar de los modelos
+          scene1.rotation.y -= 0.01;
+          scene2.rotation.y -= 0.01;
+          scene3.rotation.y -= 0.01;
+        
           renderer1.render(scene1, camera1);
           renderer2.render(scene2, camera2);
           renderer3.render(scene3, camera3);
           renderer4.render(scene4, camera4);
         }
         animate();
+
       }
 
       // Llamar a la función de inicialización cuando el DOM esté completamente cargado
