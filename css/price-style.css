@@ -347,7 +347,10 @@ img{
     transition: width 1s ease; /* Agrega una animación a la barra de progreso */
 }
 
-      
+.tuto{
+  width: 260px;
+  
+}      
 
 
 
@@ -431,6 +434,10 @@ img{
     max-width: 340px;
   }
 
+  .tuto{
+    width: 190px;
+  }      
+  
 
 }
 /* Estilos para el modal */
