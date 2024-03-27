@@ -238,7 +238,7 @@ img{
     background: rgba(255, 255, 255, 0.19);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(19.4px);
-    border: 1px solid rgba(255, 255, 255, 0.04); 
+    
     filter: drop-shadow(2px 0px 6px #000000);
     border-radius: 16px;
     margin: 20px;
@@ -455,7 +455,7 @@ img{
 
 /* Contenido del modal */
 .modal-content {
-  background-color: #0c0c0cf5;
+  background-color: #040404;
   position: absolute;
   top: 50%;
   left: 50%;
