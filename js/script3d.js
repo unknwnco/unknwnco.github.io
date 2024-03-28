@@ -22,8 +22,8 @@ modal.style.display = "block";
 body.style.overflow = "hidden"; // Desactivar el scroll
 
 
-// Inicializar la escena Three.js dentro del contenedor
-      function inicializar() {
+
+
 
     // Obtener la barra de progreso interna y el preloader
     const progressBar = document.querySelector('.progress-bar-inner');
@@ -74,7 +74,12 @@ body.style.overflow = "hidden"; // Desactivar el scroll
         // Iniciar la animación
         updateOpacity();
     }
-        
+// FIN DEL PRELOADER
+
+// Inicializar PRELOADER PROGRESS BAR
+function inicializar() {
+       
+// Inicializar la escena Three.js dentro del contenedor
         const container1 = document.getElementById('item1');
         const container2 = document.getElementById('item2');
         const container3 = document.getElementById('item3');
@@ -142,8 +147,8 @@ body.style.overflow = "hidden"; // Desactivar el scroll
 
         const camera4 = new THREE.PerspectiveCamera(45, container4.clientWidth / container4.clientHeight, 0.1, 1000); // Nueva cámara
         const controls4 = new THREE.OrbitControls(camera4, renderer4.domElement); // Nuevos controles
-        controls4.enableDamping = false;
-        controls4.enablePan = false;
+        controls4.enableDamping = true;
+        controls4.enablePan = true;
         controls4.enableZoom = true; // Habilitar zoom para el último modelo
         controls4.minDistance = 1;
         controls4.maxDistance = 4; // Límite de zoom
@@ -266,7 +271,7 @@ body.style.overflow = "hidden"; // Desactivar el scroll
         loader.load('/3dmodels/world.glb', function (gltf) {
           const model4 = gltf.scene;
           scene4.add(model4);
-
+        
           // Recorrer todos los materiales del modelo y ajustar su reflectividad
           model4.traverse((child) => {
             if (child.isMesh) {
@@ -274,20 +279,62 @@ body.style.overflow = "hidden"; // Desactivar el scroll
             }
           });
         
-          // Agregar una luz direccional al modelo sin sombras
-          const light = new THREE.DirectionalLight(0xffffff, 3); // Color blanco y intensidad 1
-          light.position.set(10, 1, 10); // Posición de la luz
-          light.castShadow = false; // Desactivar sombras
-          scene4.add(light);
-
+          // Agregar una luz ambiental al modelo
+          const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color blanco y intensidad 0.5
+          scene4.add(ambientLight);
+        
+          // Agregar luz rectangular
+          const width = .4;
+          const height = .2;
+          const intensity = 400;
+          const rectLight = new THREE.RectAreaLight(0x0000ff, intensity, width, height); // Cambiar el color a azul (0x0000ff)
+          rectLight.position.set(0, .6, -.8); // Ajustar la posición para que apunte desde arriba
+          rectLight.lookAt(0, -4, 0); // Orientar la luz hacia abajo
+          scene4.add(rectLight);
+        
+          const rectLightHelper = new THREE.RectAreaLightHelper(rectLight);
+          scene4.add(rectLightHelper);
+        
           // Posicionar la cámara y los controles orbitales para el nuevo modelo
           camera4.position.set(.7, 4, 1); // Mover la cámara hacia abajo en el eje Z
           // Mover el objetivo de la cámara
           controls4.update(); // Actualizar los controles
         });
+        
+        
+
 
 
         // Función de renderizado y animación
+        function animate() {
+          requestAnimationFrame(animate);
+        
+          // Rotar la escena en lugar de los modelos
+          scene1.rotation.y -= 0.01;
+          scene2.rotation.y -= 0.01;
+          scene3.rotation.y -= 0.01;
+        
+          renderer1.render(scene1, camera1);
+          renderer2.render(scene2, camera2);
+          renderer3.render(scene3, camera3);
+          renderer4.render(scene4, camera4);
+        }
+        animate();
+
+      }
+
+// Llamar a la función de inicialización cuando el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', inicializar);
+
+
+
+
+
+
+
+
+
+// Función de renderizado y animación
         //function animate() {
         //  requestAnimationFrame(animate);
 
@@ -308,24 +355,3 @@ body.style.overflow = "hidden"; // Desactivar el scroll
         //  renderer4.render(scene4, camera4);
         //}
         //animate();
-
-        // Función de renderizado y animación
-        function animate() {
-          requestAnimationFrame(animate);
-        
-          // Rotar la escena en lugar de los modelos
-          scene1.rotation.y -= 0.01;
-          scene2.rotation.y -= 0.01;
-          scene3.rotation.y -= 0.01;
-        
-          renderer1.render(scene1, camera1);
-          renderer2.render(scene2, camera2);
-          renderer3.render(scene3, camera3);
-          renderer4.render(scene4, camera4);
-        }
-        animate();
-
-      }
-
-      // Llamar a la función de inicialización cuando el DOM esté completamente cargado
-      document.addEventListener('DOMContentLoaded', inicializar);

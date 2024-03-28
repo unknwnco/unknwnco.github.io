@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@UnkwnCO Comissions │ Web site </title>
+    <link rel="stylesheet" href="/css/style-visor3d.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.svg">  
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/TransformControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/lights/RectAreaLight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/helpers/RectAreaLightHelper.js"></script>
+    <script src="/js/script3d.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js Model Viewer</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="model-canvas"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/TransformControls.js"></script>
+<script>
+  // Inicializar la escena Three.js dentro del canvas
+  const canvas = document.getElementById('model-canvas');
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const loader = new THREE.GLTFLoader();
+
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.enablePan = true;
+  controls.enableZoom = true;
+  controls.minDistance = 1;
+  controls.maxDistance = 4;
+  controls.minPolarAngle = 1.4;
+  controls.maxPolarAngle = 1.4;
+  controls.target = new THREE.Vector3(0, 1, 0);
+  controls.update();
+
+  const transformControls = new THREE.TransformControls(camera, renderer.domElement);
+  transformControls.addEventListener('change', () => renderer.render(scene, camera));
+  scene.add(transformControls);
+
+  loader.load('/3dmodels/world.glb', function (gltf) {
+    const model = gltf.scene;
+    scene.add(model);
+
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.material.reflectivity = 0;
+      }
+    });
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    scene.add(ambientLight);
+
+    const width = .5;
+    const height = .2;
+    const intensity = 400;
+    const rectLight = new THREE.RectAreaLight(0x0000ff, intensity, width, height);
+    rectLight.position.set(.2, .65, -.8);
+    rectLight.lookAt(0, -20, 0);
+    scene.add(rectLight);
+
+    const rectLightHelper = new THREE.RectAreaLightHelper(rectLight);
+    scene.add(rectLightHelper);
+
+    transformControls.attach(rectLight);
+    transformControls.position.copy(rectLight.position); // Fijar el gizmo a la posición de la luz
+    transformControls.update();
+
+    camera.position.set(.7, 4, 1);
+    controls.update();
+  });
+
+  // Función de renderizado y animación
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
+</body>
+</html>
