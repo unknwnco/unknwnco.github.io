@@ -148,7 +148,7 @@ function inicializar() {
         const camera4 = new THREE.PerspectiveCamera(45, container4.clientWidth / container4.clientHeight, 0.1, 1000); // Nueva cámara
         const controls4 = new THREE.OrbitControls(camera4, renderer4.domElement); // Nuevos controles
         controls4.enableDamping = true;
-        controls4.enablePan = true;
+        controls4.enablePan = false;
         controls4.enableZoom = true; // Habilitar zoom para el último modelo
         controls4.minDistance = 1;
         controls4.maxDistance = 4; // Límite de zoom
