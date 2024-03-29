@@ -7,50 +7,48 @@ var body = document.getElementsByTagName("body")[0];
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
-    body.style.overflow = "auto"; // Reactivar el scroll
+    //body.style.overflow = "auto"; // Reactivar el scroll
   }
 }
 
 // Función para cerrar el modal al hacer clic en la "x"
 closeModalBtn.onclick = function() {
   modal.style.display = "none";
-  body.style.overflow = "auto"; // Reactivar el scroll
+  //body.style.overflow = "auto"; // Reactivar el scroll
 }
 
 // Mostrar el modal al cargar la página
 modal.style.display = "block";
-body.style.overflow = "hidden"; // Desactivar el scroll
+//body.style.overflow = "hidden"; // Desactivar el scroll
 
 
 
+// Obtener la barra de progreso interna y el preloader
+  const progressBar = document.querySelector('.progress-bar-inner');
+  const preloader = document.getElementById('preloader-container');
 
+  // Definir el tiempo de simulación del preloader (en milisegundos)
+  const simulatedLoadTime = 1500; // Por ejemplo, 2 segundos
 
-    // Obtener la barra de progreso interna y el preloader
-    const progressBar = document.querySelector('.progress-bar-inner');
-    const preloader = document.getElementById('preloader-container');
+  // Simular el progreso de carga durante el tiempo especificado
+  let startTime = null;
+  function animateProgressBar(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / simulatedLoadTime, 1);
+      progressBar.style.width = `${progress * 100}%`;
+      if (progress < 1) {
+          requestAnimationFrame(animateProgressBar);
+      } else {
+          // Una vez completada la simulación de carga, desvanece el preloader
+          fadeOut(preloader, 500); // Desvanecer el preloader en 1 segundo (1000 milisegundos)
+      }
+  }
 
-    // Definir el tiempo de simulación del preloader (en milisegundos)
-    const simulatedLoadTime = 1500; // Por ejemplo, 2 segundos
+  // Iniciar la animación de la barra de progreso
+  requestAnimationFrame(animateProgressBar);
 
-    // Simular el progreso de carga durante el tiempo especificado
-    let startTime = null;
-    function animateProgressBar(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / simulatedLoadTime, 1);
-        progressBar.style.width = `${progress * 100}%`;
-        if (progress < 1) {
-            requestAnimationFrame(animateProgressBar);
-        } else {
-            // Una vez completada la simulación de carga, desvanece el preloader
-            fadeOut(preloader, 500); // Desvanecer el preloader en 1 segundo (1000 milisegundos)
-        }
-    }
-
-    // Iniciar la animación de la barra de progreso
-    requestAnimationFrame(animateProgressBar);
-
-    // Función para desvanecer un elemento HTML
-    function fadeOut(element, duration) {
+ // Función para desvanecer un elemento HTML
+ function fadeOut(element, duration) {
         const interval = 10; // Intervalo de tiempo para actualizar la opacidad (en milisegundos)
         const steps = duration / interval; // Número de pasos de animación
         let currentStep = 0;
@@ -73,7 +71,7 @@ body.style.overflow = "hidden"; // Desactivar el scroll
 
         // Iniciar la animación
         updateOpacity();
-    }
+ }
 // FIN DEL PRELOADER
 
 // Inicializar PRELOADER PROGRESS BAR
@@ -280,20 +278,20 @@ function inicializar() {
           });
         
           // Agregar una luz ambiental al modelo
-          const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color blanco y intensidad 0.5
+          const ambientLight = new THREE.AmbientLight(0xffffff, .5); // Color blanco y intensidad 0.5
           scene4.add(ambientLight);
         
           // Agregar luz rectangular
-          const width = .4;
-          const height = .2;
-          const intensity = 400;
-          const rectLight = new THREE.RectAreaLight(0x0000ff, intensity, width, height); // Cambiar el color a azul (0x0000ff)
-          rectLight.position.set(0, .6, -.8); // Ajustar la posición para que apunte desde arriba
-          rectLight.lookAt(0, -4, 0); // Orientar la luz hacia abajo
+          const width = .6;
+          const height = .6;
+          const intensity = 30;
+          const rectLight = new THREE.RectAreaLight(0xffffff, intensity, width, height); // Cambiar el color a azul (0x0000ff)
+          rectLight.position.set(1, 1, 1); // Ajustar la posición para que apunte desde arriba
+          rectLight.lookAt(0, 1, 0); // Orientar la luz hacia abajo
           scene4.add(rectLight);
         
-          const rectLightHelper = new THREE.RectAreaLightHelper(rectLight);
-          scene4.add(rectLightHelper);
+          //const rectLightHelper = new THREE.RectAreaLightHelper(rectLight);
+          //scene4.add(rectLightHelper);
         
           // Posicionar la cámara y los controles orbitales para el nuevo modelo
           camera4.position.set(.7, 4, 1); // Mover la cámara hacia abajo en el eje Z

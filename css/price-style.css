@@ -443,6 +443,7 @@ img{
 /* Estilos para el modal */
 .modal {
   display: none; /* Oculta el modal por defecto */
+  visibility: hidden; /* Oculta el modal */
   position: fixed;
   z-index: 1;
   left: 0;
