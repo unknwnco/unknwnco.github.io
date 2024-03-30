@@ -155,40 +155,47 @@ function inicializar() {
         controls4.target = new THREE.Vector3(0, .9, 0);
         controls4.update();
 
-        loader.load('/3dmodels/avatar.glb', function (gltf) {
-          const model1 = gltf.scene;
-          scene1.add(model1);
-        
-          // Recorrer todos los materiales del modelo y configurarlos como ToonMaterial
-          model1.traverse((child) => {
-            if (child.isMesh) {
-              const toonMaterial = new THREE.MeshToonMaterial({
+// Iniciar temporizador
+console.time('Tiempo de carga');
+
+// Cargar el modelo
+loader.load('/3dmodels/avatarlow.glb', function (gltf) {
+    // Detener temporizador
+    console.timeEnd('Tiempo de carga');
+
+    const model1 = gltf.scene;
+    scene1.add(model1);
+
+    // Recorrer todos los materiales del modelo y configurarlos como ToonMaterial
+    model1.traverse((child) => {
+        if (child.isMesh) {
+            const toonMaterial = new THREE.MeshToonMaterial({
                 color: child.material.color, // Mantener el color original del material
                 specular: new THREE.Color(0x000000), // Especificar un color negro para el componente especular
-              });
-              child.material = toonMaterial; // Reemplazar el material existente por el nuevo material toon
-            }
-          });       
-        
-          // Crear un objeto para agrupar la luz
-          const lightGroup = new THREE.Object3D();
-        
-          // Agregar una luz de ambiente al grupo de luces
-          const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color blanco y intensidad 0.5
-          lightGroup.add(ambientLight);
-        
-          // Agregar el grupo de luces a la escena
-          scene1.add(lightGroup);
-        
-          // Posicionar la cámara y los controles orbitales para el modelo1
-          camera1.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
-          // Mover el objetivo de la cámara
-          controls1.update(); // Actualizar los controles
-        });
-        
+            });
+            child.material = toonMaterial; // Reemplazar el material existente por el nuevo material toon
+        }
+    });
+
+    // Crear un objeto para agrupar la luz
+    const lightGroup = new THREE.Object3D();
+
+    // Agregar una luz de ambiente al grupo de luces
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Color blanco y intensidad 0.5
+    lightGroup.add(ambientLight);
+
+    // Agregar el grupo de luces a la escena
+    scene1.add(lightGroup);
+
+    // Posicionar la cámara y los controles orbitales para el modelo1
+    camera1.position.set(-0.1, 5, 1.8); // Mover la cámara hacia abajo en el eje Z
+    // Mover el objetivo de la cámara
+    controls1.update(); // Actualizar los controles
+});
 
 
-        loader.load('/3dmodels/outfit.glb', function (gltf) {
+
+        loader.load('/3dmodels/Outfitlow.glb', function (gltf) {
           const model2 = gltf.scene;
           scene2.add(model2);
         
