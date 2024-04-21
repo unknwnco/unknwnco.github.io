@@ -32,7 +32,7 @@ body {
     border-radius: 3px;
     padding: 10px;
     text-align: center;
-    background-color: rgba(66, 66, 66, 0.24);
+    /*background-color: rgba(66, 66, 66, 0.24);*/
   }
 
 .selector {
@@ -171,4 +171,61 @@ footer{
     align-items: center;
     padding: 0 6px 0 6px;
 }
+
+@media screen and (max-width:45em){
+    .container{
+        width: 80%;
+        flex-direction: column;
+        align-items: normal;
+    }
+    .canvas{
+        order: 1;
+    }
+    .selector{
+        height: 25%;
+        flex-wrap: wrap;
+        order: 2;
+    }
+    .item{
     
+    }
+
+    .colorselect{
+        height: auto;
+        margin: 0;
+    }
+    .selectortext{
+        height: 30px;
+    }
+
+    .color1{
+        width: 20px;
+        height: 20px;
+
+    }
+    .color2{
+        width: 20px;
+        height: 20px;
+        
+    }
+    .color3{
+        width: 20px;
+        height: 20px;
+        
+    }
+    .color4{
+        width: 20px;
+        height: 20px;
+        
+    }
+
+    img{
+        width: 60px;
+        height: 60px;
+    }
+
+    footer{
+        font-size: 15px;
+    }
+
+}
