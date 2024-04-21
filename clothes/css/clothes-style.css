@@ -175,6 +175,7 @@ footer{
 @media screen and (max-width:45em){
     .container{
         width: 80%;
+        height: 80%;
         flex-direction: column;
         align-items: normal;
     }
@@ -182,12 +183,12 @@ footer{
         order: 1;
     }
     .selector{
-        height: 25%;
+        height: 40%;
         flex-wrap: wrap;
         order: 2;
     }
     .item{
-    
+        
     }
 
     .colorselect{
@@ -199,29 +200,29 @@ footer{
     }
 
     .color1{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
 
     }
     .color2{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         
     }
     .color3{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         
     }
     .color4{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         
     }
 
     img{
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     footer{
