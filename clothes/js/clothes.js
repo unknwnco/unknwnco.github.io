@@ -24,15 +24,16 @@ function inicializar() {
     controls.target = new THREE.Vector3(0, 1.3, 0);
     controls.update();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, .4);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, .6);
     directionalLight.position.set(10, 10, 20);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
     let jacketMaterial; // Variable para almacenar el material de la chaqueta
+    let bolsilloMaterial;
     let capotaMesh;
     let capotaVisible = false;
     let bolsilloMesh;
@@ -59,6 +60,12 @@ function inicializar() {
         gltf.scene.traverse(function (child) {
             if (child.isMesh && child.material.name === "Jacket_Texture") {
                 jacketMaterial = child.material;
+            }
+        });
+        // Buscar el material con nombre "Jacket_Texture"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.material.name === "Bolsillo_Texture") {
+                bolsilloMaterial = child.material;
             }
         });
 
@@ -102,7 +109,7 @@ function inicializar() {
 
         // Buscar el mesh con nombre "Decal"
         gltf.scene.traverse(function (child) {
-            if (child.isMesh && child.name === "Decai1") {
+            if (child.isMesh && child.name === "Decal1") {
                 decalMesh = child;
                 decalMesh.visible = false;
             }
@@ -126,6 +133,10 @@ function inicializar() {
             // Cambiar el color de la textura del material a rojo
             jacketMaterial.color.set(0x1C1C1C); // Color rojo
         }
+            // Cambiar el color del bolsilloMaterial a gris
+        if (bolsilloMaterial) {
+            bolsilloMaterial.color.set(0x363636); // Color gris
+        }
     });
 
     // Escuchar clics en el elemento con id "color1"
@@ -136,6 +147,11 @@ function inicializar() {
             // Cambiar el color de la textura del material a rojo
             jacketMaterial.color.set(0xFFFFFF); // Color rojo
         }
+        
+            // Cambiar el color del bolsilloMaterial a gris
+        if (bolsilloMaterial) {
+            bolsilloMaterial.color.set(0xDDDDDD); // Color gris
+        }
     });
 
     // Escuchar clics en el elemento con id "color1"
@@ -144,7 +160,11 @@ function inicializar() {
         console.log('Se hizo clic en el elemento con id "color1"'); // Agregando console.log
         if (jacketMaterial) {
             // Cambiar el color de la textura del material a rojo
-            jacketMaterial.color.set(0xFE2E2E); // Color rojo
+            jacketMaterial.color.set(0xB40404); // Color rojo
+        }
+            // Cambiar el color del bolsilloMaterial a gris
+        if (bolsilloMaterial) {
+            bolsilloMaterial.color.set(0xc00606); // Color gris
         }
     });
 
@@ -155,6 +175,10 @@ function inicializar() {
         if (jacketMaterial) {
             // Cambiar el color de la textura del material a rojo
             jacketMaterial.color.set(0x0431B4); // Color rojo
+        }
+            // Cambiar el color del bolsilloMaterial a gris
+        if (bolsilloMaterial) {
+            bolsilloMaterial.color.set(0x08298A); // Color gris
         }
     });
 

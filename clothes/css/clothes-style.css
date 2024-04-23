@@ -254,7 +254,7 @@ footer{
     }
 
     .colorselect{
-        height: auto;
+        width: 95%;
         margin: 0;
     }
     .selectortext{
@@ -262,7 +262,7 @@ footer{
     }
     
     .decalselect{
-        width: 100%;
+        width: 95%;
         flex-wrap: nowrap;
     }
 
@@ -297,6 +297,10 @@ footer{
     .color4{
         width: 40px;
         height: 40px;
+    }
+
+    .bolselect{
+        width: 95%;
     }
 
     .bolsi1{
