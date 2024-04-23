@@ -56,21 +56,54 @@ body {
 }
 
 .decai{
-
+    display: flex;
+    flex-direction: column;
 }
+
+.decalselect{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: center;
+}
+
+.decai1{
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    cursor: pointer;
+    background-color: aquamarine;
+}
+.decai2{
+    width: 40px;        
+    height: 40px;
+    margin: 4px;
+    cursor: pointer;
+    background-color: aquamarine;
+}
+.decai3{
+    width: 40px;        
+    height: 40px;
+    margin: 4px;
+    cursor: pointer;
+    background-color: aquamarine;
+}
+.decai4{
+    width: 40px;        
+    height: 40px;
+    margin: 4px;
+    cursor: pointer;
+    background-color: aquamarine;
+}
+
+
 .color{
     display: flex;
     flex-direction: column;
 }
 
 .colorselect{
-    height: 60px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    
+    display: flex;    
 }
 
 .color1{
@@ -122,8 +155,37 @@ body {
     flex-direction: column;
 }
 
-.selectorbol{
+.bolselect{
+    display: flex;
+}
+
+.bolsi1{
+    width: 25px;
+    height: 25px;
     cursor: pointer;
+    margin: 5px;
+    background-color: crimson;
+}
+.bolsi2{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: crimson;
+}
+.bolsi3{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: crimson;
+}
+.bolsi4{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: crimson;
 }
 
 .hat{
@@ -183,7 +245,7 @@ footer{
         order: 1;
     }
     .selector{
-        height: 40%;
+        height: 15%;
         flex-wrap: wrap;
         order: 2;
     }
@@ -198,26 +260,60 @@ footer{
     .selectortext{
         height: 30px;
     }
+    
+    .decalselect{
+        width: 100%;
+        flex-wrap: nowrap;
+    }
 
+    .decai1{
+        width: 50px;
+        height: 50px;
+    }
+    .decai2{
+        width: 50px;        
+        height: 50px;
+    }
+    .decai3{
+        width: 50px;        
+        height: 50px;
+    }
+    .decai4{
+        width: 50px;        
+        height: 50px;
+    }
     .color1{
-        width: 30px;
-        height: 30px;
-
+        width: 40px;
+        height: 40px;
     }
     .color2{
-        width: 30px;
-        height: 30px;
-        
+        width: 40px;
+        height: 40px;    
     }
     .color3{
-        width: 30px;
-        height: 30px;
-        
+        width: 40px;
+        height: 40px;    
     }
     .color4{
-        width: 30px;
-        height: 30px;
-        
+        width: 40px;
+        height: 40px;
+    }
+
+    .bolsi1{
+        width: 50px;
+        height: 50px;
+    }
+    .bolsi2{
+        width: 50px;
+        height: 50px;
+    }
+    .bolsi3{
+        width: 50px;
+        height: 50px;
+    }
+    .bolsi4{
+        width: 50px;
+        height: 50px;
     }
 
     img{
@@ -227,6 +323,10 @@ footer{
 
     footer{
         font-size: 15px;
+    }
+
+    .selectortext{
+        display: none;
     }
 
 }

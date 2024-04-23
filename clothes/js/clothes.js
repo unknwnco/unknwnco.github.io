@@ -24,19 +24,28 @@ function inicializar() {
     controls.target = new THREE.Vector3(0, 1.3, 0);
     controls.update();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, .5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, .5);
-    directionalLight.position.set(1, 10, 20);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, .4);
+    directionalLight.position.set(10, 10, 20);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
     let jacketMaterial; // Variable para almacenar el material de la chaqueta
     let capotaMesh;
-    let capotaVisible = true;
+    let capotaVisible = false;
     let bolsilloMesh;
-    let bolsilloVisible = true;
+    let bolsilloVisible = false;
+    let bolsillo2Mesh;
+    let bolsillo2Visible = false;
+    let bolsillo3Mesh;
+    let bolsillo3Visible = false;
+    let bolsillo4Mesh;
+    let bolsillo4Visible = false;
+
+    let decalMesh;
+    let decalVisible = false;
 
     loader.load('/clothes/3d/jacket.glb', function (gltf) {
         const model = gltf.scene;
@@ -57,14 +66,45 @@ function inicializar() {
         gltf.scene.traverse(function (child) {
             if (child.type === "Group" && child.name === "Capota") {
                 capotaMesh = child;
+                capotaMesh.visible = true; // Ocultar por defecto
             }
         });
 
 
-        // Buscar el mesh con nombre "Capota"
+        // Buscar el mesh con nombre "Bolsilo"
         gltf.scene.traverse(function (child) {
             if (child.isMesh && child.name === "Bolsillo") {
                 bolsilloMesh = child;
+                bolsilloMesh.visible = true;
+            }
+        });
+        // Buscar el mesh con nombre "Bolsilo"
+        gltf.scene.traverse(function (child) {
+            if (child.type === "Group" && child.name === "Bolsillo2") {
+                bolsillo2Mesh = child;
+                bolsillo2Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Bolsilo"
+        gltf.scene.traverse(function (child) {
+            if (child.type === "Group" && child.name === "Bolsillo3") {
+                bolsillo3Mesh = child;
+                bolsillo3Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Bolsilo"
+        gltf.scene.traverse(function (child) {
+            if (child.type === "Group" && child.name === "Bolsillo4") {
+                bolsillo4Mesh = child;
+                bolsillo4Mesh.visible = false;
+            }
+        });
+
+        // Buscar el mesh con nombre "Decal"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decai1") {
+                decalMesh = child;
+                decalMesh.visible = false;
             }
         });
 
@@ -129,7 +169,7 @@ function inicializar() {
         }
     });
 
-    // Escuchar clics en el elemento con id "hat"
+    // Escuchar clics en el elemento con id "bolsillo"
     const bolsillo = document.getElementById('bolsillo');
     bolsillo.addEventListener('click', function () {
         console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
@@ -137,6 +177,50 @@ function inicializar() {
             // Alternar la visibilidad del mesh del bolsillo
             bolsilloVisible = !bolsilloVisible;
             bolsilloMesh.visible = bolsilloVisible;
+        }
+    });
+
+    // Escuchar clics en el elemento con id "bolsillo"
+    const bolsillo2 = document.getElementById('bolsillo2');
+    bolsillo2.addEventListener('click', function () {
+        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+        if (bolsillo2Mesh) {
+            // Alternar la visibilidad del mesh del bolsillo
+            bolsillo2Visible = !bolsillo2Visible;
+            bolsillo2Mesh.visible = bolsillo2Visible;
+        }
+    });
+
+    // Escuchar clics en el elemento con id "bolsillo"
+    const bolsillo3 = document.getElementById('bolsillo3');
+    bolsillo3.addEventListener('click', function () {
+        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+        if (bolsillo3Mesh) {
+            // Alternar la visibilidad del mesh del bolsillo
+            bolsillo3Visible = !bolsillo3Visible;
+            bolsillo3Mesh.visible = bolsillo3Visible;
+        }
+    });
+
+    // Escuchar clics en el elemento con id "bolsillo"
+    const bolsillo4 = document.getElementById('bolsillo4');
+    bolsillo4.addEventListener('click', function () {
+        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+        if (bolsillo4Mesh) {
+            // Alternar la visibilidad del mesh del bolsillo
+            bolsillo4Visible = !bolsillo4Visible;
+            bolsillo4Mesh.visible = bolsillo4Visible;
+        }
+    });
+
+    // Escuchar clics en el elemento con id "hat"
+    const decal = document.getElementById('decal');
+    decal.addEventListener('click', function () {
+        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+        if (decalMesh) {
+            // Alternar la visibilidad del mesh del bolsillo
+            decalVisible = !decalVisible;
+            decalMesh.visible = decalVisible;
         }
     });
 }
