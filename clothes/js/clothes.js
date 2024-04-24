@@ -48,6 +48,20 @@ function inicializar() {
     let decalMesh;
     let decalVisible = false;
 
+    
+    let decal2Mesh;
+    let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
+    let decal2Visible = false;
+    let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
+    // Variable para el estado de visibilidad de bolsillo3
+
+// Variable para el estado de visibilidad de decal2Bolsillo3Mesh
+let decal2Bolsillo3Visible = false;
+
+
+
+    
+
     loader.load('/clothes/3d/jacket.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
@@ -112,6 +126,27 @@ function inicializar() {
             if (child.isMesh && child.name === "Decal1") {
                 decalMesh = child;
                 decalMesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal2"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal2") {
+                decal2Mesh = child;
+                decal2Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal2"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal2bolsillo2") {
+                decal2Bolsillo2Mesh = child;
+                decal2Bolsillo2Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal2"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal2bolsillo3") {
+                decal2Bolsillo3Mesh = child;
+                decal2Bolsillo3Mesh.visible = false;
             }
         });
 
@@ -204,14 +239,22 @@ function inicializar() {
         }
     });
 
-    // Escuchar clics en el elemento con id "bolsillo"
+    // Escuchar clics en el elemento con id "bolsillo2"
     const bolsillo2 = document.getElementById('bolsillo2');
     bolsillo2.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+        console.log('Se hizo clic en el elemento con id "bolsillo2"');
         if (bolsillo2Mesh) {
-            // Alternar la visibilidad del mesh del bolsillo
+            // Alternar la visibilidad del mesh del bolsillo 2
             bolsillo2Visible = !bolsillo2Visible;
             bolsillo2Mesh.visible = bolsillo2Visible;
+    
+            // Verificar si ambos bolsillo2Mesh y decal2Mesh son visibles
+            if (bolsillo2Visible && decal2Visible) {
+                // Si ambos son visibles, hacer visible el mesh Decal2.bolsillo2
+                if (decal2Bolsillo2Mesh) {
+                    decal2Bolsillo2Mesh.visible = true;
+                }
+            }
         }
     });
 
@@ -223,6 +266,13 @@ function inicializar() {
             // Alternar la visibilidad del mesh del bolsillo
             bolsillo3Visible = !bolsillo3Visible;
             bolsillo3Mesh.visible = bolsillo3Visible;
+
+        // Verificar si bolsillo3Mesh y decal2Mesh son visibles
+        if (bolsillo3Visible && decal2Visible) {
+            // Si ambos son visibles, alternar la visibilidad del mesh decal2Bolsillo3Mesh
+            decal2Bolsillo3Visible = !decal2Bolsillo3Visible;
+            decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
+        }
         }
     });
 
@@ -245,6 +295,27 @@ function inicializar() {
             // Alternar la visibilidad del mesh del bolsillo
             decalVisible = !decalVisible;
             decalMesh.visible = decalVisible;
+        }
+    });
+
+    // Escuchar clics en el elemento con id "decal2"
+    const decal2 = document.getElementById('decal2');
+    decal2.addEventListener('click', function () {
+        console.log('Se hizo clic en el elemento con id "decal2"');
+        if (decal2Mesh) {
+            // Alternar la visibilidad del mesh del decal 2
+            decal2Visible = !decal2Visible;
+            decal2Mesh.visible = decal2Visible;
+    
+            // Verificar si ambos bolsillo2Mesh y decal2Mesh son visibles
+            if (bolsillo2Visible && decal2Visible) {
+                // Si ambos son visibles, hacer visible el mesh Decal2.bolsillo2
+                if (decal2Bolsillo3Mesh) {
+                    // Si ambos son visibles, alternar la visibilidad del mesh decal2Bolsillo3Mesh
+                    decal2Bolsillo3Visible = !decal2Bolsillo3Visible;
+                    decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
+                }
+            }
         }
     });
 }
