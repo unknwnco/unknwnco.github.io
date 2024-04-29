@@ -48,10 +48,15 @@ function inicializar() {
     let decalMesh;
     let decalVisible = false;
 
-    
+    let activeDecal = null;
+
     let decal2Mesh;
-    let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
     let decal2Visible = false;
+    let decal3Mesh;
+    let decal3Visible = false;
+    let decal4Mesh;
+    let decal4Visible = false;
+    let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
     let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
     // Variable para el estado de visibilidad de bolsillo3
 
@@ -133,6 +138,20 @@ let decal2Bolsillo3Visible = false;
             if (child.isMesh && child.name === "Decal2") {
                 decal2Mesh = child;
                 decal2Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal2"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal3") {
+                decal3Mesh = child;
+                decal3Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal2"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal4") {
+                decal4Mesh = child;
+                decal4Mesh.visible = false;
             }
         });
         // Buscar el mesh con nombre "Decal2"
@@ -287,37 +306,72 @@ let decal2Bolsillo3Visible = false;
         }
     });
 
-    // Escuchar clics en el elemento con id "hat"
-    const decal = document.getElementById('decal');
-    decal.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
-        if (decalMesh) {
-            // Alternar la visibilidad del mesh del bolsillo
-            decalVisible = !decalVisible;
-            decalMesh.visible = decalVisible;
-        }
-    });
+// Función para desactivar un decal
+function deactivateDecal(decal) {
+    decal.visible = false;
+    activeDecal = null;
+}
 
-    // Escuchar clics en el elemento con id "decal2"
-    const decal2 = document.getElementById('decal2');
-    decal2.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "decal2"');
-        if (decal2Mesh) {
-            // Alternar la visibilidad del mesh del decal 2
-            decal2Visible = !decal2Visible;
-            decal2Mesh.visible = decal2Visible;
-    
-            // Verificar si ambos bolsillo2Mesh y decal2Mesh son visibles
-            if (bolsillo2Visible && decal2Visible) {
-                // Si ambos son visibles, hacer visible el mesh Decal2.bolsillo2
-                if (decal2Bolsillo3Mesh) {
-                    // Si ambos son visibles, alternar la visibilidad del mesh decal2Bolsillo3Mesh
-                    decal2Bolsillo3Visible = !decal2Bolsillo3Visible;
-                    decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
-                }
-            }
+// Escuchar clics en el elemento con id "decal"
+const decal = document.getElementById('decal');
+decal.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "decal"');
+    if (activeDecal !== decalMesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
         }
-    });
+        decalMesh.visible = true;
+        activeDecal = decalMesh;
+    } else {
+        deactivateDecal(decalMesh);
+    }
+});
+
+// Escuchar clics en el elemento con id "decal2"
+const decal2 = document.getElementById('decal2');
+decal2.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "decal2"');
+    if (activeDecal !== decal2Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal2Mesh.visible = true;
+        activeDecal = decal2Mesh;
+    } else {
+        deactivateDecal(decal2Mesh);
+    }
+});
+
+// Escuchar clics en el elemento con id "decal3"
+const decal3 = document.getElementById('decal3');
+decal3.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "decal3"');
+    if (activeDecal !== decal3Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal3Mesh.visible = true;
+        activeDecal = decal3Mesh;
+    } else {
+        deactivateDecal(decal3Mesh);
+    }
+});
+
+// Escuchar clics en el elemento con id "decal4"
+const decal4 = document.getElementById('decal4');
+decal4.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "decal4"');
+    if (activeDecal !== decal4Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal4Mesh.visible = true;
+        activeDecal = decal4Mesh;
+    } else {
+        deactivateDecal(decal4Mesh);
+    }
+});
+
 }
 
 document.addEventListener('DOMContentLoaded', inicializar);
