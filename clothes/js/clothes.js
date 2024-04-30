@@ -1,3 +1,8 @@
+let selectedDecal = null;
+let selectedColor = null;
+let selectedBolsillo = null;
+let selectedHat = false;
+
 function inicializar() {
     const canvas = document.getElementById('item');
 
@@ -178,63 +183,107 @@ let decal2Bolsillo3Visible = false;
         // Llamar a la función de renderizado
         render();
     });
+// Definir los colores por defecto
+const defaultJacketColor = 0xFFFFFF; // Color blanco
+const defaultBolsilloColor = 0xDDDDDD; // Color gris
 
-    // Escuchar clics en el elemento con id "color1"
-    const color1 = document.getElementById('color1');
-    color1.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "color1"'); // Agregando console.log
-        if (jacketMaterial) {
-            // Cambiar el color de la textura del material a rojo
-            jacketMaterial.color.set(0x1C1C1C); // Color rojo
-        }
-            // Cambiar el color del bolsilloMaterial a gris
-        if (bolsilloMaterial) {
-            bolsilloMaterial.color.set(0x363636); // Color gris
-        }
-    });
 
-    // Escuchar clics en el elemento con id "color1"
-    const color2 = document.getElementById('color2');
-    color2.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "color1"'); // Agregando console.log
-        if (jacketMaterial) {
-            // Cambiar el color de la textura del material a rojo
-            jacketMaterial.color.set(0xFFFFFF); // Color rojo
-        }
-        
-            // Cambiar el color del bolsilloMaterial a gris
-        if (bolsilloMaterial) {
-            bolsilloMaterial.color.set(0xDDDDDD); // Color gris
-        }
-    });
+// Escuchar clics en el elemento con id "color1"
+const color1 = document.getElementById('color1');
+color1.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "color1"');
+    if (selectedColor === "color1") {
+        selectedColor = null; // Desactivar el color
+        resetDefaultColors(); // Establecer el color por defecto
+        updateSelectedOptions();
+        return;
+    }
+    if (jacketMaterial) {
+        // Cambiar el color de la textura del material a rojo
+        jacketMaterial.color.set(0x1C1C1C); // Color rojo
+    }
+    // Cambiar el color del bolsilloMaterial a gris
+    if (bolsilloMaterial && selectedColor !== "color1") {
+        bolsilloMaterial.color.set(0x363636); // Color gris
+    }
+    selectedColor = "color1";
+    updateSelectedOptions();
+});
 
-    // Escuchar clics en el elemento con id "color1"
-    const color3 = document.getElementById('color3');
-    color3.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "color1"'); // Agregando console.log
-        if (jacketMaterial) {
-            // Cambiar el color de la textura del material a rojo
-            jacketMaterial.color.set(0xB40404); // Color rojo
-        }
-            // Cambiar el color del bolsilloMaterial a gris
-        if (bolsilloMaterial) {
-            bolsilloMaterial.color.set(0xc00606); // Color gris
-        }
-    });
+// Escuchar clics en el elemento con id "color2"
+const color2 = document.getElementById('color2');
+color2.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "color2"');
+    if (selectedColor === "color2") {
+        selectedColor = null; // Desactivar el color
+        resetDefaultColors(); // Establecer el color por defecto
+        updateSelectedOptions();
+        return;
+    }
+    if (jacketMaterial) {
+        // Cambiar el color de la textura del material a blanco
+        jacketMaterial.color.set(0xFFFFFF); // Color blanco
+    }
+    // Cambiar el color del bolsilloMaterial a gris
+    if (bolsilloMaterial && selectedColor !== "color2") {
+        bolsilloMaterial.color.set(0xDDDDDD); // Color gris
+    }
+    selectedColor = "color2";
+    updateSelectedOptions();
+});
 
-    // Escuchar clics en el elemento con id "color1"
-    const color4 = document.getElementById('color4');
-    color4.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "color1"'); // Agregando console.log
-        if (jacketMaterial) {
-            // Cambiar el color de la textura del material a rojo
-            jacketMaterial.color.set(0x0431B4); // Color rojo
-        }
-            // Cambiar el color del bolsilloMaterial a gris
-        if (bolsilloMaterial) {
-            bolsilloMaterial.color.set(0x08298A); // Color gris
-        }
-    });
+// Escuchar clics en el elemento con id "color3"
+const color3 = document.getElementById('color3');
+color3.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "color3"');
+    if (selectedColor === "color3") {
+        selectedColor = null; // Desactivar el color
+        resetDefaultColors(); // Establecer el color por defecto
+        updateSelectedOptions();
+        return;
+    }
+    if (jacketMaterial) {
+        // Cambiar el color de la textura del material a rojo
+        jacketMaterial.color.set(0xB40404); // Color rojo
+    }
+    // Cambiar el color del bolsilloMaterial a rojo oscuro
+    if (bolsilloMaterial && selectedColor !== "color3") {
+        bolsilloMaterial.color.set(0xC00606); // Color gris
+    }
+    selectedColor = "color3";
+    updateSelectedOptions();
+});
+
+// Escuchar clics en el elemento con id "color4"
+const color4 = document.getElementById('color4');
+color4.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "color4"');
+    if (selectedColor === "color4") {
+        selectedColor = null; // Desactivar el color
+        resetDefaultColors(); // Establecer el color por defecto
+        updateSelectedOptions();
+        return;
+    }
+    if (jacketMaterial) {
+        // Cambiar el color de la textura del material a azul oscuro
+        jacketMaterial.color.set(0x0431B4); // Color rojo
+    }
+    // Cambiar el color del bolsilloMaterial a azul
+    if (bolsilloMaterial && selectedColor !== "color4") {
+        bolsilloMaterial.color.set(0x08298A); // Color gris
+    }
+    selectedColor = "color4";
+    updateSelectedOptions();
+});
+// Función para restablecer los colores por defecto
+function resetDefaultColors() {
+    if (jacketMaterial) {
+        jacketMaterial.color.set(defaultJacketColor);
+    }
+    if (bolsilloMaterial) {
+        bolsilloMaterial.color.set(defaultBolsilloColor);
+    }
+}
 
     // Escuchar clics en el elemento con id "hat"
     const hat = document.getElementById('hat');
@@ -245,6 +294,8 @@ let decal2Bolsillo3Visible = false;
             capotaVisible = !capotaVisible;
             capotaMesh.visible = capotaVisible;
         }
+        selectedHat = !selectedHat;
+        updateSelectedOptions();
     });
 
     // Escuchar clics en el elemento con id "bolsillo"
@@ -256,6 +307,8 @@ let decal2Bolsillo3Visible = false;
             bolsilloVisible = !bolsilloVisible;
             bolsilloMesh.visible = bolsilloVisible;
         }
+        selectedBolsillo = "bolsillo";
+        updateSelectedOptions();
     });
 
     // Escuchar clics en el elemento con id "bolsillo2"
@@ -275,6 +328,8 @@ let decal2Bolsillo3Visible = false;
                 }
             }
         }
+        selectedBolsillo = "bolsillo2";
+        updateSelectedOptions();
     });
 
     // Escuchar clics en el elemento con id "bolsillo"
@@ -293,6 +348,8 @@ let decal2Bolsillo3Visible = false;
             decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
         }
         }
+        selectedBolsillo = "bolsillo3";
+        updateSelectedOptions();
     });
 
     // Escuchar clics en el elemento con id "bolsillo"
@@ -304,6 +361,8 @@ let decal2Bolsillo3Visible = false;
             bolsillo4Visible = !bolsillo4Visible;
             bolsillo4Mesh.visible = bolsillo4Visible;
         }
+        selectedBolsillo = "bolsillo4";
+        updateSelectedOptions();
     });
 
 // Función para desactivar un decal
@@ -325,6 +384,8 @@ decal.addEventListener('click', function () {
     } else {
         deactivateDecal(decalMesh);
     }
+    selectedDecal = "decal";
+    updateSelectedOptions();
 });
 
 // Escuchar clics en el elemento con id "decal2"
@@ -340,6 +401,8 @@ decal2.addEventListener('click', function () {
     } else {
         deactivateDecal(decal2Mesh);
     }
+    selectedDecal = "decal2";
+    updateSelectedOptions();
 });
 
 // Escuchar clics en el elemento con id "decal3"
@@ -355,6 +418,8 @@ decal3.addEventListener('click', function () {
     } else {
         deactivateDecal(decal3Mesh);
     }
+    selectedDecal = "decal3";
+    updateSelectedOptions();
 });
 
 // Escuchar clics en el elemento con id "decal4"
@@ -370,11 +435,46 @@ decal4.addEventListener('click', function () {
     } else {
         deactivateDecal(decal4Mesh);
     }
+    selectedDecal = "decal4";
+    updateSelectedOptions();
 });
 
 }
 
 document.addEventListener('DOMContentLoaded', inicializar);
+
+// Función para actualizar la lista de opciones seleccionadas y dibujar "+1" en el div "shop" si hay más de una opción seleccionada
+function updateSelectedOptions() {
+    const selectedOptions = [];
+    if (selectedDecal) selectedOptions.push(selectedDecal);
+    if (selectedColor) selectedOptions.push(selectedColor);
+    if (selectedBolsillo) selectedOptions.push(selectedBolsillo);
+    if (selectedHat) selectedOptions.push("Hat");
+
+    // Mostrar las opciones seleccionadas en la consola
+    console.log("Opciones seleccionadas:", selectedOptions);
+
+    // Actualizar el contenido del div "shop"
+    const shopDiv = document.getElementById('shop');
+    console.log("Valor de shopDiv:", shopDiv);
+    console.log("Longitud de selectedOptions:", selectedOptions.length);
+    
+    // Actualizar el contenido del div "notify"
+    const notifyDiv = document.getElementById('notify');
+    
+    if (selectedOptions.length > 0) {
+        shopDiv.textContent = "+1";
+        
+        console.log("Mostrando +1 en el div 'shop'");
+    } else {
+        shopDiv.textContent = "";
+        
+    }
+}
+
+
+
+
 
 
 
