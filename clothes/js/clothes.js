@@ -375,3 +375,32 @@ decal4.addEventListener('click', function () {
 }
 
 document.addEventListener('DOMContentLoaded', inicializar);
+
+
+
+
+function toggleDropdown() {
+    var dropdown = document.querySelector('.decalselect');
+    var dropdown2 = document.querySelector('.bolselect');
+
+    if (!dropdown.classList.contains('active')) {
+        dropdown.classList.add('active');
+        dropdown2.classList.remove('active');
+    } else {
+        dropdown.classList.remove('active');
+    }
+}
+
+function toggleDropdown2() {
+    var dropdown = document.querySelector('.bolselect');
+    var dropdown2 = document.querySelector('.decalselect');
+
+    if (!dropdown.classList.contains('active')) {
+        dropdown.classList.add('active');
+        dropdown2.classList.remove('active');
+    } else {
+        dropdown.classList.remove('active');
+    }
+}
+
+

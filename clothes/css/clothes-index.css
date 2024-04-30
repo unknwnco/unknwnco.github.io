@@ -1,0 +1,306 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+  
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  body {
+      margin: 0;
+      padding: 0;
+      padding-top: 200px;
+      font-size: 16px;
+      line-height: 1.em;
+      font-family: 'Roboto';
+      background-color: white;
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+}
+
+header{
+    background-image: url(../img/BG_Cover.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+  .fixed{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    color: #222;
+    top:0;
+    background: #212121;
+    font-family: 'Roboto', sans-serif;
+}
+
+nav{
+    width: 100%;
+    margin-bottom: .1em;
+    background: #fcfcfc;
+    color: rgb(0, 0, 0);
+    border-bottom:4px solid #101010;
+}
+
+.cabezera{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.cabezera2{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.nav-item{
+    display: inline-block;
+    padding: 15px;
+    font-weight: 100;
+    font-size: 1.2em;
+    
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    transition: max-height 0.5s;
+}
+
+
+.nav-active,.nav-item:hover{
+    cursor: pointer;
+    background: rgba(194, 194, 194, 0.2);
+    border-bottom: 2px solid rgba(255,255,255,.8);
+}
+
+.nav-item2{
+    display: flex;
+    padding: 15px;
+    font-weight: 100;
+    font-size: 1.2em;
+    color: white;
+    background: #000000;
+    border: 2px solid rgba(255,255,255,.8);
+}
+
+.nav-item2:hover{
+    color: green;
+    background: white;
+    border: 2px grey;
+}
+
+.logo{
+    width: 400px;
+    margin: auto;
+    background-color: white;
+    padding: 2px;
+}
+
+.texto{
+    display: inline-block;
+    max-width: 250px;
+    padding: 15px;
+    flex-grow: 2;
+}
+
+.texto h1{
+    color: #d8d8d8;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 600;
+    margin: 5px 0 0 0;
+}
+
+.texto h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+
+.texto2 {
+    display: inline-block;
+    max-width: 80px;
+    padding: 15px;
+    flex-grow: 2;
+}
+
+.texto2 h2{
+    padding: 5px;
+    color: #000000;
+    font-size: 0.8em;
+    text-align: center;
+    margin: 0px;
+    text-align: left;
+        font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+
+.menu-bar{
+    height: 2.5em;
+    width: 100%;
+    box-sizing: border-box;
+    background: #242424;
+    text-align: left;
+    padding: 15px 20px;
+    color: white;
+    font-size: 1.4em;
+    display: none;
+}
+
+.hamburger-icon{
+    float: right;
+    clear: both;
+    margin-top: -5px;
+    font-size: 1.4em;
+}
+
+.container{
+    background-color: yellow;
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section{
+    clear: both;
+    padding: 0;
+    margin: 0;
+}
+
+.col{
+    display: block;
+    float: left;
+    margin: 1% 0 1% 1.6%;
+}
+
+.col:first-child{
+    margin-left: 0;
+}
+
+.span_3_of_3{
+    width: 100%;    
+}
+
+.blog-post{
+    background: #00ff73;
+    color: white;
+    margin: 0 auto 2em auto;
+}
+
+.banner{
+    height: 60vh;
+    background-color: blue;
+    margin: 10px;   
+}
+
+.nosotros{
+    height: 60vh;
+    background-color: blue;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parrafo{
+    width: 500px;
+    text-align: center;
+}
+
+.parrafo h1,p{
+    margin: 20px;
+}
+
+
+
+
+
+
+
+/* footer */
+
+footer{
+    width: 100%;
+    background: #141414;
+    color: #999999;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+
+.footer-cont{
+    text-align: center;
+    margin: auto;
+}
+
+.footer-cont h1{
+    margin: 10px 0 auto;
+    font-size: 1em;
+    font-weight: 800;
+}
+
+.footer-cont h2{
+    font-size: 0.8em;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+footer a:hover{
+    color: white;
+    text-decoration: underline;
+}
+
+.emoji{
+    width: 1em;
+}
+
+
+@media screen and (max-width: 30em){
+    nav ul{
+        max-height: 0;
+    }
+
+    nav ul .nav-item{
+        box-sizing: border-box;
+        text-align: left;
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .menu-bar{
+        display: block;
+    }
+    
+    nav{
+        background: #3b3b3b;
+    }
+    
+    
+    .logo{
+        display: none;
+    }
+    .texto{
+        display: none;
+    }
+
+    .reveal{
+        max-height: 19em;
+    }
+}
