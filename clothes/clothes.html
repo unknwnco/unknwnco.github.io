@@ -10,6 +10,26 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
+    <div class="compras" id="compras">
+        <div class="listacompras"><span class="close" onclick="cerrarCompras()">X</span>
+            <div class="formcont">
+            <div class="form">
+                <div class="tittlecompras">CARRITO DE COMPRAS</div>
+            <table id="tablaCompras">
+                <thead>
+                    <tr id="comprasBody">
+                    </tr>
+                </thead>
+            </table>
+            <div id="vaciarOpciones">
+                Haz clic aquí para vaciar las opciones
+            </div>
+            <div class="btncomprar"><div class="comprarbtn">comprar</div></div>
+            </div>
+
+        </div>
+        </div>
+    </div>
     <img src="img/the house of trucks.jpg" alt="" class="logo">
     <div class="container">
         <div class="selector">
@@ -37,12 +57,12 @@
             <div class="selectortext">color</div>
             </div>
         </div>
-        <div class="canvas" id="item"><div class="notify" id="shop"></div><div class="shop"><i class="fa-solid fa-bag-shopping fa-2xl"></i></div></div>
+        <div class="canvas" id="item"><div class="carshop" id="notify"><div class="notify" id="shop" ></div><div class="shop"><i class="fa-solid fa-bag-shopping fa-2xl"></i></div></div></div>
         <div class="selector">
             
             <div class="item bolsillo">
                 <div class="selectortext2">BOLSILLOS</div>
-                <img src="img/bolsillo1.png" alt="" class="bolsilloref">
+                <img src="img/bolsillo3.png" alt="" class="bolsilloref">
                 <div class="bolselect" onclick="toggleDropdown2()"><!--<img src="/clothes/img/bolsillo.png" alt="">-->
                     <button class="dropbtn">Seleccionar</button>
                     <div class="dropdown-content2">
@@ -56,7 +76,7 @@
             </div>
             <div class="item hat">
                 <div class="selectorhat">
-                    <img src="/clothes/img/capota.png" alt="" id="hat" class="capucha"></div><div class="selectortext">hat</div>
+                    <img src="/clothes/img/capota.png" alt="" id="hat" class="capucha"></div><div class="selectortext">Capota</div>
                 </div>
             </div>
     </div>

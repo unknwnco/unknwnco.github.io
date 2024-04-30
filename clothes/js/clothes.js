@@ -3,6 +3,8 @@ let selectedColor = null;
 let selectedBolsillo = null;
 let selectedHat = false;
 
+let activeDecal = null;
+
 function inicializar() {
     const canvas = document.getElementById('item');
 
@@ -68,10 +70,6 @@ function inicializar() {
 // Variable para el estado de visibilidad de decal2Bolsillo3Mesh
 let decal2Bolsillo3Visible = false;
 
-
-
-    
-
     loader.load('/clothes/3d/jacket.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
@@ -97,7 +95,7 @@ let decal2Bolsillo3Visible = false;
         gltf.scene.traverse(function (child) {
             if (child.type === "Group" && child.name === "Capota") {
                 capotaMesh = child;
-                capotaMesh.visible = true; // Ocultar por defecto
+                capotaMesh.visible = false; // Ocultar por defecto
             }
         });
 
@@ -187,26 +185,24 @@ let decal2Bolsillo3Visible = false;
 const defaultJacketColor = 0xFFFFFF; // Color blanco
 const defaultBolsilloColor = 0xDDDDDD; // Color gris
 
-
 // Escuchar clics en el elemento con id "color1"
 const color1 = document.getElementById('color1');
 color1.addEventListener('click', function () {
     console.log('Se hizo clic en el elemento con id "color1"');
-    if (selectedColor === "color1") {
+    if (selectedColor === "Negro") { // Verificar si ya está seleccionado
         selectedColor = null; // Desactivar el color
         resetDefaultColors(); // Establecer el color por defecto
         updateSelectedOptions();
         return;
     }
     if (jacketMaterial) {
-        // Cambiar el color de la textura del material a rojo
         jacketMaterial.color.set(0x1C1C1C); // Color rojo
     }
-    // Cambiar el color del bolsilloMaterial a gris
-    if (bolsilloMaterial && selectedColor !== "color1") {
+    // Cambiar el color del bolsilloMaterial a gris solo si no está seleccionado
+    if (bolsilloMaterial && selectedColor !== "Negro") {
         bolsilloMaterial.color.set(0x363636); // Color gris
     }
-    selectedColor = "color1";
+    selectedColor = "Negro";
     updateSelectedOptions();
 });
 
@@ -214,21 +210,19 @@ color1.addEventListener('click', function () {
 const color2 = document.getElementById('color2');
 color2.addEventListener('click', function () {
     console.log('Se hizo clic en el elemento con id "color2"');
-    if (selectedColor === "color2") {
+    if (selectedColor === "Blanco") {
         selectedColor = null; // Desactivar el color
         resetDefaultColors(); // Establecer el color por defecto
         updateSelectedOptions();
         return;
     }
     if (jacketMaterial) {
-        // Cambiar el color de la textura del material a blanco
         jacketMaterial.color.set(0xFFFFFF); // Color blanco
     }
-    // Cambiar el color del bolsilloMaterial a gris
-    if (bolsilloMaterial && selectedColor !== "color2") {
+    if (bolsilloMaterial && selectedColor !== "Blanco") {
         bolsilloMaterial.color.set(0xDDDDDD); // Color gris
     }
-    selectedColor = "color2";
+    selectedColor = "Blanco";
     updateSelectedOptions();
 });
 
@@ -236,21 +230,19 @@ color2.addEventListener('click', function () {
 const color3 = document.getElementById('color3');
 color3.addEventListener('click', function () {
     console.log('Se hizo clic en el elemento con id "color3"');
-    if (selectedColor === "color3") {
+    if (selectedColor === "Rojo") {
         selectedColor = null; // Desactivar el color
         resetDefaultColors(); // Establecer el color por defecto
         updateSelectedOptions();
         return;
     }
     if (jacketMaterial) {
-        // Cambiar el color de la textura del material a rojo
         jacketMaterial.color.set(0xB40404); // Color rojo
     }
-    // Cambiar el color del bolsilloMaterial a rojo oscuro
-    if (bolsilloMaterial && selectedColor !== "color3") {
-        bolsilloMaterial.color.set(0xC00606); // Color gris
+    if (bolsilloMaterial && selectedColor !== "Rojo") {
+        bolsilloMaterial.color.set(0xC00606); // Color rojo oscuro
     }
-    selectedColor = "color3";
+    selectedColor = "Rojo";
     updateSelectedOptions();
 });
 
@@ -258,23 +250,22 @@ color3.addEventListener('click', function () {
 const color4 = document.getElementById('color4');
 color4.addEventListener('click', function () {
     console.log('Se hizo clic en el elemento con id "color4"');
-    if (selectedColor === "color4") {
+    if (selectedColor === "Azul") {
         selectedColor = null; // Desactivar el color
         resetDefaultColors(); // Establecer el color por defecto
         updateSelectedOptions();
         return;
     }
     if (jacketMaterial) {
-        // Cambiar el color de la textura del material a azul oscuro
-        jacketMaterial.color.set(0x0431B4); // Color rojo
+        jacketMaterial.color.set(0x0431B4); // Color azul oscuro
     }
-    // Cambiar el color del bolsilloMaterial a azul
-    if (bolsilloMaterial && selectedColor !== "color4") {
-        bolsilloMaterial.color.set(0x08298A); // Color gris
+    if (bolsilloMaterial && selectedColor !== "Azul") {
+        bolsilloMaterial.color.set(0x08298A); // Color azul
     }
-    selectedColor = "color4";
+    selectedColor = "Azul";
     updateSelectedOptions();
 });
+
 // Función para restablecer los colores por defecto
 function resetDefaultColors() {
     if (jacketMaterial) {
@@ -284,6 +275,9 @@ function resetDefaultColors() {
         bolsilloMaterial.color.set(defaultBolsilloColor);
     }
 }
+
+// Resto del código...
+
 
     // Escuchar clics en el elemento con id "hat"
     const hat = document.getElementById('hat');
@@ -307,7 +301,7 @@ function resetDefaultColors() {
             bolsilloVisible = !bolsilloVisible;
             bolsilloMesh.visible = bolsilloVisible;
         }
-        selectedBolsillo = "bolsillo";
+        selectedBolsillo = "Bolsillo inferiores internos";
         updateSelectedOptions();
     });
 
@@ -328,7 +322,7 @@ function resetDefaultColors() {
                 }
             }
         }
-        selectedBolsillo = "bolsillo2";
+        selectedBolsillo = "Bolsillos fontral medio";
         updateSelectedOptions();
     });
 
@@ -348,7 +342,7 @@ function resetDefaultColors() {
             decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
         }
         }
-        selectedBolsillo = "bolsillo3";
+        selectedBolsillo = "Bolsillos laterales";
         updateSelectedOptions();
     });
 
@@ -361,7 +355,7 @@ function resetDefaultColors() {
             bolsillo4Visible = !bolsillo4Visible;
             bolsillo4Mesh.visible = bolsillo4Visible;
         }
-        selectedBolsillo = "bolsillo4";
+        selectedBolsillo = "Bolsillos inferiores externos";
         updateSelectedOptions();
     });
 
@@ -381,10 +375,11 @@ decal.addEventListener('click', function () {
         }
         decalMesh.visible = true;
         activeDecal = decalMesh;
+        selectedDecal = "BlackAir"; // Establecer el decal seleccionado
     } else {
         deactivateDecal(decalMesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
     }
-    selectedDecal = "decal";
     updateSelectedOptions();
 });
 
@@ -398,10 +393,11 @@ decal2.addEventListener('click', function () {
         }
         decal2Mesh.visible = true;
         activeDecal = decal2Mesh;
+        selectedDecal = "Celtics"; // Establecer el decal seleccionado
     } else {
         deactivateDecal(decal2Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
     }
-    selectedDecal = "decal2";
     updateSelectedOptions();
 });
 
@@ -415,10 +411,11 @@ decal3.addEventListener('click', function () {
         }
         decal3Mesh.visible = true;
         activeDecal = decal3Mesh;
+        selectedDecal = "Duplont"; // Establecer el decal seleccionado
     } else {
         deactivateDecal(decal3Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
     }
-    selectedDecal = "decal3";
     updateSelectedOptions();
 });
 
@@ -432,44 +429,142 @@ decal4.addEventListener('click', function () {
         }
         decal4Mesh.visible = true;
         activeDecal = decal4Mesh;
+        selectedDecal = "Rick & Morty"; // Establecer el decal seleccionado
     } else {
         deactivateDecal(decal4Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
     }
-    selectedDecal = "decal4";
     updateSelectedOptions();
 });
+
 
 }
 
 document.addEventListener('DOMContentLoaded', inicializar);
 
-// Función para actualizar la lista de opciones seleccionadas y dibujar "+1" en el div "shop" si hay más de una opción seleccionada
-function updateSelectedOptions() {
-    const selectedOptions = [];
-    if (selectedDecal) selectedOptions.push(selectedDecal);
-    if (selectedColor) selectedOptions.push(selectedColor);
-    if (selectedBolsillo) selectedOptions.push(selectedBolsillo);
-    if (selectedHat) selectedOptions.push("Hat");
+//modal compras
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
+});
 
-    // Mostrar las opciones seleccionadas en la consola
-    console.log("Opciones seleccionadas:", selectedOptions);
+let selectedOptions = {};
+
+// Función para manejar la selección de diseño
+function handleDecalSelection() {
+    selectedDecal = this.value;
+    updateSelectedOptions();
+}
+
+// Función para manejar la selección de color
+function handleColorSelection() {
+    selectedColor = this.value;
+    updateSelectedOptions();
+}
+
+// Función para manejar la selección de bolsillo
+function handleBolsilloSelection() {
+    selectedBolsillo = this.value;
+    updateSelectedOptions();
+}
+
+// Función para manejar la selección de capota
+function handleHatSelection() {
+    selectedHat = this.checked;
+    updateSelectedOptions();
+}
+
+// Asignar eventos a los elementos de selección
+const decalSelect = document.getElementById('decalSelect');
+if (decalSelect) {
+    decalSelect.addEventListener('change', handleDecalSelection);
+}
+
+const colorSelect = document.getElementById('colorSelect');
+if (colorSelect) {
+    colorSelect.addEventListener('change', handleColorSelection);
+}
+
+const bolsilloSelect = document.getElementById('bolsilloSelect');
+if (bolsilloSelect) {
+    bolsilloSelect.addEventListener('change', handleBolsilloSelection);
+}
+
+const hatCheckbox = document.getElementById('hatCheckbox');
+if (hatCheckbox) {
+    hatCheckbox.addEventListener('change', handleHatSelection);
+}
+
+function updateSelectedOptions() {
+    // Actualizar las opciones seleccionadas
+    selectedOptions = {
+        "Diseño": selectedDecal || "",
+        "Color": selectedColor || "",
+        "Bolsillo": selectedBolsillo || "",
+        "Capota": selectedHat ? "si" : ""
+    };
+
+    // Actualizar el contenido de la tabla
+    const comprasBody = document.getElementById('comprasBody');
+
+    // Limpiar la tabla antes de agregar filas
+    comprasBody.innerHTML = ""; 
+
+    // Agregar fila de encabezado de categorías
+    //const headerRow = document.createElement('tr');
+    //const categoryHeaderCell = document.createElement('th');
+    //categoryHeaderCell.textContent = "Solicitud";
+    //headerRow.appendChild(categoryHeaderCell);
+    //const optionHeaderCell = document.createElement('th');
+    //optionHeaderCell.textContent = "";
+    //headerRow.appendChild(optionHeaderCell);
+    //comprasBody.appendChild(headerRow);
+
+    // Agregar filas de categorías y opciones seleccionadas
+    Object.keys(selectedOptions).forEach(category => {
+        const row = document.createElement('tr');
+        const categoryCell = document.createElement('td');
+        categoryCell.textContent = category;
+        row.appendChild(categoryCell);
+        const valueCell = document.createElement('td');
+        valueCell.textContent = selectedOptions[category];
+        row.appendChild(valueCell);
+        comprasBody.appendChild(row);
+    });
 
     // Actualizar el contenido del div "shop"
     const shopDiv = document.getElementById('shop');
-    console.log("Valor de shopDiv:", shopDiv);
-    console.log("Longitud de selectedOptions:", selectedOptions.length);
     
-    // Actualizar el contenido del div "notify"
-    const notifyDiv = document.getElementById('notify');
-    
-    if (selectedOptions.length > 0) {
+    if (Object.values(selectedOptions).some(option => option !== "")) {
         shopDiv.textContent = "+1";
-        
         console.log("Mostrando +1 en el div 'shop'");
     } else {
         shopDiv.textContent = "";
-        
     }
+
+    // Mostrar las opciones seleccionadas en la consola
+    console.log("Opciones seleccionadas:", selectedOptions);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
+
+    // Agregar evento de clic al elemento "Vacaciones opciones"
+    const vacacionesOpciones = document.getElementById('vaciarOpciones');
+    if (vacacionesOpciones) {
+        vacacionesOpciones.addEventListener('click', limpiarOpciones);
+    }
+});
+
+// Función para limpiar las opciones seleccionadas
+function limpiarOpciones() {
+    // Reiniciar las opciones seleccionadas
+    selectedDecal = "";
+    selectedColor = "";
+    selectedBolsillo = "";
+    selectedHat = false;
+
+    // Actualizar las opciones seleccionadas
+    updateSelectedOptions();
 }
 
 
@@ -478,6 +573,7 @@ function updateSelectedOptions() {
 
 
 
+//dropdown add
 
 function toggleDropdown() {
     var dropdown = document.querySelector('.decalselect');
@@ -502,5 +598,39 @@ function toggleDropdown2() {
         dropdown.classList.remove('active');
     }
 }
+
+
+//lista de compras
+function abrirCompras() {
+    var compras = document.getElementById("compras");
+    compras.style.display = "flex"; // Cambiamos a "flex" para mostrar el div
+    // Centramos el div de compras en el viewport
+    compras.style.top = `${window.innerHeight / 2 - compras.offsetHeight / 2}px`;
+    compras.style.left = `${window.innerWidth / 2 - compras.offsetWidth / 2}px`;
+    // Añadimos la clase al body para evitar que haga scroll
+    document.body.classList.add('modal-open');
+}
+
+function cerrarCompras() {
+    var compras = document.getElementById("compras");
+    compras.style.display = "none";
+    // Removemos la clase del body al cerrar el modal
+    document.body.classList.remove('modal-open');
+}
+
+// Cerrar compras si se hace clic fuera de ella
+window.onclick = function(event) {
+    var compras = document.getElementById("compras");
+    if (event.target == compras) {
+        compras.style.display = "none";
+        // Removemos la clase del body al cerrar el modal
+        document.body.classList.remove('modal-open');
+    }
+}
+
+// Abrir compras al hacer clic en el div "notify"
+document.getElementById("notify").onclick = function() {
+    abrirCompras();
+};
 
 

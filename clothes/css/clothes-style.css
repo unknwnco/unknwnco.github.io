@@ -173,7 +173,8 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     height: 100%;
 }
 .bolsilloref{
-    height: 200px;
+    height: 150px;
+    margin: 25px;    
 }
 
 
@@ -305,24 +306,162 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     border-radius: 50px;
     position: absolute;
     background-color: rgba(255, 0, 0, 0.623);
-    margin: 10px;
+    margin: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .notify{
-    margin: 10px;
+    margin: 20px;
     border-radius: 20px;
     background-color: white;
     color: black;
-    z-index: 9999;
+    z-index: 200;
 }
+
 #shop{
     position: absolute;
     display: flex;
     justify-content: flex-end;
 }
+
+
+
+.carshop{
+    display: contents;
+    cursor: pointer;
+}
+
+.close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.compras {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    background-color: rgba(0, 0, 0, 0.37);
+    z-index: 9999;
+}
+
+.tittlecompras{
+    margin: 30PX;
+    font-weight: bold;
+    color: rgb(90, 90, 90);
+}
+
+.listacompras {
+    width: 80%; /* Modifica el ancho según sea necesario */
+    height: 80%;
+    max-width: 900px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px; /* Ajusta el radio de borde según sea necesario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.formcont {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    
+    max-width: 900px; /* Ajusta el ancho máximo de la tabla según tus necesidades */
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+}
+
+.form th, .form td {
+    width: 150px; /* Ancho fijo para todas las celdas */
+    border-bottom: 1px solid #dddddd;
+    padding: 16px;
+    text-align: left;
+}
+
+.form th {
+    background-color: #f7f7f7;
+}
+
+.form tr:nth-child(even) {
+    /* Puedes agregar estilos adicionales para filas pares si lo necesitas */
+}
+
+#vaciarOpciones{
+    cursor: pointer;
+    margin: 20px;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    font-size: .8em;
+}
+
+#vaciarOpciones:hover{
+    font-size: .82em;
+}
+
+
+/* Estilos para evitar que el body haga scroll cuando se muestra el modal */
+body.modal-open {
+    overflow: hidden;
+}
+
+#tablaCompras{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#comprasBody{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.comprarbtn{
+    width: 100px;
+    height: 40px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: rgb(125, 255, 125);
+}
+
+.comprarbtn:hover{
+    outline: 1px solid #000000;
+    font-weight: 600;
+    background-color: rgb(68, 255, 68);
+}
+
+.btncomprar{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 #item {
     box-shadow: inset rgba(218, 218, 218, 0.37) 0px 0px 90px -12px;
@@ -338,7 +477,7 @@ footer{
     padding: 0 6px 0 6px;
 }
 
-@media screen and (max-width:45em){
+@media screen and (max-width:60em){
     .container{
         width: 80%;
         height: 80%;
@@ -362,6 +501,7 @@ footer{
     }
 
     .colorselect{
+        justify-content: center;
         width: 95%;
         margin: 0;
     }
@@ -375,20 +515,20 @@ footer{
     }
 
     .decai1{
-        width: 300px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
     .decai2{
-        width: 300px;        
-        height: 400px;
+        width: 100%;        
+        height: 100%;
     }
     .decai3{
-        width: 300px;        
-        height: 400px;
+        width: 100%;        
+        height: 100%;
     }
     .decai4{
-        width: 300px;        
-        height: 400px;
+        width: 100%;        
+        height: 100%;
     }
     .color1{
         width: 40px;
@@ -412,20 +552,20 @@ footer{
     }
 
     .bolsi1{
-        width: 300px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
     .bolsi2{
-        width: 300px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
     .bolsi3{
-        width: 300px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
     .bolsi4{
-        width: 300px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
     }
 
     .bolsilloref,.decalref{
@@ -446,23 +586,13 @@ footer{
     }
 
     .dropdown-content {
-        z-index: 999; /* Asegura que el modal esté encima del fondo */
-        position: fixed; /* Fija la posición del elemento con respecto a la ventana del navegador */
-        top: 20%; /* Coloca el elemento 10% desde la parte superior del viewport */
-        left: 13%; /* Coloca el elemento 10% desde el lado izquierdo del viewport */
-        width: 70%; /* Establece el ancho del elemento al 80% del viewport */
-        height: 60%; /* Establece la altura del elemento al 80% del viewport */
-        max-height: 100%;   
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
     }
-
+    
     .dropdown-content2 {
-        z-index: 999; /* Asegura que el modal esté encima del fondo */
-        position: fixed; /* Fija la posición del elemento con respecto a la ventana del navegador */
-        top: 20%; /* Coloca el elemento 10% desde la parte superior del viewport */
-        left: 13%; /* Coloca el elemento 10% desde el lado izquierdo del viewport */
-        width: 70%; /* Establece el ancho del elemento al 80% del viewport */
-        height: 60%; /* Establece la altura del elemento al 80% del viewport */
-        max-height: 100%;   
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
     }
     
 
