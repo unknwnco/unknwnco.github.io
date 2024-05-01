@@ -317,7 +317,7 @@ footer a:hover{
 }
 
 
-@media screen and (max-width: 30em){
+@media screen and (max-width: 40em){
     nav ul{
         max-height: 0;
     }
@@ -336,7 +336,8 @@ footer a:hover{
     nav{
         background: #3b3b3b;
     }
-    
+
+
     
     .logo{
         display: none;
@@ -349,6 +350,9 @@ footer a:hover{
         max-height: 19em;
     }
 
+    .parrafo{
+        width: 300px;
+    }
     .banner{
         display: none;
     }
