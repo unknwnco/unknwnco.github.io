@@ -16,7 +16,7 @@
       font-size: 16px;
       line-height: 1.em;
       font-family: 'Roboto';
-      background-color: white;
+      background-color: black;
   }
 
   a{
@@ -133,6 +133,7 @@ ul{
 }
 
 .texto2 {
+    font-weight: 800;
     display: inline-block;
     max-width: 80px;
     padding: 15px;
@@ -149,7 +150,7 @@ ul{
     text-align: center;
     margin: 0px;
     text-align: left;
-        font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 200;
 }
 
@@ -173,7 +174,6 @@ ul{
 }
 
 .container{
-    background-color: yellow;
     max-width: 1020px;
     margin: 0 auto;
     padding: 20px;
@@ -200,26 +200,53 @@ ul{
 }
 
 .blog-post{
-    background: #00ff73;
     color: white;
     margin: 0 auto 2em auto;
 }
 
+.bannerimg{
+    width: 100%;
+}
 .banner{
-    height: 60vh;
-    background-color: blue;
     margin: 10px;   
+}
+.socios{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 10px;
+}
+.clientescont{
+    width: 800px;
+    margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.clientes{
+    width: 200px;
+    height: 150px;
+    margin: 20px;
+}
+
+.clientimg{
+    border-radius: 5px;
+    width: 100%;
 }
 
 .nosotros{
     height: 60vh;
-    background-color: blue;
     margin: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 
 .parrafo{
     width: 500px;
@@ -231,18 +258,14 @@ ul{
 }
 
 
-.socios{
-    height: 60vh;
-    background-color: blue;
-    margin: 10px;
-}
+
 
 #index{
     scroll-margin-top: 100px;
 }
 
 #socios{
-    scroll-margin-top: 250px;
+    scroll-margin-top: 280px;
 }
 #nosotros{
     scroll-margin-top: 300px;
