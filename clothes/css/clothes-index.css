@@ -210,6 +210,9 @@ ul{
 .banner{
     margin: 10px;   
 }
+.Banner-mobile{
+    display: none;
+}
 .socios{
     display: flex;
     justify-content: center;
@@ -344,5 +347,21 @@ footer a:hover{
 
     .reveal{
         max-height: 19em;
+    }
+
+    .banner{
+        display: none;
+    }
+
+    .Banner-mobile{
+        display: block;
+    }
+
+    .clientescont{
+        margin: auto;
+    }
+    .clientes{
+        width: 100px;
+        height: 50px;
     }
 }
