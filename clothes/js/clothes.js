@@ -3,8 +3,40 @@ let selectedColor = null;
 let selectedBolsillo = null;
 let selectedHat = false;
 
-let activeDecal = null;
+
 let selectedCantidad = [];
+
+let jacketMaterial; // Variable para almacenar el material de la chaqueta
+let bolsilloMaterial;
+let capotaMesh;
+let capotaVisible = false;
+let bolsilloMesh;
+let bolsilloVisible = false;
+let bolsillo2Mesh;
+let bolsillo2Visible = false;
+let bolsillo3Mesh;
+let bolsillo3Visible = false;
+let bolsillo4Mesh;
+let bolsillo4Visible = false;
+
+let decalMesh;
+let decalVisible = false;
+
+let activeDecal = null;
+
+let decal2Mesh;
+let decal2Visible = false;
+let decal3Mesh;
+let decal3Visible = false;
+let decal4Mesh;
+let decal4Visible = false;
+let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
+let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
+// Variable para el estado de visibilidad de bolsillo3
+
+// Definir los colores por defecto
+const defaultJacketColor = 0xFFFFFF; // Color blanco
+const defaultBolsilloColor = 0xDDDDDD; // Color gris
 
 function inicializar() {
     const canvas = document.getElementById('item');
@@ -40,33 +72,7 @@ function inicializar() {
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
-    let jacketMaterial; // Variable para almacenar el material de la chaqueta
-    let bolsilloMaterial;
-    let capotaMesh;
-    let capotaVisible = false;
-    let bolsilloMesh;
-    let bolsilloVisible = false;
-    let bolsillo2Mesh;
-    let bolsillo2Visible = false;
-    let bolsillo3Mesh;
-    let bolsillo3Visible = false;
-    let bolsillo4Mesh;
-    let bolsillo4Visible = false;
 
-    let decalMesh;
-    let decalVisible = false;
-
-    let activeDecal = null;
-
-    let decal2Mesh;
-    let decal2Visible = false;
-    let decal3Mesh;
-    let decal3Visible = false;
-    let decal4Mesh;
-    let decal4Visible = false;
-    let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
-    let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
-    // Variable para el estado de visibilidad de bolsillo3
 
 // Variable para el estado de visibilidad de decal2Bolsillo3Mesh
 let decal2Bolsillo3Visible = false;
@@ -105,7 +111,7 @@ let decal2Bolsillo3Visible = false;
         gltf.scene.traverse(function (child) {
             if (child.isMesh && child.name === "Bolsillo") {
                 bolsilloMesh = child;
-                bolsilloMesh.visible = true;
+                bolsilloMesh.visible = false;
             }
         });
         // Buscar el mesh con nombre "Bolsilo"
@@ -182,9 +188,7 @@ let decal2Bolsillo3Visible = false;
         // Llamar a la función de renderizado
         render();
     });
-// Definir los colores por defecto
-const defaultJacketColor = 0xFFFFFF; // Color blanco
-const defaultBolsilloColor = 0xDDDDDD; // Color gris
+
 
 // Escuchar clics en el elemento con id "color1"
 const color1 = document.getElementById('color1');
@@ -507,21 +511,55 @@ function updateSelectedOptions() {
 
 
 
-
+// Función para desactivar un decal
+function deactivateDecal(decal) {
+    decal.visible = false;
+    activeDecal = null;
+}
 
 //Funcion vaciar opciones
-document.addEventListener('DOMContentLoaded', function() {
-    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
-
-    // Agregar evento de clic al elemento "Vacaciones opciones"
-    const vacacionesOpciones = document.getElementById('vaciarOpciones');
-    if (vacacionesOpciones) {
-        vacacionesOpciones.addEventListener('click', limpiarOpciones);
-    }
-});
-
-// Función para limpiar las opciones seleccionadas
+// Función para limpiar las opciones seleccionadas y desactivar los mesh de los decals, bolsillos y hat si están activados
 function limpiarOpciones() {
+    console.log("Limpiando opciones...");
+    // Desactivar los decals si están activos
+    if (activeDecal) {
+        deactivateDecal(activeDecal);
+        console.log("Decal desactivado.");
+    }
+    
+    // Desactivar los bolsillos si están activos
+    if (bolsilloMesh && bolsilloMesh.visible) {
+        bolsilloMesh.visible = false;
+        console.log("Bolsillo desactivado.");
+    }
+    if (bolsillo2Mesh && bolsillo2Mesh.visible) {
+        bolsillo2Mesh.visible = false;
+        console.log("Bolsillo2 desactivado.");
+    }
+    if (bolsillo3Mesh && bolsillo3Mesh.visible) {
+        bolsillo3Mesh.visible = false;
+        console.log("Bolsillo3 desactivado.");
+    }
+    if (bolsillo4Mesh && bolsillo4Mesh.visible) {
+        bolsillo4Mesh.visible = false;
+        console.log("Bolsillo4 desactivado.");
+    }
+
+    // Desactivar el hat si está activado
+    if (capotaMesh && capotaMesh.visible) {
+        capotaMesh.visible = false;
+        console.log("Hat desactivado.");
+    }
+    
+        // Desactivar los colores
+    if (jacketMaterial) {
+        // Establecer el color por defecto del material de la chaqueta
+        jacketMaterial.color.set(defaultJacketColor);
+    }
+    if (bolsilloMaterial) {
+        // Establecer el color por defecto del material del bolsillo
+        bolsilloMaterial.color.set(defaultBolsilloColor);
+    }
     // Reiniciar las opciones seleccionadas
     selectedDecal = "";
     selectedColor = "";
@@ -531,6 +569,22 @@ function limpiarOpciones() {
     // Actualizar las opciones seleccionadas
     updateSelectedOptions();
 }
+
+//Funcion vaciar opciones
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM cargado.");
+    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
+
+    // Agregar evento de clic al elemento "Vaciar opciones"
+    const vaciarOpcionesButton = document.getElementById('vaciarOpciones');
+    if (vaciarOpcionesButton) {
+        console.log("Agregando evento de clic a vaciarOpcionesButton...");
+        vaciarOpcionesButton.addEventListener('click', limpiarOpciones);
+    } else {
+        console.error("No se encontró el elemento vaciarOpcionesButton.");
+    }
+});
+
 
 
 
