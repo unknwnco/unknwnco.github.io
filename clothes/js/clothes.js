@@ -4,6 +4,7 @@ let selectedBolsillo = null;
 let selectedHat = false;
 
 let activeDecal = null;
+let selectedCantidad = [];
 
 function inicializar() {
     const canvas = document.getElementById('item');
@@ -442,57 +443,8 @@ decal4.addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', inicializar);
 
-//modal compras
-document.addEventListener('DOMContentLoaded', function() {
-    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
-});
 
-let selectedOptions = {};
 
-// Función para manejar la selección de diseño
-function handleDecalSelection() {
-    selectedDecal = this.value;
-    updateSelectedOptions();
-}
-
-// Función para manejar la selección de color
-function handleColorSelection() {
-    selectedColor = this.value;
-    updateSelectedOptions();
-}
-
-// Función para manejar la selección de bolsillo
-function handleBolsilloSelection() {
-    selectedBolsillo = this.value;
-    updateSelectedOptions();
-}
-
-// Función para manejar la selección de capota
-function handleHatSelection() {
-    selectedHat = this.checked;
-    updateSelectedOptions();
-}
-
-// Asignar eventos a los elementos de selección
-const decalSelect = document.getElementById('decalSelect');
-if (decalSelect) {
-    decalSelect.addEventListener('change', handleDecalSelection);
-}
-
-const colorSelect = document.getElementById('colorSelect');
-if (colorSelect) {
-    colorSelect.addEventListener('change', handleColorSelection);
-}
-
-const bolsilloSelect = document.getElementById('bolsilloSelect');
-if (bolsilloSelect) {
-    bolsilloSelect.addEventListener('change', handleBolsilloSelection);
-}
-
-const hatCheckbox = document.getElementById('hatCheckbox');
-if (hatCheckbox) {
-    hatCheckbox.addEventListener('change', handleHatSelection);
-}
 
 function updateSelectedOptions() {
     // Actualizar las opciones seleccionadas
@@ -500,33 +452,41 @@ function updateSelectedOptions() {
         "Diseño": selectedDecal || "",
         "Color": selectedColor || "",
         "Bolsillo": selectedBolsillo || "",
-        "Capota": selectedHat ? "si" : ""
+        "Capota": selectedHat ? "si" : "",
+        "Cantidad": selectedCantidad || ""
     };
 
     // Actualizar el contenido de la tabla
     const comprasBody = document.getElementById('comprasBody');
-
-    // Limpiar la tabla antes de agregar filas
-    comprasBody.innerHTML = ""; 
-
-    // Agregar fila de encabezado de categorías
-    //const headerRow = document.createElement('tr');
-    //const categoryHeaderCell = document.createElement('th');
-    //categoryHeaderCell.textContent = "Solicitud";
-    //headerRow.appendChild(categoryHeaderCell);
-    //const optionHeaderCell = document.createElement('th');
-    //optionHeaderCell.textContent = "";
-    //headerRow.appendChild(optionHeaderCell);
-    //comprasBody.appendChild(headerRow);
+    comprasBody.innerHTML = ""; // Limpiar la tabla antes de agregar filas
 
     // Agregar filas de categorías y opciones seleccionadas
-    Object.keys(selectedOptions).forEach(category => {
+    Object.entries(selectedOptions).forEach(([category, selection]) => {
         const row = document.createElement('tr');
         const categoryCell = document.createElement('td');
         categoryCell.textContent = category;
         row.appendChild(categoryCell);
         const valueCell = document.createElement('td');
-        valueCell.textContent = selectedOptions[category];
+        if (category === 'Cantidad') {
+            const select = document.createElement('select');
+            select.size = 1; // Ajustar el tamaño inicial a 1
+            select.addEventListener('change', function() {
+                selectedCantidad = this.value; // Actualizar la variable selectedCantidad
+                updateSelectedOptions(); // Volver a actualizar las opciones seleccionadas
+            });
+            for (let i = 1; i <= 99; i++) {
+                const optionElement = document.createElement('option');
+                optionElement.value = i;
+                optionElement.textContent = i;
+                if (i == selectedCantidad) {
+                    optionElement.selected = true; // Seleccionar la opción previamente seleccionada
+                }
+                select.appendChild(optionElement);
+            }
+            valueCell.appendChild(select);
+        } else {
+            valueCell.textContent = selection;
+        }
         row.appendChild(valueCell);
         comprasBody.appendChild(row);
     });
@@ -534,7 +494,7 @@ function updateSelectedOptions() {
     // Actualizar el contenido del div "shop"
     const shopDiv = document.getElementById('shop');
     
-    if (Object.values(selectedOptions).some(option => option !== "")) {
+    if (Object.values(selectedOptions).some(option => (Array.isArray(option) ? option.length > 0 : option !== ""))) {
         shopDiv.textContent = "+1";
         console.log("Mostrando +1 en el div 'shop'");
     } else {
@@ -545,6 +505,11 @@ function updateSelectedOptions() {
     console.log("Opciones seleccionadas:", selectedOptions);
 }
 
+
+
+
+
+//Funcion vaciar opciones
 document.addEventListener('DOMContentLoaded', function() {
     updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
 

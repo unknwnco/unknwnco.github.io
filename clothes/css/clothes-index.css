@@ -68,7 +68,7 @@ nav{
 .nav-item{
     display: inline-block;
     padding: 15px;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.2em;
     
 }
@@ -151,7 +151,7 @@ ul{
     margin: 0px;
     text-align: left;
     font-family: 'Roboto', sans-serif;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .menu-bar{
@@ -347,6 +347,7 @@ footer a:hover{
     }
 
     .reveal{
+        background-color: white;
         max-height: 19em;
     }
 
