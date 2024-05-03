@@ -103,12 +103,13 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     position: absolute;
     background-color: #f9f9f9;
     width: 90%;
-    max-height: 150px; /* Altura máxima de la lista */
+    max-height: 220px; /* Altura máxima de la lista */
     overflow-y: auto; /* Agregar scroll vertical */
     overflow-x: hidden; /* Ocultar scroll horizontal */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 10px 10px;
     margin-top: 5px;
+    z-index: 10;
 }
 
 .dropdown-content2 {
@@ -116,13 +117,13 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     position: absolute;
     background-color: #f9f9f9;
     width: 90%;
-    max-height: 150px; /* Altura máxima de la lista */
+    max-height: 220px; /* Altura máxima de la lista */
     overflow-y: auto; /* Agregar scroll vertical */
     overflow-x: hidden; /* Ocultar scroll horizontal */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 10px 10px;
     margin-top: 5px;
-    
+    z-index: 10;
 }
 
 .decalselect.active .dropdown-content {
@@ -292,12 +293,25 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
 }
 
 .canvas{
+    height: 400px;
+    width: 300px;
+}
+
+.contcanvas{
     height: 100%;
     width: 100%;
-    background-color: rgb(32, 32, 32);
+    position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
     outline: 1px solid rgba(36, 36, 36, 0.849);
+    box-shadow: inset rgba(218, 218, 218, 0.37) 0px 0px 90px -12px;
+    z-index: 1;
+}
+
+#item {
+    
 }
 
 .shop{
@@ -305,6 +319,8 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     height: 60px;
     border-radius: 50px;
     position: absolute;
+    align-self: flex-start;
+    right: 0;
     background-color: rgba(255, 0, 0, 0.623);
     margin: 20px;
     display: flex;
@@ -316,8 +332,13 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     margin: 20px;
     border-radius: 20px;
     background-color: white;
+    position: absolute;
+    padding: 0 5px;
+    top: 0;
+    right: 0;
     color: black;
     z-index: 200;
+    
 }
 
 #shop{
@@ -463,9 +484,7 @@ body.modal-open {
 }
 
 
-#item {
-    box-shadow: inset rgba(218, 218, 218, 0.37) 0px 0px 90px -12px;
-}
+
 
 footer{
     color: rgb(31, 31, 31);
@@ -493,6 +512,8 @@ footer{
     .canvas{
         order: 1;
     }
+
+    
     .selector{
         height: 15%;
         flex-wrap: wrap;
