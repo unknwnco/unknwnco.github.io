@@ -297,48 +297,60 @@ function resetDefaultColors() {
         updateSelectedOptions();
     });
 
-    // Escuchar clics en el elemento con id "bolsillo"
-    const bolsillo = document.getElementById('bolsillo');
-    bolsillo.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
-        if (bolsilloMesh) {
-            // Alternar la visibilidad del mesh del bolsillo
-            bolsilloVisible = !bolsilloVisible;
-            bolsilloMesh.visible = bolsilloVisible;
-        }
-        selectedBolsillo = "Bolsillo inferiores internos";
-        updateSelectedOptions();
-    });
+// Escuchar clics en el elemento con id "bolsillo"
+const bolsillo = document.getElementById('bolsillo');
+bolsillo.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+    if (bolsilloMesh) {
+        // Alternar la visibilidad del mesh del bolsillo
+        bolsilloVisible = !bolsilloVisible;
+        bolsilloMesh.visible = bolsilloVisible;
+    }
 
-    // Escuchar clics en el elemento con id "bolsillo2"
-    const bolsillo2 = document.getElementById('bolsillo2');
-    bolsillo2.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "bolsillo2"');
-        if (bolsillo2Mesh) {
-            // Alternar la visibilidad del mesh del bolsillo 2
-            bolsillo2Visible = !bolsillo2Visible;
-            bolsillo2Mesh.visible = bolsillo2Visible;
-    
-            // Verificar si ambos bolsillo2Mesh y decal2Mesh son visibles
-            if (bolsillo2Visible && decal2Visible) {
-                // Si ambos son visibles, hacer visible el mesh Decal2.bolsillo2
-                if (decal2Bolsillo2Mesh) {
-                    decal2Bolsillo2Mesh.visible = true;
-                }
+    // Si ya estaba seleccionado, limpiar la selección
+    if (selectedBolsillo === "Bolsillo inferiores internos") {
+        selectedBolsillo = null;
+    } else {
+        selectedBolsillo = "Bolsillo inferiores internos";
+    }
+    updateSelectedOptions();
+});
+
+// Escuchar clics en el elemento con id "bolsillo2"
+const bolsillo2 = document.getElementById('bolsillo2');
+bolsillo2.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "bolsillo2"');
+    if (bolsillo2Mesh) {
+        // Alternar la visibilidad del mesh del bolsillo 2
+        bolsillo2Visible = !bolsillo2Visible;
+        bolsillo2Mesh.visible = bolsillo2Visible;
+
+        // Verificar si ambos bolsillo2Mesh y decal2Mesh son visibles
+        if (bolsillo2Visible && decal2Visible) {
+            // Si ambos son visibles, hacer visible el mesh Decal2.bolsillo2
+            if (decal2Bolsillo2Mesh) {
+                decal2Bolsillo2Mesh.visible = true;
             }
         }
-        selectedBolsillo = "Bolsillos fontral medio";
-        updateSelectedOptions();
-    });
+    }
 
-    // Escuchar clics en el elemento con id "bolsillo"
-    const bolsillo3 = document.getElementById('bolsillo3');
-    bolsillo3.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
-        if (bolsillo3Mesh) {
-            // Alternar la visibilidad del mesh del bolsillo
-            bolsillo3Visible = !bolsillo3Visible;
-            bolsillo3Mesh.visible = bolsillo3Visible;
+    // Si ya estaba seleccionado, limpiar la selección
+    if (selectedBolsillo === "Bolsillos fontral medio") {
+        selectedBolsillo = null;
+    } else {
+        selectedBolsillo = "Bolsillos fontral medio";
+    }
+    updateSelectedOptions();
+});
+
+// Escuchar clics en el elemento con id "bolsillo3"
+const bolsillo3 = document.getElementById('bolsillo3');
+bolsillo3.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+    if (bolsillo3Mesh) {
+        // Alternar la visibilidad del mesh del bolsillo
+        bolsillo3Visible = !bolsillo3Visible;
+        bolsillo3Mesh.visible = bolsillo3Visible;
 
         // Verificar si bolsillo3Mesh y decal2Mesh son visibles
         if (bolsillo3Visible && decal2Visible) {
@@ -346,23 +358,36 @@ function resetDefaultColors() {
             decal2Bolsillo3Visible = !decal2Bolsillo3Visible;
             decal2Bolsillo3Mesh.visible = decal2Bolsillo3Visible;
         }
-        }
-        selectedBolsillo = "Bolsillos laterales";
-        updateSelectedOptions();
-    });
+    }
 
-    // Escuchar clics en el elemento con id "bolsillo"
-    const bolsillo4 = document.getElementById('bolsillo4');
-    bolsillo4.addEventListener('click', function () {
-        console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
-        if (bolsillo4Mesh) {
-            // Alternar la visibilidad del mesh del bolsillo
-            bolsillo4Visible = !bolsillo4Visible;
-            bolsillo4Mesh.visible = bolsillo4Visible;
-        }
+    // Si ya estaba seleccionado, limpiar la selección
+    if (selectedBolsillo === "Bolsillos laterales") {
+        selectedBolsillo = null;
+    } else {
+        selectedBolsillo = "Bolsillos laterales";
+    }
+    updateSelectedOptions();
+});
+
+// Escuchar clics en el elemento con id "bolsillo4"
+const bolsillo4 = document.getElementById('bolsillo4');
+bolsillo4.addEventListener('click', function () {
+    console.log('Se hizo clic en el elemento con id "hat"'); // Agregando console.log
+    if (bolsillo4Mesh) {
+        // Alternar la visibilidad del mesh del bolsillo
+        bolsillo4Visible = !bolsillo4Visible;
+        bolsillo4Mesh.visible = bolsillo4Visible;
+    }
+
+    // Si ya estaba seleccionado, limpiar la selección
+    if (selectedBolsillo === "Bolsillos inferiores externos") {
+        selectedBolsillo = null;
+    } else {
         selectedBolsillo = "Bolsillos inferiores externos";
-        updateSelectedOptions();
-    });
+    }
+    updateSelectedOptions();
+});
+
 
 // Función para desactivar un decal
 function deactivateDecal(decal) {
