@@ -32,6 +32,8 @@ let decal3Mesh;
 let decal3Visible = false;
 let decal4Mesh;
 let decal4Visible = false;
+let decal5Mesh;
+let decal5Visible = false;
 let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
 let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
 // Variable para el estado de visibilidad de bolsillo3
@@ -59,10 +61,10 @@ function inicializar() {
     controls.enableDamping = false;
     controls.enablePan = false;
     controls.enableZoom = true;
-    controls.minDistance = 1;
-    controls.maxDistance = 6;
-    controls.minPolarAngle = 1.5;
-    controls.maxPolarAngle = 1.7;
+    controls.minDistance = 3.6;
+    controls.maxDistance = 3.6;
+    controls.minPolarAngle = 1.6;
+    controls.maxPolarAngle = 1.6;
     controls.target = new THREE.Vector3(0, 1.3, 0);
     controls.update();
 
@@ -164,6 +166,13 @@ let decal2Bolsillo3Visible = false;
             if (child.isMesh && child.name === "Decal4") {
                 decal4Mesh = child;
                 decal4Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal5"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal5") {
+                decal5Mesh = child;
+                decal5Mesh.visible = false;
             }
         });
         // Buscar el mesh con nombre "Decal2"
@@ -468,6 +477,23 @@ decal4.addEventListener('click', function () {
     }
     updateSelectedOptions();
 });
+// Escuchar clics en el elemento con id "decal4"
+const decal5 = document.getElementById('decal5');
+decal5.addEventListener('click', function () {
+    
+    if (activeDecal !== decal5Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal5Mesh.visible = true;
+        activeDecal = decal5Mesh;
+        selectedDecal = "Custom"; // Establecer el decal seleccionado
+    } else {
+        deactivateDecal(decal5Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
+    }
+    updateSelectedOptions();
+});
 
 
 }
@@ -753,4 +779,39 @@ document.getElementById("notify").onclick = function() {
     abrirCompras();
 };
 
+//custom desing
+document.getElementById('actual-btn').addEventListener('change', function() {
+    var fileName = this.value.split('\\').pop();
+    document.getElementById('file-name').textContent = fileName;
+  });
+
+document.getElementById('actual-btn').addEventListener('change', function() {
+  var file = this.files[0];
+  var reader = new FileReader();
+  
+  reader.onload = function(e) {
+    document.getElementById('preview-img').src = e.target.result;
+  }
+  
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('actual-btn').addEventListener('change', function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      // Cargar la imagen en Three.js
+      var textureLoader = new THREE.TextureLoader();
+      textureLoader.load(e.target.result, function(texture) {
+        // Reemplazar el mapa de textura del material del mesh "Decal5"
+        texture.flipY = false;
+        decal5Mesh.material.map = texture;
+        decal5Mesh.material.needsUpdate = true;
+        decal5Mesh.visible = true; // Hacer visible el mesh
+      });
+    }
+    
+    reader.readAsDataURL(file);
+  });
 
