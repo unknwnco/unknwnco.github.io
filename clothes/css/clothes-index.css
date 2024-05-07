@@ -25,9 +25,9 @@
 }
 
 header{
-    background-image: url(../img/BG_Cover.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    /*background-image: url(../img/BG_Cover.jpg);*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
     background-color: white;
     padding: 20px;
     display: flex;
