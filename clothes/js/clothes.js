@@ -724,9 +724,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Variable global para almacenar las opciones guardadas
 let opcionesGuardadas = null;
 
-
-
-
 // Función para guardar las opciones seleccionadas
 // Array para almacenar las opciones guardadas
 let opcionesGuardadasArray = [];
@@ -755,7 +752,6 @@ function guardarOpciones() {
     // Limpiar las opciones después de guardarlas
     limpiarOpciones();
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
@@ -875,3 +871,4 @@ document.getElementById('actual-btn').addEventListener('change', function() {
     reader.readAsDataURL(file);
   });
 
+//tabla container

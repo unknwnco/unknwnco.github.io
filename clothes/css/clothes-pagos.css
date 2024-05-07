@@ -144,6 +144,40 @@
   #progressBarFill {
     height: 100%;
     background-color: green;
-  }
+}
 
-  
+/* TICKET COMPRA */
+
+.cont-ticket{
+  width: 400px;
+  max-width: 800px;
+  background-color: green;
+}
+
+.bar-ticket{
+  width: 100%;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.google-button {
+  background-color: #DB4437;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.google-button:hover {
+  background-color: #C1351D;
+}
+
+#message {
+  margin-top: 10px;
+  color:white;
+}
