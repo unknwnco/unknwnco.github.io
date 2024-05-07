@@ -505,6 +505,12 @@ body.modal-open {
     flex-direction: column;
 }
 
+.botonera{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .comprarbtn{
     width: 100px;
@@ -514,7 +520,7 @@ body.modal-open {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-top: 20px;
+    color: blue;
     background-color: rgb(125, 255, 125);
 }
 
@@ -525,7 +531,6 @@ body.modal-open {
 }
 
 .btncomprar{
-    width: 100%;
     display: flex;
     justify-content: flex-end;
 }

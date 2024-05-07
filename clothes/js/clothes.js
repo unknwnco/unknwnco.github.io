@@ -590,13 +590,17 @@ function updateSelectedOptions() {
         }
         row.appendChild(valueCell);
         comprasBody.appendChild(row);
-    });
+});
 
-    // Actualizar el contenido del div "shop"
-    const shopDiv = document.getElementById('shop');
+
+
+// Actualizar el contenido del div "shop"
+const shopDiv = document.getElementById('shop');
     
     if (Object.values(selectedOptions).some(option => (Array.isArray(option) ? option.length > 0 : option !== ""))) {
-        shopDiv.textContent = "+1";
+        // Actualizar el contenido del div "shop" con el valor del contador
+shopDiv.textContent = "+" + contadorSelecciones;
+
         console.log("Mostrando +1");
     } else {
         shopDiv.textContent = "";
@@ -628,6 +632,11 @@ function updateSelectedOptions() {
         }
         if (bolsillo4Mesh) {
             bolsillo4Mesh.visible = bolsillo4Visible;
+        }
+
+        // Actualizar la visibilidad del capotaMesh
+        if (capotaMesh) {
+            capotaMesh.visible = selectedHat; // Mostrar el capotaMesh si selectedHat es true
         }
 
     // Mostrar las opciones seleccionadas en la consola
@@ -670,12 +679,11 @@ function limpiarOpciones() {
         console.log("Bolsillo4 desactivado.");
     }
 
-    // Desactivar el hat si está activado
-    if (capotaMesh && capotaMesh.visible) {
-        capotaMesh.visible = false;
-        console.log("Capota desactivado.");
+    // Restaurar el estado del capotaMesh
+    if (capotaMesh) {
+        capotaMesh.visible = false; // Desactivar el capotaMesh por defecto
+        console.log("Capota desactivado por defecto.");
     }
-    
     // Desactivar los colores
     if (jacketMaterial) {
         // Establecer el color por defecto del material de la chaqueta
@@ -712,6 +720,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+//agregar nuevas chaquetas
+// Variable global para almacenar las opciones guardadas
+let opcionesGuardadas = null;
+
+
+
+
+// Función para guardar las opciones seleccionadas
+// Array para almacenar las opciones guardadas
+let opcionesGuardadasArray = [];
+// Contador para el número de selecciones guardadas
+let contadorSelecciones = 1;
+// Función para guardar las opciones seleccionadas
+function guardarOpciones() {
+    // Incrementar el contador de selecciones
+    contadorSelecciones++;
+
+    // Actualizar las opciones seleccionadas antes de guardarlas
+    updateSelectedOptions();
+
+    // Clonar las opciones seleccionadas para almacenarlas de forma independiente
+    const opcionesClonadas = { ...selectedOptions };
+
+    // Agregar las opciones clonadas al array de opciones guardadas
+    opcionesGuardadasArray.push(opcionesClonadas);
+
+    // Actualizar el contenido del div "shop" con el nuevo contador
+    const shopDiv = document.getElementById('shop');
+    shopDiv.textContent = "+" + contadorSelecciones;
+
+    console.log("Opciones guardadas:", opcionesGuardadasArray);
+
+    // Limpiar las opciones después de guardarlas
+    limpiarOpciones();
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
+
+    // Agregar evento de clic al elemento "Vaciar opciones"
+    const vaciarOpcionesButton = document.getElementById('vaciarOpciones');
+    if (vaciarOpcionesButton) {
+        vaciarOpcionesButton.addEventListener('click', limpiarOpciones);
+    }
+
+    // Agregar evento de clic al elemento "Guardar opciones"
+    const guardarOpcionesButton = document.getElementById('guardarOpciones');
+    if (guardarOpcionesButton) {
+        guardarOpcionesButton.addEventListener('click', guardarOpciones);
+    }
+});
 
 
 
