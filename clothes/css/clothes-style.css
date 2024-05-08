@@ -626,11 +626,6 @@ footer{
         bottom: calc(100% + 5px); /* Posición desde abajo */
         top: auto; /* Reiniciar la posición desde arriba */
     }
-    #login-button{
-        position: relative;
-        margin-top: 0;
-    }
-
 }
 
 .tabla{
@@ -644,14 +639,15 @@ footer{
 /* Estilos para el div flotante */
 #login-button {
     display: none;
-    position: fixed;
+    position: relative;
     background-color: #ffffff;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 45px;
+    margin-left: 10px;
 }
+
 
 #login{
     width: 95px;
@@ -666,6 +662,7 @@ footer{
 }
 
 .barlogin{ 
+    height: 100px;
     display: flex;
     justify-content: flex-end;
 }
