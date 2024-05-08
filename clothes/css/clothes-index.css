@@ -376,6 +376,15 @@ footer a:hover{
         height: 50px;
     }
 
+    .botonera{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .barlogin{
+        margin-bottom: 10px;
+    }
+
 }
 
 /* Estilos para el div flotante */
