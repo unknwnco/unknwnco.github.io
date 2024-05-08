@@ -627,7 +627,7 @@ footer{
         top: auto; /* Reiniciar la posición desde arriba */
     }
     #login-button{
-        position: absolute;
+        position: relative;
     }
 
 }
