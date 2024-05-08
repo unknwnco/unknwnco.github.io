@@ -628,6 +628,7 @@ footer{
     }
     #login-button{
         position: relative;
+        margin-top: 0;
     }
 
 }
