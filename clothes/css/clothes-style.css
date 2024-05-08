@@ -626,8 +626,9 @@ footer{
         bottom: calc(100% + 5px); /* Posición desde abajo */
         top: auto; /* Reiniciar la posición desde arriba */
     }
-    
-
+    #login-button{
+        bottom: 80px;
+    }
 
 }
 
