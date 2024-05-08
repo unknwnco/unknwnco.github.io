@@ -638,3 +638,77 @@ footer{
 #opcionesGuardadas{
     color: white;
 }
+
+/* Estilos para el div flotante */
+#login-button {
+    display: none;
+    position: fixed;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 45px;
+}
+
+#login{
+    width: 95px;
+    cursor: pointer;
+    background-color: rgb(98, 206, 98);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#login:hover{
+    background-color: rgb(138, 241, 138);
+}
+
+.barlogin{ 
+    display: flex;
+    justify-content: flex-end;
+}
+
+#google{
+    background-color: rgb(0, 140, 255);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+#google:hover{
+    background-color: rgb(43, 160, 255);
+}
+
+.icon{
+    margin: 5px;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-info{
+    color: white;
+    margin: 5px;
+}
+
+#sign-out{
+    background-color: rgb(255, 42, 42);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.botonera{
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+}

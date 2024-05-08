@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/clothes/css/clothes-index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <!-- Incluir el archivo auth.js -->
+    <script src="auth.js"></script>
+</head>
+<body>
+    <div class="barlogin">
+    <div class="user">
+    <div id="login" onclick="showLogin()">Iniciar sesión</div>
+    <div id="user-info" style="display: none;"></div>
+    <button id="sign-out" style="display: none;" onclick="signOut()">Cerrar sesión</button>
+    </div>
+    
+    <!-- Div flotante para el botón de inicio de sesión -->
+    <div id="login-button">
+        <button onclick="signInWithGoogle()" id="google"><span class="icon"><i class="fab fa-google"style="color: #ffffff;"></i></span>Login con Google</button>
+    </div>
+    </div>
+    <a href="clothes.html"><img class="logo" src="img/the house of trucks.jpg" alt="">
+</body>
+</html>
