@@ -4,7 +4,7 @@ let selectedBolsillo = null;
 let selectedHat = false;
 
 
-let selectedCantidad = [];
+let selectedCantidad = 1;
 let selectedBolsillos = [];
 
 
@@ -549,6 +549,12 @@ function updateSelectedOptions() {
         bolsillo3Visible = false;
         bolsillo4Visible = false;
     // Actualizar las opciones seleccionadas
+        // Establecer la cantidad predeterminada en 1 si no se selecciona ninguna cantidad
+        if (!selectedCantidad) {
+            selectedCantidad = 1;
+        }
+    
+
     selectedOptions = {
         "Diseño": selectedDecal || "",
         "Color": selectedColor || "",
@@ -597,9 +603,9 @@ function updateSelectedOptions() {
 // Actualizar el contenido del div "shop"
 const shopDiv = document.getElementById('shop');
     
-    if (Object.values(selectedOptions).some(option => (Array.isArray(option) ? option.length > 0 : option !== ""))) {
-        // Actualizar el contenido del div "shop" con el valor del contador
-shopDiv.textContent = "+" + contadorSelecciones;
+if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(option => (Array.isArray(selectedOptions[option]) ? selectedOptions[option].length > 0 : selectedOptions[option] !== ""))) {
+    // Actualizar el contenido del div "shop" con el valor del contador
+    shopDiv.textContent = "+" + contadorSelecciones;
 
         console.log("Mostrando +1");
     } else {
@@ -699,7 +705,7 @@ function limpiarOpciones() {
     selectedColor = "";
     selectedBolsillos = "";
     selectedHat = false;
-    selectedCantidad = 0; // Establecer la cantidad seleccionada a cero o al valor por defecto
+    selectedCantidad = ""; // Establecer la cantidad seleccionada a cero o al valor por defecto
 
     // Actualizar las opciones seleccionadas
     updateSelectedOptions();
@@ -751,7 +757,11 @@ function guardarOpciones() {
 
     // Limpiar las opciones después de guardarlas
     limpiarOpciones();
+    
+
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado

@@ -2,14 +2,14 @@
 
 // Configuración de Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBqYsXRUagYLPOLqJMX0xMU0ywXSztZeNA",
-    authDomain: "clothes-7159b.firebaseapp.com",
-    projectId: "clothes-7159b",
-    storageBucket: "clothes-7159b.appspot.com",
-    messagingSenderId: "900598179429",
-    appId: "1:900598179429:web:4a30901dc548721283c88c",
-    measurementId: "G-15W6W3JRDG"
-};
+    apiKey: "AIzaSyCjaTHggxSfdGVWf4QFyOlGEDEsH2dUIgk",
+    authDomain: "unknwnclothes.firebaseapp.com",
+    projectId: "unknwnclothes",
+    storageBucket: "unknwnclothes.appspot.com",
+    messagingSenderId: "878618511099",
+    appId: "1:878618511099:web:9c60ba1c16fb22297d525e",
+    measurementId: "G-V2EPB2X84N"
+  };
 
 firebase.initializeApp(firebaseConfig);
 
@@ -84,3 +84,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         // Puedes hacer cualquier acción necesaria aquí
     }
 });
+
+
+
+
+

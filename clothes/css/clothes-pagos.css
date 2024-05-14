@@ -27,6 +27,7 @@
     height: 100vh;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -151,7 +152,7 @@
 .cont-ticket{
   width: 400px;
   max-width: 800px;
-  background-color: green;
+  background-color: rgb(235, 235, 235);
 }
 
 .bar-ticket{
@@ -180,4 +181,45 @@
 #message {
   margin-top: 10px;
   color:white;
+}
+
+#tablaOpciones{
+  text-align: start;
+}
+
+th{
+  text-align: start;
+  width: 100px;
+}
+
+td{
+  width: 140px;
+}
+
+h4{
+  text-align: center;
+  margin: 20px;
+}
+
+.comprarbtn{
+  width: 100px;
+  height: 40px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: blue;
+  background-color: rgb(125, 255, 125);
+}
+
+.comprarbtn:hover{
+  outline: 1px solid #000000;
+  font-weight: 600;
+  background-color: rgb(68, 255, 68);
+}
+
+.btncomprar{
+  display: flex;
+  justify-content: flex-end;
 }

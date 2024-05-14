@@ -664,6 +664,7 @@ footer{
 .barlogin{ 
     height: 100px;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -710,4 +711,18 @@ footer{
     max-width: 900px;
     display: flex;
     justify-content: space-between;
+}
+
+#tablaOpciones{
+    color: white;
+    text-align: start;
+}
+
+th{
+    text-align: start;
+    width: 100px;
+}
+
+td{
+    width: 140px;
 }
