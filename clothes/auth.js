@@ -1,9 +1,11 @@
 // auth.js
 
 // Configuración de Firebase
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyCjaTHggxSfdGVWf4QFyOlGEDEsH2dUIgk",
     authDomain: "unknwnclothes.firebaseapp.com",
+    databaseURL: "https://unknwnclothes-default-rtdb.firebaseio.com",
     projectId: "unknwnclothes",
     storageBucket: "unknwnclothes.appspot.com",
     messagingSenderId: "878618511099",
