@@ -22,6 +22,17 @@ body {
     align-items: center;
 }
 
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 95vh;
+    border-radius: 3px;
+    
+    text-align: center;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -537,6 +548,13 @@ footer{
         align-items: normal;
     }
 
+    header{
+        width: 80%;
+        
+        flex-direction: column;
+        align-items: normal;
+    }
+
     .logo{
         width: 300px;
     }
@@ -664,7 +682,7 @@ footer{
 .barlogin{ 
     height: 100px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
 }
 
@@ -725,4 +743,8 @@ th{
 
 td{
     width: 140px;
+}
+
+#datos-container{
+    color: white;
 }

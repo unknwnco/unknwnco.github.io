@@ -563,6 +563,10 @@ function updateSelectedOptions() {
         "Cantidad": selectedCantidad || ""
     };
 
+    selectedOptionsEmpt = Object.values(selectedOptions);
+
+
+
     // Actualizar el contenido de la tabla
     const comprasBody = document.getElementById('comprasBody');
     comprasBody.innerHTML = ""; // Limpiar la tabla antes de agregar filas
@@ -647,6 +651,7 @@ if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(op
 
     // Mostrar las opciones seleccionadas en la consola
     console.log("Opciones seleccionadas:", selectedOptions);
+    console.log("Opciones sin categoria:", selectedOptionsEmpt);
 }
 
 
@@ -744,22 +749,39 @@ function guardarOpciones() {
     updateSelectedOptions();
 
     // Clonar las opciones seleccionadas para almacenarlas de forma independiente
-    const opcionesClonadas = { ...selectedOptions };
+    const opcionesClonadas = { ...selectedOptions};
 
     // Agregar las opciones clonadas al array de opciones guardadas
     opcionesGuardadasArray.push(opcionesClonadas);
 
-    // Actualizar el contenido del div "shop" con el nuevo contador
+    // Obtener el usuario autenticado
+    const usuario = firebase.auth().currentUser;
+
+    if (usuario) { // Si el usuario está autenticado
+        // Obtener una referencia a la base de datos donde se guardarán las opciones
+        const database = firebase.database();
+        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
+        
+        // Guardar las opciones en la base de datos
+        opcionesRef.push(selectedOptions)
+            .then(() => {
+                console.log("Opciones guardadas en la base de datos.");
+            })
+            .catch(error => {
+                console.error("Error al guardar las opciones:", error);
+            });
+    } else {
+        console.log("Usuario no autenticado. No se pueden guardar las opciones.");
+    }
+
+    // Actualizar el contador en el elemento "shop"
     const shopDiv = document.getElementById('shop');
     shopDiv.textContent = "+" + contadorSelecciones;
 
-    console.log("Opciones guardadas:", opcionesGuardadasArray);
-
     // Limpiar las opciones después de guardarlas
     limpiarOpciones();
-    
-
 }
+
 
 
 
@@ -769,7 +791,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Agregar evento de clic al elemento "Vaciar opciones"
     const vaciarOpcionesButton = document.getElementById('vaciarOpciones');
     if (vaciarOpcionesButton) {
-        vaciarOpcionesButton.addEventListener('click', limpiarOpciones);
+        vaciarOpcionesButton.addEventListener('click', limpiarOpcionesButton);
     }
 
     // Agregar evento de clic al elemento "Guardar opciones"
@@ -779,6 +801,78 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function limpiarOpcionesButton() {
+    console.log("Limpiando opciones...");
+    // Desactivar los decals si están activos
+    if (activeDecal) {
+        deactivateDecal(activeDecal);
+        console.log("Decal desactivado.");
+    }
+    
+    // Desactivar los bolsillos si están activos
+    if (bolsilloMesh && bolsilloMesh.visible) {
+        bolsilloMesh.visible = false;
+        console.log("Bolsillo desactivado.");
+    }
+    if (bolsillo2Mesh && bolsillo2Mesh.visible) {
+        bolsillo2Mesh.visible = false;
+        console.log("Bolsillo2 desactivado.");
+    }
+    if (bolsillo3Mesh && bolsillo3Mesh.visible) {
+        bolsillo3Mesh.visible = false;
+        console.log("Bolsillo3 desactivado.");
+    }
+    if (bolsillo4Mesh && bolsillo4Mesh.visible) {
+        bolsillo4Mesh.visible = false;
+        console.log("Bolsillo4 desactivado.");
+    }
+
+    // Restaurar el estado del capotaMesh
+    if (capotaMesh) {
+        capotaMesh.visible = false; // Desactivar el capotaMesh por defecto
+        console.log("Capota desactivado por defecto.");
+    }
+    // Desactivar los colores
+    if (jacketMaterial) {
+        // Establecer el color por defecto del material de la chaqueta
+        jacketMaterial.color.set(defaultJacketColor);
+    }
+    if (bolsilloMaterial) {
+        // Establecer el color por defecto del material del bolsillo
+        bolsilloMaterial.color.set(defaultBolsilloColor);
+    }
+    
+    // Reiniciar las opciones seleccionadas
+    selectedDecal = "";
+    selectedColor = "";
+    selectedBolsillos = "";
+    selectedHat = false;
+    selectedCantidad = ""; // Establecer la cantidad seleccionada a cero o al valor por defecto
+
+        // Obtener el usuario autenticado
+        const usuario = firebase.auth().currentUser;
+
+        if (usuario) { // Si el usuario está autenticado
+            // Obtener una referencia a la base de datos donde se guardan las opciones
+            const database = firebase.database();
+            const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
+            
+            // Eliminar los datos guardados de la base de datos
+            opcionesRef.remove()
+                .then(() => {
+                    console.log("Datos guardados eliminados de la base de datos.");
+                })
+                .catch(error => {
+                    console.error("Error al eliminar los datos guardados:", error);
+                });
+        } else {
+            console.log("Usuario no autenticado. No se pueden eliminar los datos guardados.");
+        }
+
+    // Actualizar las opciones seleccionadas
+    updateSelectedOptions();
+
+}
 
 
 

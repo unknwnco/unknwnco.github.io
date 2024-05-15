@@ -88,6 +88,93 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 
+// Función para guardar las opciones seleccionadas en la base de datos
 
 
 
+// Obtener referencia a la base de datos
+const database = firebase.database();
+
+// Obtener el usuario actualmente autenticado
+const usuario = firebase.auth().currentUser;
+
+
+firebase.auth().onAuthStateChanged((usuario) => {
+    if (usuario) {
+        // El usuario está autenticado, obtén y muestra los datos
+        mostrarDatos(usuario);
+    } else {
+        // El usuario no está autenticado, limpia los datos de la tabla
+        limpiarTabla();
+    }
+});
+
+function mostrarDatos(usuario) {
+    const userId = usuario.uid;
+    const opcionesRef = database.ref('usuarios/' + userId + '/opcionesGuardadas');
+
+    opcionesRef.on('value', (snapshot) => {
+        const datos = snapshot.val();
+
+        if (!datos) {
+            console.log("No se encontraron datos en la base de datos.");
+            return;
+        }
+
+        const datosContainer = document.getElementById('datos-container');
+        if (!datosContainer) {
+            console.log("El elemento 'datos-container' no se encontró en el documento.");
+            return;
+        }
+
+        datosContainer.innerHTML = ''; // Limpiar el contenedor
+
+        // Crear tabla
+        const tabla = document.createElement('table');
+        tabla.classList.add('opciones-table');
+
+        // Crear fila de categorías
+        const categoriasRow = document.createElement('tr');
+        categoriasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
+
+        // Obtener las categorías de la primera fila de datos
+        const primerOpiones = Object.values(datos)[0];
+        Object.keys(primerOpiones).forEach(categoria => {
+            // Crear celda para categoría
+            const categoriaCell = document.createElement('td');
+            categoriaCell.textContent = categoria;
+            categoriasRow.appendChild(categoriaCell);
+        });
+
+        // Agregar fila de categorías a la tabla
+        tabla.appendChild(categoriasRow);
+
+        // Iterar sobre los datos
+        Object.values(datos).forEach(opciones => {
+            // Crear fila para opciones
+            const opcionesRow = document.createElement('tr');
+            opcionesRow.classList.add('opciones-row'); // Agregar clase a la fila de opciones
+
+            // Iterar sobre las opciones y categorías
+            Object.values(opciones).forEach(value => {
+                // Crear celda para opción
+                const opcionCell = document.createElement('td');
+                opcionCell.textContent = value;
+                opcionesRow.appendChild(opcionCell);
+            });
+
+            // Agregar fila de opciones a la tabla
+            tabla.appendChild(opcionesRow);
+        });
+
+        // Agregar tabla al contenedor
+        datosContainer.appendChild(tabla);
+    });
+}
+
+function limpiarTabla() {
+    const datosContainer = document.getElementById('datos-container');
+    if (datosContainer) {
+        datosContainer.innerHTML = ''; // Limpiar el contenedor
+    }
+}

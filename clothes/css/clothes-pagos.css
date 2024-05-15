@@ -10,12 +10,15 @@
   }
   
   body {
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      line-height: 1.em;
-      font-family: 'Roboto';
-      
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
   }
 
   a{
@@ -23,18 +26,19 @@
     color: inherit;
 }
 
-.container, .container2 {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+  border-radius: 3px;
+  text-align: center;
+}
 
+.logo{
+  width: 500px;
+  
+}
   .form{
     padding: 50px;
     display: flex;
@@ -123,6 +127,7 @@
   }
 
   .container {
+    width: 800px;
     background-color: white;
     z-index: 1;
   }
@@ -222,4 +227,132 @@ h4{
 .btncomprar{
   display: flex;
   justify-content: flex-end;
+}
+
+
+#datos-container{
+  color: black;
+  margin: 60px 0 60px 0;
+}
+
+#vaciarOpciones{
+  cursor: pointer;
+  margin: 20px;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  font-size: .8em;
+}
+
+#vaciarOpciones:hover{
+  font-size: .82em;
+}
+
+.botonera{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+/* Estilos para el div flotante */
+#login-button {
+  display: none;
+  position: relative;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+}
+
+
+#login{
+  width: 95px;
+  cursor: pointer;
+  background-color: rgb(98, 206, 98);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#login:hover{
+  background-color: rgb(138, 241, 138);
+}
+
+.barlogin{ 
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+#google{
+  background-color: rgb(0, 140, 255);
+  padding: 5px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+#google:hover{
+  background-color: rgb(43, 160, 255);
+}
+
+.icon{
+  margin: 5px;
+}
+
+.user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#user-info{
+  color: black;
+  margin: 5px;
+}
+
+#sign-out{
+  background-color: rgb(255, 42, 42);
+  padding: 5px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.opciones-table{
+  width: 100%;
+}
+
+.categorias-row {
+  font-weight: bold;
+}
+
+table td, th,tr {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+@media screen and (max-width:60em){
+  .container{
+    width: 80%;
+  }
+  header{
+    flex-direction: column;
+  }
+  .logo{
+    width: 100%;
+  }
+  .datos-container{
+    width: 80%;
+  }
+  table {
+    font-size: .8em;
+  }
+  .barlogin{
+    align-self: flex-end;
+    height: auto;
+  }
 }
