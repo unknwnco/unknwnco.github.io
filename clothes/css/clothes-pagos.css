@@ -126,6 +126,33 @@ header{
     font-size: .7em;
   }
 
+
+container, container2 {
+
+ height: 100vh;
+
+ width: 100%;
+
+ display: flex;
+
+ flex-direction: column;
+
+ justify-content: center;
+
+ align-items: center;
+
+ position: absolute;
+
+ left: 0;
+
+ top: 0;
+
+ }
+.factura {
+    width: 800px;
+  }
+
+
   .container {
     width: 800px;
     background-color: white;
@@ -336,7 +363,7 @@ table td, th,tr {
 }
 
 @media screen and (max-width:60em){
-  .container{
+  .factura{
     width: 80%;
   }
   header{
