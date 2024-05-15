@@ -362,14 +362,14 @@ table td, th,tr {
   .logo{
     width: 100%;
   }
+  .barlogin{
+    align-self: flex-end;
+    height: auto;
+  }
   .datos-container{
     width: 80%;
   }
   table {
     font-size: .8em;
-  }
-  .barlogin{
-    align-self: flex-end;
-    height: auto;
   }
 }

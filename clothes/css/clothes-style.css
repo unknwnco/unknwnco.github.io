@@ -539,113 +539,6 @@ footer{
 }
 
 
-
-@media screen and (max-width:60em){
-    .container{
-        width: 80%;
-        height: 80%;
-        flex-direction: column;
-        align-items: normal;
-    }
-
-    header{
-        width: 80%;
-        
-        flex-direction: column;
-        align-items: normal;
-    }
-
-    .logo{
-        width: 300px;
-    }
-    .canvas{
-        order: 1;
-    }
-
-    
-    .selector{
-        height: 15%;
-        flex-wrap: wrap;
-        order: 2;
-    }
-    .item{
-        
-    }
-
-
-    .colorselect{
-        justify-content: center;
-        width: 95%;
-        margin: 0;
-    }
-    .selectortext{
-        height: 30px;
-    }
-    
-    .decalselect{
-        width: 140px;
-        flex-wrap: nowrap;
-    }
-
-    .decal{
-        width: 100%;
-        height: 100%;
-    }
-
-    .color1{
-        width: 40px;
-        height: 40px;
-    }
-    .color2{
-        width: 40px;
-        height: 40px;    
-    }
-    .color3{
-        width: 40px;
-        height: 40px;    
-    }
-    .color4{
-        width: 40px;
-        height: 40px;
-    }
-
-    .bolselect{
-        width: 140px;
-    }
-
-    .bolsi{
-        width: 100%;
-    }
-
-
-    .bolsilloref,.decalref{
-        display: none;
-    }
-
-    footer{
-        font-size: 15px;
-    }
-
-    .selectortext{
-        display: none;
-    }
-
-    .selectortext2{
-        display: block;
-        margin: 10px;
-    }
-
-    .dropdown-content {
-        bottom: calc(100% + 5px); /* Posición desde abajo */
-        top: auto; /* Reiniciar la posición desde arriba */
-    }
-    
-    .dropdown-content2 {
-        bottom: calc(100% + 5px); /* Posición desde abajo */
-        top: auto; /* Reiniciar la posición desde arriba */
-    }
-}
-
 .tabla{
     color: white;
 }
@@ -747,4 +640,111 @@ td{
 
 #datos-container{
     color: white;
+}
+
+
+
+@media screen and (max-width:60em){
+    .container{
+        width: 80%;
+        height: 80%;
+        flex-direction: column;
+        align-items: normal;
+    }
+    header{
+        width: 80%;
+        flex-direction: column;
+      }
+    .logo{
+      width: 100%;
+    }
+    .barlogin{
+        height: auto;
+      align-self: flex-end;
+    }
+
+    .canvas{
+        order: 1;
+    }    
+    .selector{
+        height: 15%;
+        flex-wrap: wrap;
+        order: 2;
+    }
+    .item{
+        
+    }
+
+
+    .colorselect{
+        justify-content: center;
+        width: 95%;
+        margin: 0;
+    }
+    .selectortext{
+        height: 30px;
+    }
+    
+    .decalselect{
+        width: 140px;
+        flex-wrap: nowrap;
+    }
+
+    .decal{
+        width: 100%;
+        height: 100%;
+    }
+
+    .color1{
+        width: 40px;
+        height: 40px;
+    }
+    .color2{
+        width: 40px;
+        height: 40px;    
+    }
+    .color3{
+        width: 40px;
+        height: 40px;    
+    }
+    .color4{
+        width: 40px;
+        height: 40px;
+    }
+
+    .bolselect{
+        width: 140px;
+    }
+
+    .bolsi{
+        width: 100%;
+    }
+
+
+    .bolsilloref,.decalref{
+        display: none;
+    }
+
+    footer{
+        font-size: 15px;
+    }
+
+    .selectortext{
+        display: none;
+    }
+
+    .selectortext2{
+        display: block;
+        margin: 10px;
+    }
+
+    .dropdown-content {
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
+    }
+    
+    .dropdown-content2 {
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
+    }
 }
