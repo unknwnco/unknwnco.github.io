@@ -77,18 +77,44 @@ function hideLogin() {
 }
 
 // Verificar el estado de autenticación al cargar la página
+let isUserAuthenticated = false;
+
+// Verificar el estado de autenticación al cargar la página
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         // El usuario está autenticado
+        isUserAuthenticated = true;
         displayUserInfo(user);
     } else {
         // El usuario no está autenticado
+        isUserAuthenticated = false;
         // Puedes hacer cualquier acción necesaria aquí
     }
 });
 
 
-// Función para guardar las opciones seleccionadas en la base de datos
+
+// Función modal
+firebase.auth().onAuthStateChanged(function(user) {
+    const loginModal = document.getElementById('login-modal');
+    if (loginModal) { // Verifica si el modal está en el DOM
+        if (user) {
+            displayUserInfo(user);
+            loginModal.style.display = 'none'; // Ocultar el modal si el usuario está autenticado
+        } else {
+            loginModal.style.display = 'block'; // Mostrar el modal si el usuario no está autenticado
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginModal = document.getElementById('login-modal');
+
+    if (loginModal) {
+        // El modal está presente en la página, puedes agregar cualquier lógica adicional aquí si es necesario
+    }
+});
+
 
 
 
@@ -113,64 +139,114 @@ function mostrarDatos(usuario) {
     const userId = usuario.uid;
     const opcionesRef = database.ref('usuarios/' + userId + '/opcionesGuardadas');
 
-    opcionesRef.on('value', (snapshot) => {
-        const datos = snapshot.val();
+    opcionesRef.once('value')
+        .then(snapshot => {
+            const datos = snapshot.val();
 
-        if (!datos) {
-            console.log("No se encontraron datos en la base de datos.");
-            return;
-        }
+            if (!datos) {
+                console.log("No se encontraron datos en la base de datos.");
+                return;
+            }
 
-        const datosContainer = document.getElementById('datos-container');
-        if (!datosContainer) {
-            console.log("El elemento 'datos-container' no se encontró en el documento.");
-            return;
-        }
+            const datosContainer = document.getElementById('datos-container');
+            if (!datosContainer) {
+                console.log("El elemento 'datos-container' no se encontró en el documento.");
+                return;
+            }
 
-        datosContainer.innerHTML = ''; // Limpiar el contenedor
+            datosContainer.innerHTML = ''; // Limpiar el contenedor
 
-        // Crear tabla
-        const tabla = document.createElement('table');
-        tabla.classList.add('opciones-table');
+            // Crear tabla
+            const tabla = document.createElement('table');
+            tabla.classList.add('opciones-table');
 
-        // Crear fila de categorías
-        const categoriasRow = document.createElement('tr');
-        categoriasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
+            // Crear fila de categorías
+            const categoriasRow = document.createElement('tr');
+            categoriasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
 
-        // Obtener las categorías de la primera fila de datos
-        const primerOpiones = Object.values(datos)[0];
-        Object.keys(primerOpiones).forEach(categoria => {
-            // Crear celda para categoría
-            const categoriaCell = document.createElement('td');
-            categoriaCell.textContent = categoria;
-            categoriasRow.appendChild(categoriaCell);
-        });
-
-        // Agregar fila de categorías a la tabla
-        tabla.appendChild(categoriasRow);
-
-        // Iterar sobre los datos
-        Object.values(datos).forEach(opciones => {
-            // Crear fila para opciones
-            const opcionesRow = document.createElement('tr');
-            opcionesRow.classList.add('opciones-row'); // Agregar clase a la fila de opciones
-
-            // Iterar sobre las opciones y categorías
-            Object.values(opciones).forEach(value => {
-                // Crear celda para opción
-                const opcionCell = document.createElement('td');
-                opcionCell.textContent = value;
-                opcionesRow.appendChild(opcionCell);
+            // Obtener las categorías de la primera fila de datos
+            const primerOpciones = Object.values(datos)[0];
+            Object.keys(primerOpciones).forEach(categoria => {
+                // Crear celda para categoría
+                const categoriaCell = document.createElement('td');
+                categoriaCell.textContent = categoria;
+                categoriasRow.appendChild(categoriaCell);
             });
 
-            // Agregar fila de opciones a la tabla
-            tabla.appendChild(opcionesRow);
-        });
+            // Agregar fila de categorías a la tabla
+            tabla.appendChild(categoriasRow);
 
-        // Agregar tabla al contenedor
-        datosContainer.appendChild(tabla);
-    });
+            // Inicializar el costo total
+            let costoTotal = 0;
+
+            // Iterar sobre los datos
+            Object.values(datos).forEach(opciones => {
+                // Crear fila para opciones
+                const opcionesRow = document.createElement('tr');
+                opcionesRow.classList.add('opciones-row'); // Agregar clase a la fila de opciones
+
+// Iterar sobre las opciones y categorías
+Object.entries(opciones).forEach(([key, value]) => {
+    // Crear celda para opción
+    const opcionCell = document.createElement('td');
+    // Si la opción está vacía
+    if (value === '') {
+        // Si la categoría es "color", mostrar "blanco"
+        if (key === 'color') {
+            opcionCell.textContent = 'blanco';
+        } else {
+            opcionCell.textContent = 'N/A';
+        }
+    } else {
+        opcionCell.textContent = value; // Mostrar el valor normalmente
+    }
+    opcionesRow.appendChild(opcionCell);
+});
+
+
+                // Agregar fila de opciones a la tabla
+                tabla.appendChild(opcionesRow);
+
+                // Agregar el costo de este grupo de opciones al costo total
+                costoTotal += 80000; // Cada grupo de opciones tiene un costo de 80000
+            });
+
+            // Agregar tabla al contenedor
+            datosContainer.appendChild(tabla);
+
+            // Crear tabla adicional para mostrar el costo total
+            const totalTabla = document.createElement('table');
+            totalTabla.classList.add('total-table');
+
+            // Crear fila para el total
+            const totalRow = document.createElement('tr');
+
+            // Crear celda para la etiqueta 'Total'
+            const totalLabelCell = document.createElement('td');
+            totalLabelCell.textContent = 'Total';
+            totalRow.appendChild(totalLabelCell);
+
+            // Crear celda para el valor del costo total
+            const totalValueCell = document.createElement('td');
+            // Formatear el valor del costo total
+            const formattedCostoTotal = '$ ' + Intl.NumberFormat('es-ES').format(costoTotal);
+            totalValueCell.textContent = formattedCostoTotal;
+            totalRow.appendChild(totalValueCell);
+
+            // Agregar fila de total a la tabla adicional
+            totalTabla.appendChild(totalRow);
+
+            // Agregar tabla adicional al contenedor
+            datosContainer.appendChild(totalTabla);
+        })
+        .catch(error => {
+            console.error("Error al obtener los datos desde la base de datos:", error);
+        });
 }
+
+
+
+
 
 function limpiarTabla() {
     const datosContainer = document.getElementById('datos-container');

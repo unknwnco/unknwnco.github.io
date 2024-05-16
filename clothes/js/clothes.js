@@ -200,10 +200,18 @@ let decal2Bolsillo3Visible = false;
         render();
     });
 
+    function checkAuthentication() {
+        if (!isUserAuthenticated) {
+            alert("Debe iniciar sesión para realizar esta acción.");
+            return false;
+        }
+        return true;
+    }
 
 // Escuchar clics en el elemento con id "color1"
 const color1 = document.getElementById('color1');
 color1.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (selectedColor === "Negro") { // Verificar si ya está seleccionado
         selectedColor = null; // Desactivar el color
@@ -225,6 +233,7 @@ color1.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color2"
 const color2 = document.getElementById('color2');
 color2.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (selectedColor === "Blanco") {
         selectedColor = null; // Desactivar el color
@@ -245,6 +254,7 @@ color2.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color3"
 const color3 = document.getElementById('color3');
 color3.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (selectedColor === "Rojo") {
         selectedColor = null; // Desactivar el color
@@ -265,6 +275,7 @@ color3.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color4"
 const color4 = document.getElementById('color4');
 color4.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (selectedColor === "Azul") {
         selectedColor = null; // Desactivar el color
@@ -295,18 +306,19 @@ function resetDefaultColors() {
 // Resto del código...
 
 
-    // Escuchar clics en el elemento con id "hat"
-    const hat = document.getElementById('hat');
-    hat.addEventListener('click', function () {
-        
-        if (capotaMesh) {
-            // Alternar la visibilidad del mesh del hat
-            capotaVisible = !capotaVisible;
-            capotaMesh.visible = capotaVisible;
-        }
-        selectedHat = !selectedHat;
-        updateSelectedOptions();
-    });
+// Escuchar clics en el elemento con id "hat"
+const hat = document.getElementById('hat');
+hat.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
+    
+    if (capotaMesh) {
+        // Alternar la visibilidad del mesh del hat
+        capotaVisible = !capotaVisible;
+        capotaMesh.visible = capotaVisible;
+    }
+    selectedHat = !selectedHat;
+    updateSelectedOptions();
+});
 
 // Escuchar clics en el elemento con id "bolsillo"
 const bolsillo = document.getElementById('bolsillo');
@@ -409,6 +421,7 @@ function deactivateDecal(decal) {
 // Escuchar clics en el elemento con id "decal"
 const decal = document.getElementById('decal');
 decal.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (activeDecal !== decalMesh) {
         if (activeDecal) {
@@ -427,6 +440,7 @@ decal.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal2"
 const decal2 = document.getElementById('decal2');
 decal2.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (activeDecal !== decal2Mesh) {
         if (activeDecal) {
@@ -445,6 +459,7 @@ decal2.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal3"
 const decal3 = document.getElementById('decal3');
 decal3.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (activeDecal !== decal3Mesh) {
         if (activeDecal) {
@@ -463,6 +478,7 @@ decal3.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal4"
 const decal4 = document.getElementById('decal4');
 decal4.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (activeDecal !== decal4Mesh) {
         if (activeDecal) {
@@ -480,6 +496,7 @@ decal4.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal4"
 const decal5 = document.getElementById('decal5');
 decal5.addEventListener('click', function () {
+    if (!checkAuthentication()) return;
     
     if (activeDecal !== decal5Mesh) {
         if (activeDecal) {
@@ -610,11 +627,14 @@ const shopDiv = document.getElementById('shop');
 if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(option => (Array.isArray(selectedOptions[option]) ? selectedOptions[option].length > 0 : selectedOptions[option] !== ""))) {
     // Actualizar el contenido del div "shop" con el valor del contador
     shopDiv.textContent = "+" + contadorSelecciones;
+    console.log("Mostrando +1");
+} else if (contadorSelecciones === 1) {
+    // Si contadorSelecciones es igual a 0, establecer el contenido del div "shop" como vacío
+    shopDiv.textContent = "";
+} else {
+    // En cualquier otro caso, no hagas nada con el div "shop"
+}
 
-        console.log("Mostrando +1");
-    } else {
-        shopDiv.textContent = "";
-    }
 
         // Restablecer la visibilidad de los bolsillos seleccionados
         if (selectedBolsillos.includes("Inferiores internos")) {
@@ -651,7 +671,7 @@ if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(op
 
     // Mostrar las opciones seleccionadas en la consola
     console.log("Opciones seleccionadas:", selectedOptions);
-    console.log("Opciones sin categoria:", selectedOptionsEmpt);
+    //console.log("Opciones sin categoria:", selectedOptionsEmpt);
 }
 
 
@@ -704,6 +724,7 @@ function limpiarOpciones() {
         // Establecer el color por defecto del material del bolsillo
         bolsilloMaterial.color.set(defaultBolsilloColor);
     }
+
     
     // Reiniciar las opciones seleccionadas
     selectedDecal = "";
@@ -716,20 +737,24 @@ function limpiarOpciones() {
     updateSelectedOptions();
 }
 
+
+
 //Funcion vaciar opciones
+function vaciarOpciones() {
+    limpiarOpciones(); // Limpia las opciones, lo que ya incluye establecer el contador a 1
+    contadorSelecciones = 1;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    
     updateSelectedOptions(); // Llama a la función cuando el DOM se haya cargado
 
     // Agregar evento de clic al elemento "Vaciar opciones"
     const vaciarOpcionesButton = document.getElementById('vaciarOpciones');
     if (vaciarOpcionesButton) {
-        
-        vaciarOpcionesButton.addEventListener('click', limpiarOpciones);
-    } else {
-        
+        vaciarOpcionesButton.addEventListener('click', vaciarOpciones);
     }
 });
+
 
 //agregar nuevas chaquetas
 // Variable global para almacenar las opciones guardadas
@@ -741,7 +766,7 @@ let opcionesGuardadasArray = [];
 // Contador para el número de selecciones guardadas
 let contadorSelecciones = 1;
 // Función para guardar las opciones seleccionadas
-function guardarOpciones() {
+function agregarOpciones() {
     // Incrementar el contador de selecciones
     contadorSelecciones++;
 
@@ -753,7 +778,15 @@ function guardarOpciones() {
 
     // Agregar las opciones clonadas al array de opciones guardadas
     opcionesGuardadasArray.push(opcionesClonadas);
+    
+    // Actualizar el contador en el elemento "shop"
+    const shopDiv = document.getElementById('shop');
+    shopDiv.textContent = "+" + contadorSelecciones;
 
+    // Limpiar las opciones después de guardarlas
+    limpiarOpciones();
+}
+function guardarOpciones() {
     // Obtener el usuario autenticado
     const usuario = firebase.auth().currentUser;
 
@@ -774,13 +807,44 @@ function guardarOpciones() {
         console.log("Usuario no autenticado. No se pueden guardar las opciones.");
     }
 
-    // Actualizar el contador en el elemento "shop"
-    const shopDiv = document.getElementById('shop');
-    shopDiv.textContent = "+" + contadorSelecciones;
-
-    // Limpiar las opciones después de guardarlas
     limpiarOpciones();
+
 }
+
+
+// Función para obtener las opciones guardadas desde la base de datos al cargar la página
+function obtenerOpcionesGuardadas() {
+    // Obtener el usuario autenticado
+    const usuario = firebase.auth().currentUser;
+
+    if (usuario) { // Si el usuario está autenticado
+        // Obtener una referencia a las opciones guardadas en la base de datos
+        const database = firebase.database();
+        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
+
+        // Obtener las opciones guardadas desde la base de datos
+        opcionesRef.once('value')
+            .then(snapshot => {
+                const opcionesGuardadas = snapshot.val(); // Obtener las opciones guardadas como un objeto
+                if (opcionesGuardadas) {
+                    // Actualizar el contador de selecciones con la cantidad de opciones guardadas
+                    contadorSelecciones = Object.keys(opcionesGuardadas).length;
+
+                    // Actualizar el contador en el elemento "shop"
+                    const shopDiv = document.getElementById('shop');
+                    shopDiv.textContent = "+" + contadorSelecciones;
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener las opciones guardadas:", error);
+            });
+    } else {
+        console.log("Usuario no autenticado. No se pueden obtener las opciones guardadas.");
+    }
+}
+
+// Llamar a la función obtenerOpcionesGuardadas al cargar la página
+window.addEventListener('load', obtenerOpcionesGuardadas);
 
 
 
@@ -795,10 +859,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Agregar evento de clic al elemento "Guardar opciones"
-    const guardarOpcionesButton = document.getElementById('guardarOpciones');
-    if (guardarOpcionesButton) {
-        guardarOpcionesButton.addEventListener('click', guardarOpciones);
+    const agregarOpcionesButton = document.getElementById('agregarOpciones');
+    if (agregarOpcionesButton) {
+        agregarOpcionesButton.addEventListener('click', agregarOpciones);
     }
+        // Agregar evento de clic al elemento "Guardar opciones"
+        const guardarOpcionesButton = document.getElementById('guardarOpciones');
+        if (guardarOpcionesButton) {
+            guardarOpcionesButton.addEventListener('click', guardarOpciones);
+        }
 });
 
 function limpiarOpcionesButton() {

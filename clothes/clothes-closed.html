@@ -17,6 +17,17 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
+        <!-- Modal de inicio de sesión -->
+        <div id="login-modal" class="modal">
+            <div class="login-modal">
+            <div class="modal-content">
+                <h2>Iniciar Sesión</h2>
+                <button id="login-login" onclick="signInWithGoogle()">Correo electronico</button>
+                <button id="google-login" onclick="signInWithGoogle()">Sign in with Google</button>
+            </div>
+        </div>
+        </div>
+
     <div class="compras" id="compras">
         <div class="listacompras"><span class="close" onclick="cerrarCompras()">X</span>
             <div class="formcont">
@@ -32,8 +43,8 @@
                 Haz clic aquí para vaciar las opciones
             </div>
             <div class="botonera">
-            <div class="btncomprar"><div class="comprarbtn" id="guardarOpciones">agregar</div></div>
-            <div class="btncomprar"><a href="compra.html"><div class="comprarbtn">continuar</div></a></div>
+            <div class="btncomprar"><div class="comprarbtn" id="agregarOpciones">agregar</div></div>
+            <div class="btncomprar"><a href="compra.html"><div class="comprarbtn" id="guardarOpciones">continuar</div></a></div>
         </div>
             </div>
 
