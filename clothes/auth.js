@@ -150,7 +150,7 @@ function mostrarDatos(usuario) {
 
             const datosContainer = document.getElementById('datos-container');
             if (!datosContainer) {
-                console.log("El elemento 'datos-container' no se encontró en el documento.");
+                //console.log("El elemento 'datos-container' no se encontró en el documento.");
                 return;
             }
 
@@ -185,23 +185,23 @@ function mostrarDatos(usuario) {
                 const opcionesRow = document.createElement('tr');
                 opcionesRow.classList.add('opciones-row'); // Agregar clase a la fila de opciones
 
-// Iterar sobre las opciones y categorías
-Object.entries(opciones).forEach(([key, value]) => {
-    // Crear celda para opción
-    const opcionCell = document.createElement('td');
-    // Si la opción está vacía
-    if (value === '') {
-        // Si la categoría es "color", mostrar "blanco"
-        if (key === 'color') {
-            opcionCell.textContent = 'blanco';
-        } else {
-            opcionCell.textContent = 'N/A';
-        }
-    } else {
-        opcionCell.textContent = value; // Mostrar el valor normalmente
-    }
-    opcionesRow.appendChild(opcionCell);
-});
+                // Iterar sobre las opciones y categorías
+                Object.entries(opciones).forEach(([key, value]) => {
+                    // Crear celda para opción
+                    const opcionCell = document.createElement('td');
+                    // Si la opción está vacía
+                    if (value === '') {
+                        // Si la categoría es "color", mostrar "blanco"
+                        if (key === 'color') {
+                            opcionCell.textContent = 'blanco';
+                        } else {
+                            opcionCell.textContent = 'N/A';
+                        }
+                    } else {
+                        opcionCell.textContent = value; // Mostrar el valor normalmente
+                    }
+                    opcionesRow.appendChild(opcionCell);
+                });
 
 
                 // Agregar fila de opciones a la tabla

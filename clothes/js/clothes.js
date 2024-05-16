@@ -899,7 +899,7 @@ function limpiarOpcionesButton() {
     // Restaurar el estado del capotaMesh
     if (capotaMesh) {
         capotaMesh.visible = false; // Desactivar el capotaMesh por defecto
-        console.log("Capota desactivado por defecto.");
+        //console.log("Capota desactivado por defecto.");
     }
     // Desactivar los colores
     if (jacketMaterial) {
