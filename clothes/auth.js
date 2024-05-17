@@ -11,33 +11,83 @@ const firebaseConfig = {
     messagingSenderId: "878618511099",
     appId: "1:878618511099:web:9c60ba1c16fb22297d525e",
     measurementId: "G-V2EPB2X84N"
-  };
+};
 
+// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Obtener referencia a la base de datos
+const database = firebase.database();
+
+// Obtener el usuario actualmente autenticado
+const usuario = firebase.auth().currentUser;
+
+// Configurar la persistencia de Firebase Authentication
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+.then(() => {
+    // La persistencia se configuró correctamente
+    console.log("Persistencia de autenticación configurada correctamente.");
+})
+.catch((error) => {
+    // Error al configurar la persistencia
+    console.error("Error al configurar la persistencia de autenticación:", error);
+});
 
 // Función para iniciar sesión con Google
 function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-        // El usuario ha iniciado sesión correctamente
-        const user = result.user;
-        displayUserInfo(user);
-    })
     .catch((error) => {
         console.error(error);
     });
 }
 
+// Función para agregar el usuario a la base de datos
+function agregarUsuarioALaBaseDeDatos(user) {
+    const database = firebase.database();
+    const userRef = database.ref('usuarios/' + user.uid);
+
+    userRef.once('value')
+    .then((snapshot) => {
+        if (!snapshot.exists()) {
+            // Si el usuario no existe en la base de datos, agregarlo
+            userRef.set({
+                displayName: user.displayName,
+                email: user.email,
+                opcionesGuardadas: {} // Inicializar con un objeto vacío
+            })
+            .then(() => {
+                console.log("Usuario agregado a la base de datos.");
+            })
+            .catch((error) => {
+                console.error("Error al agregar el usuario a la base de datos:", error);
+            });
+        } else {
+            console.log("El usuario ya existe en la base de datos.");
+        }
+    })
+    .catch((error) => {
+        console.error("Error al verificar la existencia del usuario:", error);
+    });
+}
+
+// Verificar el estado de autenticación al cargar la página
+firebase.auth().onAuthStateChanged((usuario) => {
+    if (usuario) {
+        // El usuario está autenticado, obtén y muestra los datos
+        mostrarDatos(usuario);
+        displayUserInfo(usuario);
+    } else {
+        // El usuario no está autenticado, limpia los datos de la tabla
+        limpiarTabla();
+        displayUserInfo(null); // Llama a displayUserInfo con null para ocultar la información del usuario
+    }
+});
+
 // Función para cerrar sesión
 function signOut() {
     firebase.auth().signOut().then(() => {
         // El usuario ha cerrado sesión correctamente
-        document.getElementById('user-info').style.display = 'none'; // Oculta la información del usuario
-        document.getElementById('sign-out').style.display = 'none'; // Oculta el botón de cerrar sesión
-        document.getElementById('login').style.display = 'block'; // Muestra el botón de iniciar sesión
-        
     }).catch((error) => {
         console.error(error);
     });
@@ -45,12 +95,21 @@ function signOut() {
 
 // Función para mostrar la información del usuario
 function displayUserInfo(user) {
-    document.getElementById('user-info').innerText = `${user.displayName}`;
-    document.getElementById('user-info').style.display = 'block';
-    document.getElementById('sign-out').style.display = 'block';
-    document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
-    hideLogin(); // Oculta el botón de inicio de sesión flotante
+    if (user) {
+        document.getElementById('user-info').innerText = `${user.displayName}`;
+        document.getElementById('user-info').style.display = 'block';
+        document.getElementById('sign-out').style.display = 'block';
+        document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
+        hideLogin(); // Oculta el botón de inicio de sesión flotante
+    } else {
+        // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('sign-out').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+    }
 }
+
+
 
 // Variable para controlar el estado del botón de inicio de sesión
 let loginButtonVisible = false;
@@ -76,24 +135,6 @@ function hideLogin() {
     document.getElementById('login-button').style.display = 'none';
 }
 
-// Verificar el estado de autenticación al cargar la página
-let isUserAuthenticated = false;
-
-// Verificar el estado de autenticación al cargar la página
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        // El usuario está autenticado
-        isUserAuthenticated = true;
-        displayUserInfo(user);
-    } else {
-        // El usuario no está autenticado
-        isUserAuthenticated = false;
-        // Puedes hacer cualquier acción necesaria aquí
-    }
-});
-
-
-
 // Función modal
 firebase.auth().onAuthStateChanged(function(user) {
     const loginModal = document.getElementById('login-modal');
@@ -117,24 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-// Obtener referencia a la base de datos
-const database = firebase.database();
-
-// Obtener el usuario actualmente autenticado
-const usuario = firebase.auth().currentUser;
-
-
-firebase.auth().onAuthStateChanged((usuario) => {
-    if (usuario) {
-        // El usuario está autenticado, obtén y muestra los datos
-        mostrarDatos(usuario);
-    } else {
-        // El usuario no está autenticado, limpia los datos de la tabla
-        limpiarTabla();
-    }
-});
-
 function mostrarDatos(usuario) {
     const userId = usuario.uid;
     const opcionesRef = database.ref('usuarios/' + userId + '/opcionesGuardadas');
@@ -150,23 +173,40 @@ function mostrarDatos(usuario) {
 
             const datosContainer = document.getElementById('datos-container');
             if (!datosContainer) {
-                //console.log("El elemento 'datos-container' no se encontró en el documento.");
+                console.log("El elemento 'datos-container' no se encontró en el documento.");
                 return;
             }
 
             datosContainer.innerHTML = ''; // Limpiar el contenedor
 
-            // Crear tabla
-            const tabla = document.createElement('table');
-            tabla.classList.add('opciones-table');
+            // Crear tabla para el contador de chaquetas
+            const chaquetasTabla = document.createElement('table');
+            chaquetasTabla.classList.add('chaquetas-table');
+
+            // Crear fila para el contador de chaquetas
+            const chaquetasCountRow = document.createElement('tr');
+            const chaquetasCountCell = document.createElement('td');
+            chaquetasCountCell.textContent = 'Número de Chaquetas';
+            chaquetasCountRow.appendChild(chaquetasCountCell);
+            const chaquetasCountValueCell = document.createElement('td');
+            chaquetasCountValueCell.textContent = Object.keys(datos["Chaquetas"]).length;
+            chaquetasCountRow.appendChild(chaquetasCountValueCell);
+            chaquetasTabla.appendChild(chaquetasCountRow);
+
+            // Agregar tabla del contador de chaquetas al contenedor
+            datosContainer.appendChild(chaquetasTabla);
+
+            // Crear tabla para las opciones guardadas
+            const opcionesTabla = document.createElement('table');
+            opcionesTabla.classList.add('opciones-table');
 
             // Crear fila de categorías
             const categoriasRow = document.createElement('tr');
             categoriasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
 
-            // Obtener las categorías de la primera fila de datos
-            const primerOpciones = Object.values(datos)[0];
-            Object.keys(primerOpciones).forEach(categoria => {
+            // Obtener las categorías de la primera chaqueta
+            const primerChaqueta = Object.values(datos["Chaquetas"])[0];
+            Object.keys(primerChaqueta).forEach(categoria => {
                 // Crear celda para categoría
                 const categoriaCell = document.createElement('td');
                 categoriaCell.textContent = categoria;
@@ -174,45 +214,29 @@ function mostrarDatos(usuario) {
             });
 
             // Agregar fila de categorías a la tabla
-            tabla.appendChild(categoriasRow);
+            opcionesTabla.appendChild(categoriasRow);
 
-            // Inicializar el costo total
-            let costoTotal = 0;
-
-            // Iterar sobre los datos
-            Object.values(datos).forEach(opciones => {
-                // Crear fila para opciones
-                const opcionesRow = document.createElement('tr');
-                opcionesRow.classList.add('opciones-row'); // Agregar clase a la fila de opciones
+            // Iterar sobre las chaquetas guardadas
+            Object.entries(datos["Chaquetas"]).forEach(([nombre, opciones]) => {
+                // Crear fila para chaqueta
+                const chaquetaRow = document.createElement('tr');
+                chaquetaRow.classList.add('chaqueta-row'); // Agregar clase a la fila de chaqueta
 
                 // Iterar sobre las opciones y categorías
-                Object.entries(opciones).forEach(([key, value]) => {
+                Object.values(opciones).forEach(valor => {
                     // Crear celda para opción
                     const opcionCell = document.createElement('td');
-                    // Si la opción está vacía
-                    if (value === '') {
-                        // Si la categoría es "color", mostrar "blanco"
-                        if (key === 'color') {
-                            opcionCell.textContent = 'blanco';
-                        } else {
-                            opcionCell.textContent = 'N/A';
-                        }
-                    } else {
-                        opcionCell.textContent = value; // Mostrar el valor normalmente
-                    }
-                    opcionesRow.appendChild(opcionCell);
+                    // Mostrar "N/A" si la opción está vacía
+                    opcionCell.textContent = valor === "" ? "N/A" : valor;
+                    chaquetaRow.appendChild(opcionCell);
                 });
 
-
-                // Agregar fila de opciones a la tabla
-                tabla.appendChild(opcionesRow);
-
-                // Agregar el costo de este grupo de opciones al costo total
-                costoTotal += 80000; // Cada grupo de opciones tiene un costo de 80000
+                // Agregar fila de chaqueta a la tabla
+                opcionesTabla.appendChild(chaquetaRow);
             });
 
-            // Agregar tabla al contenedor
-            datosContainer.appendChild(tabla);
+            // Agregar tabla de opciones al contenedor
+            datosContainer.appendChild(opcionesTabla);
 
             // Crear tabla adicional para mostrar el costo total
             const totalTabla = document.createElement('table');
@@ -229,7 +253,7 @@ function mostrarDatos(usuario) {
             // Crear celda para el valor del costo total
             const totalValueCell = document.createElement('td');
             // Formatear el valor del costo total
-            const formattedCostoTotal = '$ ' + Intl.NumberFormat('es-ES').format(costoTotal);
+            const formattedCostoTotal = '$ ' + Intl.NumberFormat('es-ES').format(Object.keys(datos["Chaquetas"]).length * 80000); // Multiplicar el número de chaquetas por el costo de cada una
             totalValueCell.textContent = formattedCostoTotal;
             totalRow.appendChild(totalValueCell);
 
@@ -243,10 +267,6 @@ function mostrarDatos(usuario) {
             console.error("Error al obtener los datos desde la base de datos:", error);
         });
 }
-
-
-
-
 
 function limpiarTabla() {
     const datosContainer = document.getElementById('datos-container');

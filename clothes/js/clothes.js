@@ -1,3 +1,5 @@
+
+
 let selectedDecal = null;
 let selectedColor = null;
 let selectedBolsillo = null;
@@ -200,13 +202,16 @@ let decal2Bolsillo3Visible = false;
         render();
     });
 
-    function checkAuthentication() {
-        if (!isUserAuthenticated) {
-            alert("Debe iniciar sesión para realizar esta acción.");
-            return false;
-        }
-        return true;
+    // Función para verificar si el usuario está autenticado
+function checkAuthentication() {
+    const usuario = firebase.auth().currentUser;
+    if (!usuario) {
+        alert("Debe iniciar sesión para realizar esta acción.");
+        return false;
     }
+    return true;
+}
+
 
 // Escuchar clics en el elemento con id "color1"
 const color1 = document.getElementById('color1');
@@ -517,6 +522,7 @@ decal5.addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', inicializar);
 
+
 // Inicializar arrays para almacenar los bolsillos seleccionados
 
 
@@ -559,127 +565,43 @@ function toggleSelection(bolsilloName) {
 }
 
 
-function updateSelectedOptions() {
-        // Restablecer la visibilidad de todos los bolsillos
-        bolsilloVisible = false;
-        bolsillo2Visible = false;
-        bolsillo3Visible = false;
-        bolsillo4Visible = false;
-    // Actualizar las opciones seleccionadas
-        // Establecer la cantidad predeterminada en 1 si no se selecciona ninguna cantidad
-        if (!selectedCantidad) {
-            selectedCantidad = 1;
-        }
-    
-
-    selectedOptions = {
-        "Diseño": selectedDecal || "",
-        "Color": selectedColor || "",
-        "Bolsillos": selectedBolsillos.length > 0 ? selectedBolsillos.join(", ") : "",
-        "Capota": selectedHat ? "si" : "",
-        "Cantidad": selectedCantidad || ""
-    };
-
-    selectedOptionsEmpt = Object.values(selectedOptions);
-
-
-
-    // Actualizar el contenido de la tabla
-    const comprasBody = document.getElementById('comprasBody');
-    comprasBody.innerHTML = ""; // Limpiar la tabla antes de agregar filas
-
-    // Agregar filas de categorías y opciones seleccionadas
-    Object.entries(selectedOptions).forEach(([category, selection]) => {
-        const row = document.createElement('tr');
-        const categoryCell = document.createElement('td');
-        categoryCell.textContent = category;
-        row.appendChild(categoryCell);
-        const valueCell = document.createElement('td');
-        if (category === 'Cantidad') {
-            const select = document.createElement('select');
-            select.size = 1; // Ajustar el tamaño inicial a 1
-            select.addEventListener('change', function() {
-                selectedCantidad = this.value; // Actualizar la variable selectedCantidad
-                updateSelectedOptions(); // Volver a actualizar las opciones seleccionadas
-            });
-            for (let i = 1; i <= 99; i++) {
-                const optionElement = document.createElement('option');
-                optionElement.value = i;
-                optionElement.textContent = i;
-                if (i == selectedCantidad) {
-                    optionElement.selected = true; // Seleccionar la opción previamente seleccionada
-                }
-                select.appendChild(optionElement);
-            }
-            valueCell.appendChild(select);
-        } else {
-            valueCell.textContent = selection;
-        }
-        row.appendChild(valueCell);
-        comprasBody.appendChild(row);
-});
-
-
-
-// Actualizar el contenido del div "shop"
-const shopDiv = document.getElementById('shop');
-    
-if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(option => (Array.isArray(selectedOptions[option]) ? selectedOptions[option].length > 0 : selectedOptions[option] !== ""))) {
-    // Actualizar el contenido del div "shop" con el valor del contador
-    shopDiv.textContent = "+" + contadorSelecciones;
-    console.log("Mostrando +1");
-} else if (contadorSelecciones === 1) {
-    // Si contadorSelecciones es igual a 0, establecer el contenido del div "shop" como vacío
-    shopDiv.textContent = "";
-} else {
-    // En cualquier otro caso, no hagas nada con el div "shop"
-}
-
-
-        // Restablecer la visibilidad de los bolsillos seleccionados
-        if (selectedBolsillos.includes("Inferiores internos")) {
-            bolsilloVisible = true;
-        }
-        if (selectedBolsillos.includes("Frontal medio")) {
-            bolsillo2Visible = true;
-        }
-        if (selectedBolsillos.includes("Laterales")) {
-            bolsillo3Visible = true;
-        }
-        if (selectedBolsillos.includes("Inferiores externos")) {
-            bolsillo4Visible = true;
-        }
-    
-        // Actualizar la visibilidad de los bolsillos
-        if (bolsilloMesh) {
-            bolsilloMesh.visible = bolsilloVisible;
-        }
-        if (bolsillo2Mesh) {
-            bolsillo2Mesh.visible = bolsillo2Visible;
-        }
-        if (bolsillo3Mesh) {
-            bolsillo3Mesh.visible = bolsillo3Visible;
-        }
-        if (bolsillo4Mesh) {
-            bolsillo4Mesh.visible = bolsillo4Visible;
-        }
-
-        // Actualizar la visibilidad del capotaMesh
-        if (capotaMesh) {
-            capotaMesh.visible = selectedHat; // Mostrar el capotaMesh si selectedHat es true
-        }
-
-    // Mostrar las opciones seleccionadas en la consola
-    console.log("Opciones seleccionadas:", selectedOptions);
-    //console.log("Opciones sin categoria:", selectedOptionsEmpt);
-}
-
-
-
 // Función para desactivar un decal
 function deactivateDecal(decal) {
     decal.visible = false;
     activeDecal = null;
+}
+
+// Función para obtener las opciones guardadas desde la base de datos al cargar la página
+function obtenerOpcionesGuardadas() {
+    const usuario = firebase.auth().currentUser;
+
+    if (usuario) {
+        const database = firebase.database();
+        const opcionesRef = database.ref(`usuarios/${usuario.uid}/opcionesGuardadas`);
+
+        opcionesRef.once('value')
+            .then(snapshot => {
+                const opcionesGuardadas = snapshot.val();
+                console.log("Opciones guardadas obtenidas:", opcionesGuardadas);
+
+                if (opcionesGuardadas && opcionesGuardadas["Chaquetas"]) {
+                    contadorSelecciones = Object.keys(opcionesGuardadas["Chaquetas"]).length;
+                    const shopDiv = document.getElementById('shop');
+                    if (shopDiv) {
+                        shopDiv.textContent = "+" + contadorSelecciones;
+                    } else {
+                        console.error("Elemento con id 'shop' no encontrado.");
+                    }
+                } else {
+                    console.log("No se encontraron opciones guardadas para el usuario:", usuario.displayName);
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener las opciones guardadas:", error);
+            });
+    } else {
+        console.log("Usuario no autenticado. No se pueden obtener las opciones guardadas.");
+    }
 }
 
 //Funcion vaciar opciones
@@ -756,36 +678,138 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//agregar nuevas chaquetas
-// Variable global para almacenar las opciones guardadas
-let opcionesGuardadas = null;
+document.addEventListener('DOMContentLoaded', (event) => {
+    obtenerOpcionesGuardadas();
+});
 
-// Función para guardar las opciones seleccionadas
-// Array para almacenar las opciones guardadas
+// Variables globales para almacenar las opciones seleccionadas y guardadas
+let selectedOptions = {};
 let opcionesGuardadasArray = [];
-// Contador para el número de selecciones guardadas
 let contadorSelecciones = 1;
+
+
+// Función para actualizar las opciones seleccionadas
+function updateSelectedOptions() {
+    // Restablecer la visibilidad de todos los bolsillos
+    let bolsilloVisible = false;
+    let bolsillo2Visible = false;
+    let bolsillo3Visible = false;
+    let bolsillo4Visible = false;
+
+    // Actualizar las opciones seleccionadas
+    selectedOptions = {
+        "Diseño": selectedDecal || "",
+        "Color": selectedColor || "",
+        "Bolsillos": selectedBolsillos.length > 0 ? selectedBolsillos.join(", ") : "",
+        "Capota": selectedHat ? "si" : "",
+        "Cantidad": selectedCantidad
+    };
+
+    // Actualizar el contenido de la tabla
+    const comprasBody = document.getElementById('comprasBody');
+    comprasBody.innerHTML = ""; // Limpiar la tabla antes de agregar filas
+
+    Object.entries(selectedOptions).forEach(([category, selection]) => {
+        const row = document.createElement('tr');
+        const categoryCell = document.createElement('td');
+        categoryCell.textContent = category;
+        row.appendChild(categoryCell);
+
+        const valueCell = document.createElement('td');
+        if (category === 'Cantidad') {
+            const select = document.createElement('select');
+            select.size = 1;
+            select.addEventListener('change', function () {
+                selectedCantidad = this.value;
+                updateSelectedOptions();
+            });
+            for (let i = 1; i <= 99; i++) {
+                const optionElement = document.createElement('option');
+                optionElement.value = i;
+                optionElement.textContent = i;
+                if (i == selectedCantidad) {
+                    optionElement.selected = true;
+                }
+                select.appendChild(optionElement);
+            }
+            valueCell.appendChild(select);
+        } else {
+            valueCell.textContent = selection;
+        }
+        row.appendChild(valueCell);
+        comprasBody.appendChild(row);
+    });
+
+    // Actualizar el contenido del div "shop"
+    const shopDiv = document.getElementById('shop');
+    if (Object.keys(selectedOptions).filter(option => option !== 'Cantidad').some(option => selectedOptions[option] !== "")) {
+        shopDiv.textContent = "+" + contadorSelecciones;
+    } else if (contadorSelecciones === 1) {
+        shopDiv.textContent = "";
+    }
+
+    // Actualizar la visibilidad de los bolsillos
+    const updatePocketVisibility = (mesh, isVisible) => {
+        if (mesh) mesh.visible = isVisible;
+    };
+
+    updatePocketVisibility(bolsilloMesh, selectedBolsillos.includes("Inferiores internos"));
+    updatePocketVisibility(bolsillo2Mesh, selectedBolsillos.includes("Frontal medio"));
+    updatePocketVisibility(bolsillo3Mesh, selectedBolsillos.includes("Laterales"));
+    updatePocketVisibility(bolsillo4Mesh, selectedBolsillos.includes("Inferiores externos"));
+    
+    // Actualizar la visibilidad del capotaMesh
+    if (capotaMesh) capotaMesh.visible = selectedHat;
+
+    console.log("Opciones seleccionadas:", selectedOptions);
+}
+
+// Función para verificar y agregar opciones seleccionadas
+function continuar() {
+    // Verificar si hay opciones activas
+    const hayOpcionesActivas = Object.values(selectedOptions).some(option => option !== "" && option !== 1);
+    
+    if (hayOpcionesActivas) {
+        contadorSelecciones++;
+        updateSelectedOptions();
+        const opcionesClonadas = { ...selectedOptions };
+        opcionesGuardadasArray.push(opcionesClonadas);
+
+        const shopDiv = document.getElementById('shop');
+        shopDiv.textContent = "+" + contadorSelecciones;
+
+        // Guardar las opciones en la base de datos
+        guardarOpciones();
+
+        limpiarOpciones();
+    } else {
+        alert("No has hecho una selección");
+    }
+}
+
 // Función para guardar las opciones seleccionadas
 function agregarOpciones() {
-    // Incrementar el contador de selecciones
-    contadorSelecciones++;
-
-    // Actualizar las opciones seleccionadas antes de guardarlas
-    updateSelectedOptions();
-
-    // Clonar las opciones seleccionadas para almacenarlas de forma independiente
-    const opcionesClonadas = { ...selectedOptions};
-
-    // Agregar las opciones clonadas al array de opciones guardadas
-    opcionesGuardadasArray.push(opcionesClonadas);
+    // Verificar si hay opciones activas
+    const hayOpcionesActivas = Object.values(selectedOptions).some(option => option !== "" && option !== 1);
     
-    // Actualizar el contador en el elemento "shop"
-    const shopDiv = document.getElementById('shop');
-    shopDiv.textContent = "+" + contadorSelecciones;
+    if (hayOpcionesActivas) {
+        contadorSelecciones++;
+        updateSelectedOptions();
+        const opcionesClonadas = { ...selectedOptions };
+        opcionesGuardadasArray.push(opcionesClonadas);
 
-    // Limpiar las opciones después de guardarlas
-    limpiarOpciones();
+        const shopDiv = document.getElementById('shop');
+        shopDiv.textContent = "+" + contadorSelecciones;
+
+        // Guardar las opciones en la base de datos
+        guardarOpciones();
+
+        limpiarOpciones();
+    } else {
+        console.log("No hay opciones activas para agregar.");
+    }
 }
+
 function guardarOpciones() {
     // Obtener el usuario autenticado
     const usuario = firebase.auth().currentUser;
@@ -793,9 +817,9 @@ function guardarOpciones() {
     if (usuario) { // Si el usuario está autenticado
         // Obtener una referencia a la base de datos donde se guardarán las opciones
         const database = firebase.database();
-        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
-        
-        // Guardar las opciones en la base de datos
+        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas/Chaquetas');
+
+        // Guardar las opciones enumeradas en la base de datos sin sobrescribir las existentes
         opcionesRef.push(selectedOptions)
             .then(() => {
                 console.log("Opciones guardadas en la base de datos.");
@@ -806,45 +830,28 @@ function guardarOpciones() {
     } else {
         console.log("Usuario no autenticado. No se pueden guardar las opciones.");
     }
-
-    limpiarOpciones();
-
 }
 
 
-// Función para obtener las opciones guardadas desde la base de datos al cargar la página
-function obtenerOpcionesGuardadas() {
-    // Obtener el usuario autenticado
-    const usuario = firebase.auth().currentUser;
 
-    if (usuario) { // Si el usuario está autenticado
-        // Obtener una referencia a las opciones guardadas en la base de datos
-        const database = firebase.database();
-        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
+// Función para limpiar todos los datos cuando se cierra la sesión
+function limpiarDatosAlCerrarSesion() {
+    // Limpiar todas las variables o datos que necesiten ser reiniciados
+    opcionesGuardadasArray = []; // Reiniciar el array de opciones guardadas
+    contadorSelecciones = 1; // Reiniciar el contador de selecciones
+    limpiarOpciones(); // Limpiar las opciones
+}
 
-        // Obtener las opciones guardadas desde la base de datos
-        opcionesRef.once('value')
-            .then(snapshot => {
-                const opcionesGuardadas = snapshot.val(); // Obtener las opciones guardadas como un objeto
-                if (opcionesGuardadas) {
-                    // Actualizar el contador de selecciones con la cantidad de opciones guardadas
-                    contadorSelecciones = Object.keys(opcionesGuardadas).length;
-
-                    // Actualizar el contador en el elemento "shop"
-                    const shopDiv = document.getElementById('shop');
-                    shopDiv.textContent = "+" + contadorSelecciones;
-                }
-            })
-            .catch(error => {
-                console.error("Error al obtener las opciones guardadas:", error);
-            });
+// Escuchar cambios en el estado de autenticación
+firebase.auth().onAuthStateChanged((usuario) => {
+    if (usuario) {
+        console.log("Usuario ha iniciado sesión:", usuario.displayName);
+        obtenerOpcionesGuardadas(); // Llamar a la función si el usuario ha iniciado sesión
     } else {
-        console.log("Usuario no autenticado. No se pueden obtener las opciones guardadas.");
+        console.log("Usuario ha cerrado sesión.");
+        limpiarDatosAlCerrarSesion(); // Llamar a la función para limpiar datos cuando se cierra la sesión
     }
-}
-
-// Llamar a la función obtenerOpcionesGuardadas al cargar la página
-window.addEventListener('load', obtenerOpcionesGuardadas);
+});
 
 
 
