@@ -1,5 +1,4 @@
 
-
 let selectedDecal = null;
 let selectedColor = null;
 let selectedBolsillo = null;

@@ -355,6 +355,20 @@ h4{
   width: 100%;
 }
 
+.chaquetas-table tr:first-child td:nth-child(2) {
+  width: auto;
+  font-weight: bold;
+}
+
+.total-table tr:first-child td:nth-child(1) {
+  width: auto;
+  padding-right: 40px;
+  font-weight: bold;
+}
+.total-table tr:first-child td:nth-child(2) {
+  width: auto;
+}
+
 
 .categorias-row {
   font-weight: bold;
@@ -380,9 +394,9 @@ table td, th,tr {
     height: auto;
   }
   .datos-container{
-    width: 80%;
+    width: 60%;
   }
   table {
-    font-size: .8em;
+    font-size: .7em;
   }
 }
