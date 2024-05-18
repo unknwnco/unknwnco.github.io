@@ -138,6 +138,8 @@ function hideLogin() {
 // Función modal
 firebase.auth().onAuthStateChanged(function(user) {
     const loginModal = document.getElementById('login-modal');
+    const body = document.querySelector('body'); // Selecciona el elemento body
+
     if (loginModal) { // Verifica si el modal está en el DOM
         if (user) {
             displayUserInfo(user);
