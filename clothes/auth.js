@@ -75,6 +75,7 @@ function agregarUsuarioALaBaseDeDatos(user) {
 firebase.auth().onAuthStateChanged((usuario) => {
     if (usuario) {
         // El usuario está autenticado, obtén y muestra los datos
+        agregarUsuarioALaBaseDeDatos(usuario);
         mostrarDatos(usuario);
         displayUserInfo(usuario);
     } else {
