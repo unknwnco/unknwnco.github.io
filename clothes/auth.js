@@ -142,8 +142,10 @@ firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             displayUserInfo(user);
             loginModal.style.display = 'none'; // Ocultar el modal si el usuario está autenticado
+            body.style.overflow = "auto"; // activar el scroll
         } else {
             loginModal.style.display = 'block'; // Mostrar el modal si el usuario no está autenticado
+            body.style.overflow = "hidden"; // Desactivar el scroll
         }
     }
 });
