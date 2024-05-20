@@ -52,12 +52,17 @@ function agregarUsuarioALaBaseDeDatos(user) {
         if (!snapshot.exists()) {
             // Si el usuario no existe en la base de datos, agregarlo
             userRef.set({
-                displayName: user.displayName,
-                email: user.email,
-                opcionesGuardadas: {} // Inicializar con un objeto vacío
+                Name: user.displayName,
+                Email: user.email,
+                Rol: 'cliente', // Asignar el rol de cliente
+                Productos: {
+                    Seleccionados: null,
+                    Pendiente: null, // Inicializar Pendiente como nulo
+                    Aprobado: null   // Inicializar Aprobado como nulo
+                }
             })
             .then(() => {
-                console.log("Usuario agregado a la base de datos.");
+                console.log("Usuario agregado a la base de datos con el rol de cliente.");
             })
             .catch((error) => {
                 console.error("Error al agregar el usuario a la base de datos:", error);
@@ -70,6 +75,10 @@ function agregarUsuarioALaBaseDeDatos(user) {
         console.error("Error al verificar la existencia del usuario:", error);
     });
 }
+
+
+
+
 
 // Verificar el estado de autenticación al cargar la página
 firebase.auth().onAuthStateChanged((usuario) => {
@@ -166,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function mostrarDatos(usuario) {
     const chaquetasRef = database.ref('Chaquetas');
     const userId = usuario.uid;
-    const opcionesRef = database.ref('usuarios/' + userId + '/opcionesGuardadas');
+    const opcionesRef = database.ref('usuarios/' + userId + '/Productos/Seleccionados');
 
     // Obtener las categorías desde la ruta 'Chaquetas' en la base de datos
     chaquetasRef.once('value')
@@ -286,3 +295,42 @@ function limpiarTabla() {
         datosContainer.innerHTML = ''; // Limpiar el contenedor
     }
 }
+
+
+// Función para obtener el rol del usuario
+function obtenerRolUsuario() {
+    const usuario = firebase.auth().currentUser;
+
+    if (usuario) {
+        const database = firebase.database();
+        const userRef = database.ref('usuarios/' + usuario.uid);
+
+        userRef.once('value')
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const rol = snapshot.val().Rol;
+                    // Redirigir según el rol del usuario
+                    if (rol === 'cliente') {
+                        window.location.href = 'profile.html';
+                    } else if (rol === 'vendedor') {
+                        window.location.href = 'adminshop.html';
+                    } else {
+                        console.log("Rol no reconocido:", rol);
+                    }
+                } else {
+                    console.log("El usuario no existe en la base de datos.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error al obtener el rol del usuario:", error);
+            });
+    } else {
+        console.log("Usuario no autenticado.");
+    }
+}
+
+// Esperar a que el DOM se cargue completamente antes de añadir el evento click
+document.addEventListener('DOMContentLoaded', function() {
+    // Evento click para el perfil
+    document.getElementById('user-info').addEventListener('click', obtenerRolUsuario);
+});

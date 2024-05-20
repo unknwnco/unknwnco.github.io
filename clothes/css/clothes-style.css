@@ -72,6 +72,7 @@ header{
 }
 
 
+
 .selectortext2{
     display: none;
 }
@@ -633,6 +634,7 @@ footer{
 #user-info{
     color: white;
     margin: 5px;
+    cursor: pointer;
 }
 
 #sign-out{

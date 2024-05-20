@@ -570,38 +570,7 @@ function deactivateDecal(decal) {
     activeDecal = null;
 }
 
-// Función para obtener las opciones guardadas desde la base de datos al cargar la página
-function obtenerOpcionesGuardadas() {
-    const usuario = firebase.auth().currentUser;
 
-    if (usuario) {
-        const database = firebase.database();
-        const opcionesRef = database.ref(`usuarios/${usuario.uid}/opcionesGuardadas`);
-
-        opcionesRef.once('value')
-            .then(snapshot => {
-                const opcionesGuardadas = snapshot.val();
-                console.log("Opciones guardadas obtenidas:", opcionesGuardadas);
-
-                if (opcionesGuardadas && opcionesGuardadas["Chaquetas"]) {
-                    contadorSelecciones = Object.keys(opcionesGuardadas["Chaquetas"]).length;
-                    const shopDiv = document.getElementById('shop');
-                    if (shopDiv) {
-                        shopDiv.textContent = "+" + contadorSelecciones;
-                    } else {
-                        console.error("Elemento con id 'shop' no encontrado.");
-                    }
-                } else {
-                    console.log("No se encontraron opciones guardadas para el usuario:", usuario.displayName);
-                }
-            })
-            .catch(error => {
-                console.error("Error al obtener las opciones guardadas:", error);
-            });
-    } else {
-        console.log("Usuario no autenticado. No se pueden obtener las opciones guardadas.");
-    }
-}
 
 //Funcion vaciar opciones
 // Función para limpiar las opciones seleccionadas y desactivar los mesh de los decals, bolsillos y hat si están activados
@@ -676,7 +645,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Función para obtener las opciones guardadas desde la base de datos al cargar la página
+function obtenerOpcionesGuardadas() {
+    const usuario = firebase.auth().currentUser;
 
+    if (usuario) {
+        const database = firebase.database();
+        const opcionesRef = database.ref(`usuarios/${usuario.uid}/Productos/Seleccionados`);
+
+        opcionesRef.once('value')
+            .then(snapshot => {
+                const opcionesGuardadas = snapshot.val();
+                console.log("Opciones guardadas obtenidas:", opcionesGuardadas);
+
+                if (opcionesGuardadas && opcionesGuardadas["Chaquetas"]) {
+                    contadorSelecciones = Object.keys(opcionesGuardadas["Chaquetas"]).length;
+                    const shopDiv = document.getElementById('shop');
+                    if (shopDiv) {
+                        shopDiv.textContent = "+" + contadorSelecciones;
+                    } else {
+                        console.error("Elemento con id 'shop' no encontrado.");
+                    }
+                } else {
+                    console.log("No se encontraron opciones guardadas para el usuario:", usuario.displayName);
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener las opciones guardadas:", error);
+            });
+    } else {
+        console.log("Usuario no autenticado. No se pueden obtener las opciones guardadas.");
+    }
+}
 document.addEventListener('DOMContentLoaded', (event) => {
     obtenerOpcionesGuardadas();
 });
@@ -769,7 +769,6 @@ function continuar() {
     const hayOpcionesActivas = Object.values(selectedOptions).some(option => option !== "" && option !== 1);
     
     if (hayOpcionesActivas) {
-        contadorSelecciones++;
         updateSelectedOptions();
         const opcionesClonadas = { ...selectedOptions };
         opcionesGuardadasArray.push(opcionesClonadas);
@@ -786,23 +785,17 @@ function continuar() {
     }
 }
 
+
 // Función para guardar las opciones seleccionadas
 function agregarOpciones() {
-    // Verificar si hay opciones activas
     const hayOpcionesActivas = Object.values(selectedOptions).some(option => option !== "" && option !== 1);
     
     if (hayOpcionesActivas) {
-        contadorSelecciones++;
         updateSelectedOptions();
         const opcionesClonadas = { ...selectedOptions };
         opcionesGuardadasArray.push(opcionesClonadas);
 
-        const shopDiv = document.getElementById('shop');
-        shopDiv.textContent = "+" + contadorSelecciones;
-
-        // Guardar las opciones en la base de datos
         guardarOpciones();
-
         limpiarOpciones();
     } else {
         console.log("No hay opciones activas para agregar.");
@@ -810,18 +803,20 @@ function agregarOpciones() {
 }
 
 function guardarOpciones() {
-    // Obtener el usuario autenticado
     const usuario = firebase.auth().currentUser;
 
-    if (usuario) { // Si el usuario está autenticado
-        // Obtener una referencia a la base de datos donde se guardarán las opciones
+    if (usuario) {
         const database = firebase.database();
-        const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas/Chaquetas');
+        const opcionesRef = database.ref(`usuarios/${usuario.uid}/Productos/Seleccionados/Chaquetas`);
 
-        // Guardar las opciones enumeradas en la base de datos sin sobrescribir las existentes
-        opcionesRef.push(selectedOptions)
+        const nuevoNombreChaqueta = `Chaqueta ${contadorSelecciones}`;
+
+        opcionesRef.child(nuevoNombreChaqueta).set(selectedOptions)
             .then(() => {
                 console.log("Opciones guardadas en la base de datos.");
+                contadorSelecciones++;
+                const shopDiv = document.getElementById('shop');
+                shopDiv.textContent = "+" + contadorSelecciones;
             })
             .catch(error => {
                 console.error("Error al guardar las opciones:", error);
@@ -830,6 +825,7 @@ function guardarOpciones() {
         console.log("Usuario no autenticado. No se pueden guardar las opciones.");
     }
 }
+
 
 
 
@@ -930,7 +926,7 @@ function limpiarOpcionesButton() {
         if (usuario) { // Si el usuario está autenticado
             // Obtener una referencia a la base de datos donde se guardan las opciones
             const database = firebase.database();
-            const opcionesRef = database.ref('usuarios/' + usuario.uid + '/opcionesGuardadas');
+            const opcionesRef = database.ref('usuarios/' + usuario.uid + '/Productos/Seleccionados');
             
             // Eliminar los datos guardados de la base de datos
             opcionesRef.remove()
