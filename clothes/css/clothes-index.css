@@ -208,6 +208,71 @@ ul{
     background-color: rgb(133, 133, 133);
 }
 
+.tittle{
+    padding: 20px;
+    font-weight: bold;
+}
+
+.content-user-reg{
+    width: 100%;
+    height: 80%;
+}
+
+.table-scroll {
+    height: 300px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom: 1px solid black;
+}
+
+.table-scroll td{
+    width:40px;
+}
+
+.table-scroll .user-registers {
+    border-top: none; /* Eliminar borde duplicado entre thead y tbody */
+}
+
+.user-mm{
+    color: black;
+    font-size: 1.4em;
+    margin: 20px;
+}
+.user-mm td{
+    padding: 10px;
+}
+
+.user-mm th,td{
+    border: none;
+}
+
+.user-registers {
+    width: 100%;
+    text-align: start;
+    border-collapse: collapse;
+}
+
+.user-registers tr:nth-child(even){background-color: #f2f2f2;}
+
+.user-registers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #1b1b1b;
+  color: white;
+}
+
+.user-registers th,td {
+    padding: 20px;
+}
+
+#contenido3{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+
 
 .btnmm{
     display: flex;
@@ -225,7 +290,8 @@ ul{
 }
 
 .content1{
-    width: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -461,6 +527,9 @@ footer a:hover{
     } 
 }
 
+
+
+
 /* Estilos para el div flotante */
 #login-button {
     display: none;
@@ -515,6 +584,7 @@ footer a:hover{
 
 #user-info{
     margin: 5px;
+    cursor: pointer;
 }
 
 #sign-out{

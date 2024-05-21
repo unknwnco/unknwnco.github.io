@@ -42,11 +42,12 @@ function signInWithGoogle() {
     });
 }
 
-// Función para agregar el usuario a la base de datos
+/// Función para agregar el usuario a la base de datos
 function agregarUsuarioALaBaseDeDatos(user) {
     const database = firebase.database();
     const userRef = database.ref('usuarios/' + user.uid);
 
+    const fechaCreacion = new Date().toISOString(); // Obtener la fecha de creación actual
     userRef.once('value')
     .then((snapshot) => {
         if (!snapshot.exists()) {
@@ -59,7 +60,8 @@ function agregarUsuarioALaBaseDeDatos(user) {
                     Seleccionados: null,
                     Pendiente: null, // Inicializar Pendiente como nulo
                     Aprobado: null   // Inicializar Aprobado como nulo
-                }
+                },
+                FechaCreacion: fechaCreacion // Agregar la fecha de creación actual
             })
             .then(() => {
                 console.log("Usuario agregado a la base de datos con el rol de cliente.");
@@ -106,15 +108,14 @@ function signOut() {
 // Función para mostrar la información del usuario
 function displayUserInfo(user) {
     if (user) {
-        document.getElementById('user-info').innerText = `${user.displayName}`;
+        document.getElementById('user-info').innerText = user.displayName || 'Nombre no disponible';
         document.getElementById('user-info').style.display = 'block';
         document.getElementById('sign-out').style.display = 'block';
         document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
-        hideLogin(); // Oculta el botón de inicio de sesión flotante
     } else {
         // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
         document.getElementById('user-info').style.display = 'none';
-        document.getElementById('sign-out').style.display = 'none';
+        document.getElementById('user-mail').style.display = 'none';
         document.getElementById('login').style.display = 'block';
     }
 }
@@ -334,3 +335,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Evento click para el perfil
     document.getElementById('user-info').addEventListener('click', obtenerRolUsuario);
 });
+
+
