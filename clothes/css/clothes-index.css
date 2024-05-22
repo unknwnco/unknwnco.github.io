@@ -272,6 +272,62 @@ ul{
     overflow: hidden;
 }
 
+/* Estilos para el contenedor del multiselector */
+.status-container {
+    position: relative;
+    display: inline-block;
+  }
+  /* Estilo para el multiselector */
+.multi-selector {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+  
+  /* Estilos para el título del multiselector */
+  .status-title {
+    background-color: #f0f0f0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el contenedor desplegable */
+  .status-dropdown {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+  }
+  
+  /* Mostrar el contenedor desplegable cuando se hace clic en el título */
+  .status-container.active .status-dropdown {
+    display: block;
+  }
+  
+  /* Estilos para las opciones del multiselector */
+  .status-dropdown select {
+    width: 100%;
+    padding: 5px;
+    border: none;
+  }
+  
+  /* Estilos para las opciones del multiselector cuando están seleccionadas */
+  .status-dropdown select option:checked {
+    background-color: #007bff;
+    color: #fff;
+}
+  
+
 
 
 .btnmm{
