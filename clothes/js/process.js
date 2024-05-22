@@ -12,7 +12,7 @@ function copiarUsuarioAProcesoCompra() {
                     const usuarioData = snapshot.val();
 
                     // Crear una copia del usuario en ProcesoCompra en la raíz de la base de datos
-                    const procesoCompraRef = database.ref('ProcesoCompra/PendientePago/' + usuario.uid);
+                    const procesoCompraRef = database.ref('ProcesoCompra/PendientePago' + usuario.uid);
                     procesoCompraRef.set(usuarioData)
                         .then(() => {
                             console.log("Usuario copiado a ProcesoCompra en la base de datos.");
