@@ -16,6 +16,9 @@ function copiarUsuarioAProcesoCompra() {
                     procesoCompraRef.set(usuarioData)
                         .then(() => {
                             console.log("Usuario copiado a ProcesoCompra/PendientePago en la base de datos.");
+                            
+                            // Redirigir a la página de pagos.html
+                            window.location.href = 'pagos.html';
                         })
                         .catch((error) => {
                             console.error("Error al copiar el usuario a ProcesoCompra/PendientePago:", error);
