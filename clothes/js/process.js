@@ -34,6 +34,10 @@ function copiarUsuarioAProcesoCompra() {
 
 // Esperar a que el DOM se cargue completamente antes de añadir el evento click
 document.addEventListener('DOMContentLoaded', function() {
-    // Evento click para pendiente-compra
-    document.getElementById('pendiente-compra').addEventListener('click', copiarUsuarioAProcesoCompra);
+    const pendienteCompraBtn = document.getElementById('pendiente-compra');
+    if (pendienteCompraBtn) {
+        pendienteCompraBtn.addEventListener('click', copiarUsuarioAProcesoCompra);
+    } else {
+        console.error("Elemento con id 'pendiente-compra' no encontrado.");
+    }
 });
