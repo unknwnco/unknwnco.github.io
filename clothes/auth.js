@@ -111,10 +111,11 @@ function displayUserInfo(user) {
         document.getElementById('user-info').style.display = 'block';
         document.getElementById('sign-out').style.display = 'block';
         document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
+        hideLogin();
     } else {
         // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
         document.getElementById('user-info').style.display = 'none';
-        document.getElementById('user-mail').style.display = 'none';
+        document.getElementById('sign-out').style.display = 'none';
         document.getElementById('login').style.display = 'block';
     }
 }
