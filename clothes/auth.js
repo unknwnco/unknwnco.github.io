@@ -81,7 +81,6 @@ function agregarUsuarioALaBaseDeDatos(user) {
 
 
 
-
 // Verificar el estado de autenticación al cargar la página
 firebase.auth().onAuthStateChanged((usuario) => {
     if (usuario) {
