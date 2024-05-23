@@ -43,118 +43,161 @@ function loadUsers() {
     });
 }
 
-// Función para obtener usuarios desde una referencia
+// Función para cargar y mostrar los usuarios pendientes de pago y en camino
+function loadUsersPending() {
+    const database = firebase.database();
+    const usuario = firebase.auth().currentUser;
+
+    if (usuario) {
+        const userRef = database.ref(`usuarios/${usuario.uid}`);
+        const pendientePagoRef = userRef.child('Productos/PendientePago');
+        const enCaminoRef = userRef.child('Productos/EnCamino');
+        const entregadoRef = userRef.child('Productos/Entregado');
+
+        Promise.all([getUsers(pendientePagoRef), getUsers(enCaminoRef), getUsers(entregadoRef)])
+            .then(([pendientePagoUsers, enCaminoUsers, entregadoUsers]) => {
+                // Obtener datos de usuario (Name y Email)
+                userRef.once('value').then(snapshot => {
+                    const userData = snapshot.val();
+                    const name = userData.Name || 'Nombre no disponible';
+                    const email = userData.Email || 'Email no disponible';
+
+                    const allUsers = [...pendientePagoUsers, ...enCaminoUsers, ...entregadoUsers];
+                    const usersTable = document.getElementById('users-table-pending');
+                    usersTable.innerHTML = ''; // Limpiar la tabla antes de cargar los datos
+
+                    allUsers.forEach((user, index) => {
+                        const row = document.createElement('tr');
+                        const numberCell = document.createElement('td'); // Nueva celda para el número de pedido
+                        const nameCell = document.createElement('td');
+                        const emailCell = document.createElement('td');
+                        const orderIdCell = document.createElement('td'); // Nueva celda para el ID del pedido
+                        const statusCell = document.createElement('td'); // Nueva celda para el estado
+
+                        // Utilizar Name y Email del usuario
+                        const name = userData.Name || 'Nombre no disponible';
+                        const email = userData.Email || 'Email no disponible';
+
+                        // Obtener el ID del pedido
+                        const orderId = user.id;
+
+                        // Crear un multiselector
+                        const statusSelect = document.createElement('select');
+                        statusSelect.multiple = false; // Permitir solo una selección
+
+                        // Opciones del multiselector
+                        statusSelect.classList.add('multi-selector');
+                        const options = ['PendientePago', 'EnCamino', 'Entregado'];
+                        options.forEach(option => {
+                            const optionElement = document.createElement('option');
+                            optionElement.value = option;
+                            optionElement.textContent = option;
+                            statusSelect.appendChild(optionElement);
+                        });
+
+                        // Establecer el estado seleccionado basado en la lista en la que se encuentra el usuario
+                        if (pendientePagoUsers.find(u => u.id === user.id)) {
+                            statusSelect.value = 'PendientePago';
+                        } else if (enCaminoUsers.find(u => u.id === user.id)) {
+                            statusSelect.value = 'EnCamino';
+                        } else if (entregadoUsers.find(u => u.id === user.id)) {
+                            statusSelect.value = 'Entregado';
+                        }
+
+                        // Event listener para detectar cambios en la selección
+                        statusSelect.addEventListener('change', function(event) {
+                            const selectedStatus = event.target.value;
+                            const userId = user.id;
+
+                            switch(selectedStatus) {
+                                case 'EnCamino':
+                                    // Copiar el usuario a la lista 'EnCamino'
+                                    const userRefEnCamino = database.ref(`usuarios/${usuario.uid}/Productos/EnCamino/${userId}`);
+                                    userRefEnCamino.set(user);
+
+                                    // Eliminar el usuario de 'PendientePago'
+                                    pendientePagoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
+                                    // Eliminar el usuario de 'Entregado'
+                                    entregadoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
+                                    break;
+                                case 'PendientePago':
+                                    // Copiar el usuario a la lista 'PendientePago'
+                                    const userRefPendientePago = database.ref(`usuarios/${usuario.uid}/Productos/PendientePago/${userId}`);
+                                    userRefPendientePago.set(user);
+
+                                    // Eliminar el usuario de 'EnCamino'
+                                    enCaminoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de EnCamino:', error));
+                                    // Eliminar el usuario de 'Entregado'
+                                    entregadoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
+                                    break;
+                                case 'Entregado':
+                                    // Copiar el usuario a la lista 'Entregado'
+                                    const userRefEntregado = database.ref(`usuarios/${usuario.uid}/Productos/Entregado/${userId}`);
+                                    userRefEntregado.set(user);
+
+                                    // Eliminar el usuario de 'EnCamino' si está allí
+                                    enCaminoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de EnCamino:', error));
+
+                                    // Eliminar el usuario de 'PendientePago' si está allí
+                                    pendientePagoRef.child(userId).remove()
+                                        .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+
+                        numberCell.textContent = orderId; // Mostrar el ID del pedido
+                        nameCell.textContent = name;
+                        emailCell.textContent = email;
+                        statusCell.appendChild(statusSelect); // Agregar el multiselector a la celda
+
+                        row.appendChild(numberCell); // Agregar la celda del número de pedido
+                        row.appendChild(nameCell);
+                        row.appendChild(emailCell);
+                        row.appendChild(statusCell); // Agregar la nueva celda de estado a la fila
+
+                        usersTable.appendChild(row);
+                    });
+                }).catch(error => {
+                    console.error('Error al obtener los datos del usuario:', error);
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener los usuarios:', error);
+            });
+    } else {
+        console.log("Usuario no autenticado. No se pueden cargar los usuarios pendientes.");
+    }
+}
+
+// Función
+
+
+
+
+
+
+// Función para obtener los usuarios de una referencia específica
 function getUsers(ref) {
     return ref.once('value').then(snapshot => {
         const users = [];
         snapshot.forEach(childSnapshot => {
-            const user = { id: childSnapshot.key, ...childSnapshot.val() };
+            const user = childSnapshot.val();
+            // Verificar y asignar valores predeterminados para 'id' y 'status'
+            user.id = childSnapshot.key || ''; // Si no hay 'key', asignar una cadena vacía
+            user.status = user.status || ''; // Si no hay 'status', asignar una cadena vacía
             users.push(user);
         });
         return users;
     });
 }
 
-// Función para cargar y mostrar los usuarios pendientes de pago y en camino
-function loadUsersPending() {
-    const pendientePagoRef = firebase.database().ref('ProcesoCompra/PendientePago');
-    const enCaminoRef = firebase.database().ref('ProcesoCompra/EnCamino');
-    const entregadoRef = firebase.database().ref('ProcesoCompra/Entregado');
-
-    Promise.all([getUsers(pendientePagoRef), getUsers(enCaminoRef), getUsers(entregadoRef)])
-        .then(([pendientePagoUsers, enCaminoUsers, entregadoUsers]) => {
-            const allUsers = [...pendientePagoUsers, ...enCaminoUsers, ...entregadoUsers];
-            const usersTable = document.getElementById('users-table-pending');
-            usersTable.innerHTML = ''; // Limpiar la tabla antes de cargar los datos
-
-            allUsers.forEach(user => {
-                const row = document.createElement('tr');
-                const nameCell = document.createElement('td');
-                const emailCell = document.createElement('td');
-                const statusCell = document.createElement('td'); // Nueva celda para el estado
-
-                // Verificar si Name y Email tienen valores
-                const name = user.Name || 'Nombre no disponible';
-                const email = user.Email || 'Email no disponible';
-
-                // Crear un multiselector
-                const statusSelect = document.createElement('select');
-                statusSelect.multiple = false; // Permitir solo una selección
-
-                // Opciones del multiselector
-                statusSelect.classList.add('multi-selector');
-                const options = ['PendientePago', 'EnCamino', 'Entregado'];
-                options.forEach(option => {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = option;
-                    optionElement.textContent = option;
-                    if (option === user.status) {
-                        optionElement.selected = true; // Marcar la opción actual del usuario como seleccionada
-                    }
-                    statusSelect.appendChild(optionElement);
-                });
-
-                // Event listener para detectar cambios en la selección
-                statusSelect.addEventListener('change', function(event) {
-                    const selectedStatus = event.target.value;
-                    const userId = user.id;
-
-                    switch(selectedStatus) {
-                        case 'EnCamino':
-                            // Copiar el usuario a la lista 'EnCamino'
-                            const userRef = firebase.database().ref(`ProcesoCompra/EnCamino/${userId}`);
-                            userRef.set(user);
-
-                            // Eliminar el usuario de 'PendientePago'
-                            pendientePagoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
-                            // Eliminar el usuario de 'Entregado'
-                            entregadoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
-                            break;
-                        case 'PendientePago':
-                            // Copiar el usuario a la lista 'PendientePago'
-                            const userRefPendientePago = firebase.database().ref(`ProcesoCompra/PendientePago/${userId}`);
-                            userRefPendientePago.set(user);
-
-                            // Eliminar el usuario de 'EnCamino'
-                            enCaminoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de EnCamino:', error));
-                            // Eliminar el usuario de 'Entregado'
-                            entregadoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
-                            break;
-                        case 'Entregado':
-                            // Copiar el usuario a la lista 'Entregado'
-                            const userRefEntregado = firebase.database().ref(`ProcesoCompra/Entregado/${userId}`);
-                            userRefEntregado.set(user);
-
-                            // Eliminar el usuario de 'EnCamino' si está allí
-                            enCaminoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de EnCamino:', error));
-
-                            // Eliminar el usuario de 'PendientePago' si está allí
-                            pendientePagoRef.child(userId).remove()
-                                .catch(error => console.error('Error al eliminar usuario de PendientePago:', error));
-                            break;
-                        default:
-                            break;
-                    }
-                });
-
-                nameCell.textContent = name;
-                emailCell.textContent = email;
-                statusCell.appendChild(statusSelect); // Agregar el multiselector a la celda
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(statusCell); // Agregar la nueva celda a la fila
-                usersTable.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('Error al obtener los usuarios:', error);
-        });
-}
 
 
 // Verificar la autenticación del usuario y su rol
