@@ -42,14 +42,15 @@
         </div>
     </div>
 </body>
+
+
 <script>
     firebase.auth().onAuthStateChanged((usuario) => {
-    if (!usuario) {
-        // Si el usuario no está autenticado, redirigir a clothes.html
-        window.location.href = 'clothes.html';
-    }
-});
+        if (!usuario) {
+            alert("Debe iniciar sesión para realizar la compra");
+            // Al hacer clic en la alerta, redirigir a clothes.html
+            window.location.href = 'clothes.html';
+        }
+    });
 </script>
-
-  
 </html>

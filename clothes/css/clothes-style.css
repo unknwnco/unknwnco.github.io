@@ -432,6 +432,11 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.contmodal{
+    width: auto;
+    height: auto;
+}
+
 .formcont {
     width: 100%;
     height: 100%;
@@ -679,9 +684,18 @@ footer{
     padding: 20px;
     border: 1px solid #888;
     width: 200px;
-    height: 200px;
 }
 
+.close2{
+    align-self: flex-end;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+    z-index: 9999;
+    display: flex;
+}
 .modal-content h2{
     margin: 10px;
     font-size: 1.3em;

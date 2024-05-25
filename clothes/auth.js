@@ -146,22 +146,7 @@ function hideLogin() {
     document.getElementById('login-button').style.display = 'none';
 }
 
-// Función modal
-firebase.auth().onAuthStateChanged(function(user) {
-    const loginModal = document.getElementById('login-modal');
-    const body = document.querySelector('body'); // Selecciona el elemento body
 
-    if (loginModal) { // Verifica si el modal está en el DOM
-        if (user) {
-            displayUserInfo(user);
-            loginModal.style.display = 'none'; // Ocultar el modal si el usuario está autenticado
-            body.style.overflow = "auto"; // activar el scroll
-        } else {
-            loginModal.style.display = 'block'; // Mostrar el modal si el usuario no está autenticado
-            body.style.overflow = "hidden"; // Desactivar el scroll
-        }
-    }
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginModal = document.getElementById('login-modal');
@@ -192,7 +177,7 @@ function mostrarDatos(usuario) {
                 const datos = snapshot.val();
                 const datosContainer = document.getElementById('datos-container');
                 if (!datosContainer) {
-                    console.log("El elemento 'datos-container' no se encontró en el documento.");
+                    //console.log("El elemento 'datos-container' no se encontró en el documento.");
                     return;
                 }
 

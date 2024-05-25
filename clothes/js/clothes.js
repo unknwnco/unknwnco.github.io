@@ -215,7 +215,7 @@ function checkAuthentication() {
 // Escuchar clics en el elemento con id "color1"
 const color1 = document.getElementById('color1');
 color1.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (selectedColor === "Negro") { // Verificar si ya está seleccionado
         selectedColor = null; // Desactivar el color
@@ -237,7 +237,7 @@ color1.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color2"
 const color2 = document.getElementById('color2');
 color2.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (selectedColor === "Blanco") {
         selectedColor = null; // Desactivar el color
@@ -258,7 +258,7 @@ color2.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color3"
 const color3 = document.getElementById('color3');
 color3.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (selectedColor === "Rojo") {
         selectedColor = null; // Desactivar el color
@@ -279,7 +279,7 @@ color3.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "color4"
 const color4 = document.getElementById('color4');
 color4.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (selectedColor === "Azul") {
         selectedColor = null; // Desactivar el color
@@ -313,7 +313,7 @@ function resetDefaultColors() {
 // Escuchar clics en el elemento con id "hat"
 const hat = document.getElementById('hat');
 hat.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (capotaMesh) {
         // Alternar la visibilidad del mesh del hat
@@ -425,7 +425,7 @@ function deactivateDecal(decal) {
 // Escuchar clics en el elemento con id "decal"
 const decal = document.getElementById('decal');
 decal.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (activeDecal !== decalMesh) {
         if (activeDecal) {
@@ -444,7 +444,7 @@ decal.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal2"
 const decal2 = document.getElementById('decal2');
 decal2.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (activeDecal !== decal2Mesh) {
         if (activeDecal) {
@@ -463,7 +463,7 @@ decal2.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal3"
 const decal3 = document.getElementById('decal3');
 decal3.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (activeDecal !== decal3Mesh) {
         if (activeDecal) {
@@ -482,7 +482,7 @@ decal3.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal4"
 const decal4 = document.getElementById('decal4');
 decal4.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (activeDecal !== decal4Mesh) {
         if (activeDecal) {
@@ -500,7 +500,7 @@ decal4.addEventListener('click', function () {
 // Escuchar clics en el elemento con id "decal4"
 const decal5 = document.getElementById('decal5');
 decal5.addEventListener('click', function () {
-    if (!checkAuthentication()) return;
+    //if (!checkAuthentication()) return;
     
     if (activeDecal !== decal5Mesh) {
         if (activeDecal) {
@@ -764,11 +764,78 @@ function updateSelectedOptions() {
 }
 
 // Función para verificar y agregar opciones seleccionadas
+// Función para verificar y agregar opciones seleccionadas
+// Agregar un evento de clic al elemento con el id "continuar"
+document.getElementById('continuar').addEventListener('click', function() {
+    firebase.auth().onAuthStateChanged((usuario) => {
+        if (!usuario) {
+            // Mostrar el modal de inicio de sesión
+            cerrarCompras()
+            loginModal();
+        } else {
+            // Si el usuario está autenticado, activar la función continuar
+            continuar();
+        }
+    });
+});
+
+// Definir la función para el modal de inicio de sesión
+function loginModal() {
+    const loginModal = document.getElementById('login-modal');
+    const body = document.querySelector('body');
+
+    if (loginModal) {
+        loginModal.style.display = 'block'; // Mostrar el modal
+        body.style.overflow = "hidden"; // Desactivar el scroll
+
+        // Agregar un evento de clic al fondo oscuro del modal
+        loginModal.addEventListener('click', function(event) {
+            // Verificar si el clic ocurrió fuera del contenido del modal
+            if (event.target === loginModal) {
+                // Cerrar el modal y reactivar el scroll del cuerpo
+                loginModal.style.display = 'none';
+                body.style.overflow = "auto";
+            }
+        });
+
+        // Agregar un evento de clic al botón de cerrar el modal (si lo tienes)
+        const closeButton = loginModal.querySelector('.close2');
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                // Cerrar el modal y reactivar el scroll del cuerpo
+                loginModal.style.display = 'none';
+                body.style.overflow = "auto";
+            });
+        }
+
+        // Agregar un evento para detectar el inicio de sesión
+        firebase.auth().onAuthStateChanged((usuario) => {
+            if (usuario) {
+                // Cerrar el modal y reactivar el scroll del cuerpo si el usuario se autentica
+                loginModal.style.display = 'none';
+                body.style.overflow = "auto";
+                continuar(); // Ejecutar la función continuar
+            }
+        });
+    }
+}
+
+
+
+
+
+// Definir la función continuar
 function continuar() {
     // Verificar si hay opciones activas
     const hayOpcionesActivas = Object.values(selectedOptions).some(option => option !== "" && option !== 1);
     
-    if (hayOpcionesActivas) {
+    // Verificar si hay al menos una opción guardada
+    const hayOpcionesGuardadas = opcionesGuardadasArray.length > 0;
+
+    if (hayOpcionesActivas || !hayOpcionesGuardadas) {
+        // Si hay opciones activas o no hay opciones guardadas, mostrar alerta
+        
+    } else {
         updateSelectedOptions();
         const opcionesClonadas = { ...selectedOptions };
         opcionesGuardadasArray.push(opcionesClonadas);
@@ -780,10 +847,10 @@ function continuar() {
         guardarOpciones();
 
         limpiarOpciones();
-    } else {
-        alert("No has hecho una selección");
     }
 }
+
+
 
 
 // Función para guardar las opciones seleccionadas
