@@ -775,6 +775,7 @@ document.getElementById('continuar').addEventListener('click', function() {
         } else {
             // Si el usuario está autenticado, activar la función continuar
             continuar();
+            window.location.href = 'compra.html';
         }
     });
 });
