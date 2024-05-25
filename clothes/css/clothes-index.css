@@ -74,7 +74,6 @@ nav{
     padding: 15px;
     font-weight: 300;
     font-size: 1.2em;
-    
 }
 
 ul{
@@ -220,7 +219,7 @@ ul{
 }
 
 .table-scroll {
-    height: 300px; /* Ajusta esta altura según tus necesidades */
+    height: 350px; /* Ajusta esta altura según tus necesidades */
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: rgb(252, 252, 252);
@@ -263,12 +262,77 @@ ul{
 }
 
 .user-registers th,td {
+    width: 50%;
     padding: 20px;
+}
+
+.user-orders {
+    width: 100%;
+    text-align: start;
+}
+
+.user-orders tr:nth-child(even){background-color: #f2f2f2;}
+
+.user-orders th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #1b1b1b;
+  color: white;
+}
+
+.user-orders th {
+    width: auto;
+    padding: 20px;
+}
+
+.user-orders th:nth-child(1){
+    width: 15%;
+}
+.user-orders th:nth-child(2){
+    width: 31.3%;
+}
+.user-orders th:nth-child(3){
+    width: 30.6%;
+}
+.user-orders th:nth-child(4){
+    width: 29.5%;
+}
+
+
+.user-orders td {
+    width: auto;
+    padding: 20px;
+}
+
+.user-orders td:nth-child(1){
+    width: 15%;
+}
+.user-orders td:nth-child(2){
+    max-width: 100px;
+    width: 30%;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-orders td:nth-child(3){
+    max-width: 100px;
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-orders td:nth-child(4){
+    width: 20.2%;
 }
 
 #contenido3{
     padding: 20px;
     width: 100%;
+    overflow: hidden;
+}
+#contenido4{
+    padding: 20px;
+    width: 90%;
     overflow: hidden;
 }
 
@@ -279,7 +343,6 @@ ul{
   }
   /* Estilo para el multiselector */
 .multi-selector {
-    width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -339,6 +402,7 @@ ul{
     font-size: 1.5em;
     cursor: pointer;
     background-color: #161616;
+    user-select: none;
 }
 
 .btnmm:hover{
@@ -676,13 +740,14 @@ footer a:hover{
 #login{
     width: 95px;
     cursor: pointer;
-    background-color: rgb(98, 206, 98);
+    background-color: black;
     padding: 5px;
+    color: white;
     border-radius: 5px;
 }
 
 #login:hover{
-    background-color: rgb(138, 241, 138);
+    background-color: rgb(58, 58, 58);
 }
 
 .barlogin{ 
@@ -733,4 +798,5 @@ footer a:hover{
     max-width: 900px;
     display: flex;
     justify-content: space-between;
+    user-select: none;
 }

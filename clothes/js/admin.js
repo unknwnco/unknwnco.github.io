@@ -149,12 +149,14 @@ function agregarPedidoATabla(usuarioId, nombre, email, pedidoId, estadoActual) {
         <td>${nombre}</td>
         <td>${email}</td>
         <td>
-            <select onchange="actualizarEstadoPedido('${usuarioId}', '${pedidoId}', this.value)">
+        <div class="status-container">
+            <select class="multi-selector" onchange="actualizarEstadoPedido('${usuarioId}', '${pedidoId}', this.value)">
                 <option value="Pendiente Pago" ${estadoActual === 'Pendiente Pago' ? 'selected' : ''}>Pendiente Pago</option>
                 <option value="En Camino" ${estadoActual === 'En Camino' ? 'selected' : ''}>En Camino</option>
                 <option value="Entregado" ${estadoActual === 'Entregado' ? 'selected' : ''}>Entregado</option>
                 <option value="Finalizado" ${estadoActual === 'Finalizado' ? 'selected' : ''}>Finalizado</option>
             </select>
+            </div>
         </td>
     `;
 
@@ -192,7 +194,9 @@ function actualizarEstadoPedido(usuarioId, pedidoId, nuevoEstado) {
 
             // Si el nuevo estado es "Finalizado", eliminamos directamente el pedido
             if (nuevoEstado === "Finalizado") {
-                return database.ref(`usuarios/${usuarioId}/Productos/${estadoActual}/${pedidoId}`).remove();
+                return database.ref(`usuarios/${usuarioId}/Productos/${estadoActual}/${pedidoId}`).remove().then(() => {
+                    document.getElementById(`pedido-${pedidoId}`).remove(); // Eliminar la fila de la tabla
+                });
             } else {
                 // Si no, movemos el pedido al nuevo estado y lo eliminamos del estado anterior
                 const pedidoRef = database.ref(`usuarios/${usuarioId}/Productos/${nuevoEstado}/${pedidoId}`);

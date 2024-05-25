@@ -31,7 +31,7 @@ header{
   justify-content: space-between;
   align-items: center;
   color: red;
-  border-radius: 3px;
+  border-bottom: 1px solid black;
   text-align: center;
 }
 
@@ -74,6 +74,7 @@ header{
     border-radius: 50px;
     font-weight: bold;
     color: white;
+    user-select: none;
   }
   .btn1:hover{
     cursor: pointer;
@@ -89,6 +90,7 @@ header{
     border-radius: 50px;
     font-weight: bold;
     color: white;
+    user-select: none;
   }
   .btn2:hover{
     background-color:#518353;
@@ -231,14 +233,12 @@ h4{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: blue;
-  background-color: rgb(125, 255, 125);
+  background-color: black;
 }
 
 .comprarbtn:hover{
   outline: 1px solid #000000;
-  font-weight: 600;
-  background-color: rgb(68, 255, 68);
+  background-color: rgb(58, 58, 58);
 }
 
 .btncomprar{
@@ -279,7 +279,9 @@ h4{
 .botonera{
   width: 100%;
   display: flex;
+  color: white;
   justify-content: space-between;
+  user-select: none;
 }
 /* Estilos para el div flotante */
 #login-button {
@@ -297,13 +299,14 @@ h4{
 #login{
   width: 95px;
   cursor: pointer;
-  background-color: rgb(98, 206, 98);
+  background-color: black;
   padding: 5px;
+  color: white;
   border-radius: 5px;
 }
 
 #login:hover{
-  background-color: rgb(138, 241, 138);
+  background-color: rgb(58, 58, 58);
 }
 
 .barlogin{ 
@@ -339,6 +342,7 @@ h4{
 #user-info{
   color: black;
   margin: 5px;
+  cursor: pointer;
 }
 
 #sign-out{
