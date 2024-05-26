@@ -1,21 +1,29 @@
 // Función para mostrar la información del usuario
-function displayUserInfo(user) {
-    if (user) {
-        document.getElementById('user-info').innerText = user.displayName || 'Nombre no disponible';
-        document.getElementById('user-mail').innerText = user.email;
-        document.getElementById('user-info').style.display = 'block';
-        document.getElementById('user-mail').style.display = 'block';
-        document.getElementById('sign-out').style.display = 'block';
-        document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
-    } else {
-        // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
-        document.getElementById('user-info').style.display = 'none';
-        document.getElementById('user-mail').style.display = 'none';
-        document.getElementById('sign-out').style.display = 'none';
-        document.getElementById('login').style.display = 'block';
-    }
-}
 
+    // Función para mostrar información del usuario
+    function displayUserInfo(user) {
+        if (user) {
+            document.getElementById('user-info').innerText = user.displayName || 'Nombre no disponible';
+            document.getElementById('user-mail').innerText = user.email;
+            if (user.photoURL) {
+                document.getElementById('user-photo').src = user.photoURL;
+                document.getElementById('user-photo').style.display = 'block';
+            } else {
+                document.getElementById('user-photo').style.display = 'none';
+            }
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('user-mail').style.display = 'block';
+            document.getElementById('sign-out').style.display = 'block';
+            document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
+        } else {
+            // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
+            document.getElementById('user-info').style.display = 'none';
+            document.getElementById('user-mail').style.display = 'none';
+            document.getElementById('user-photo').style.display = 'none';
+            document.getElementById('sign-out').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+        }
+    }
 // Función para cargar y mostrar los usuarios
 function loadUsers() {
     const usersRef = firebase.database().ref('usuarios');

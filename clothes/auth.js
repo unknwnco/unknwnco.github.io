@@ -40,7 +40,7 @@ function signInWithGoogle() {
     .catch((error) => {
         console.error(error);
     });
-}
+}   
 
 /// Función para agregar el usuario a la base de datos
 function agregarUsuarioALaBaseDeDatos(user) {
