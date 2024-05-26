@@ -16,7 +16,7 @@ function moverOpcionesAPendientePago() {
                     }).then(result => {
                         if (result.committed) {
                             const nuevoNumeroPedido = result.snapshot.val();
-                            const nuevoPedidoKey = `Nº ${nuevoNumeroPedido}`;
+                            const nuevoPedidoKey = `orden ${nuevoNumeroPedido}`;
                             pendientePagoRef.child(nuevoPedidoKey).set(seleccionados)
                                 .then(() => {
                                     console.log("Opciones movidas a PendientePago y enumeradas.");
