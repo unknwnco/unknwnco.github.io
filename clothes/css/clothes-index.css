@@ -206,6 +206,24 @@ ul{
     flex-direction: column;
     background-color: rgb(133, 133, 133);
 }
+.estado-pendiente {
+    font-weight: bold;
+    color: blue;
+}
+
+.estado-enviado {
+    font-weight: bold;
+    color: orange;
+}
+
+.estado-entregado {
+    font-weight: bold;
+    color: green;
+}
+
+.estado-finalizado {
+    /* Agrega estilos para el estado finalizado aquí si es necesario */
+}
 
 #contenido1{
     width: 100%;
@@ -466,10 +484,11 @@ ul{
 
 .pedido-link{
     cursor: pointer;
+    text-decoration: underline;
 }
 .pedido-link:hover{
     color: blue;
-    text-decoration: underline;
+    
 }
 
 
@@ -540,7 +559,7 @@ ul{
 
 .btnmm{
     display: flex;
-    height: 20%;
+    height: 100%;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -806,6 +825,7 @@ footer a:hover{
 .emoji{
     width: 1em;
 }
+
 
 
 @media screen and (max-width: 40em){

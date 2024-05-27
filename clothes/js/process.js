@@ -4,7 +4,7 @@ function moverOpcionesAPendientePago() {
     if (usuario) {
         const database = firebase.database();
         const seleccionadosRef = database.ref(`usuarios/${usuario.uid}/Productos/Seleccionados`);
-        const pendientePagoRef = database.ref(`usuarios/${usuario.uid}/Productos/PendientePago`);
+        const pendientePagoRef = database.ref(`usuarios/${usuario.uid}/Productos/Pendiente`);
         const contadorRef = database.ref(`usuarios/${usuario.uid}/contadorPedidos`);
 
         seleccionadosRef.once('value')

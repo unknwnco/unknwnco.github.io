@@ -1,3 +1,4 @@
+
 // Función para mostrar la información del usuario
 
     // Función para mostrar información del usuario
@@ -81,32 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Verificar la autenticación del usuario y su rol
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            // Obtener el rol del usuario
-            const userRef = firebase.database().ref('usuarios/' + user.uid);
-            userRef.once('value').then(snapshot => {
-                const userData = snapshot.val();
-                const userRol = userData && userData.Rol;
-
-                if (userRol === 'vendedor') {
-                    // Usuario tiene rol de vendedor, cargar los datos
-                    loadUsersPending();
-                } else {
-                    // Manejar caso donde el usuario no es vendedor
-                    console.log('El usuario no tiene permisos para ver esta información.');
-                }
-            }).catch(error => {
-                console.error('Error al obtener el rol del usuario:', error);
-            });
-        } else {
-            // No hay usuario autenticado, manejar de acuerdo a tu aplicación
-            console.log('Usuario no autenticado.');
-        }
-    });
-});
 
 function loadUsersPending() {
     const database = firebase.database();
@@ -163,8 +138,8 @@ function agregarPedidoATabla(usuarioId, nombre, email, pedidoId, estadoActual) {
         <td>
         <div class="status-container">
             <select class="multi-selector" onchange="actualizarEstadoPedido('${usuarioId}', '${pedidoId}', this.value)">
-                <option value="PendientePago" ${estadoActual === 'Pendiente Pago' ? 'selected' : ''}>Pendiente Pago</option>
-                <option value="EnCamino" ${estadoActual === 'En Camino' ? 'selected' : ''}>En Camino</option>
+                <option value="Pendiente" ${estadoActual === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
+                <option value="Enviado" ${estadoActual === 'Enviado' ? 'selected' : ''}>Enviado</option>
                 <option value="Entregado" ${estadoActual === 'Entregado' ? 'selected' : ''}>Entregado</option>
                 <option value="Finalizado" ${estadoActual === 'Finalizado' ? 'selected' : ''}>Finalizado</option>
             </select>

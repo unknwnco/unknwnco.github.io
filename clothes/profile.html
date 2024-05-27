@@ -14,6 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
     <!-- Incluir el archivo auth.js -->
     <script src="auth.js"></script>
+    <script src="js/profile.js"></script>
 </head>
 <body>
 
@@ -49,6 +50,7 @@
              <div class="barlogin">
                 <div class="user">
                     <div id="login" onclick="showLogin()">Iniciar sesión</div>
+                    <td><div id="user-info" style="display: none;"></div></td>
                     <button id="sign-out" style="display: none;" onclick="signOut()">Cerrar sesión</button>
                 </div>
                 <div id="login-button">
@@ -67,44 +69,66 @@
                     <div class="profile">
                           <div class="menu-manager">
                             <div class="btnmm" data-content="contenido1"><i class="fa-solid fa-house"></i></div>
-                            <div class="btnmm" data-content="contenido2"><i class="fa-solid fa-inbox"></i></div>
+                            <div class="btnmm" data-content="contenido2"><i class="fa-solid fa-file-invoice-dollar"></i></i></div>
                             <div class="btnmm" data-content="contenido3"><i class="fas fa-tasks"></i></div>
-                            <div class="btnmm" data-content="contenido4"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                            <div class="btnmm" data-content="contenido6"><i class="fas fa-truck-moving"></i></div>
+                            <!--<div class="btnmm" data-content="contenido4"><i class="fa-solid fa-inbox"></i></div>-->
                             <div class="btnmm" data-content="contenido5"><i class="fa-solid fa-headset"></i></div>
                           </div>
                           <div class="content1">
                             <div id="contenido1" class="content active">
-                                <div >
+                                <div class="cont-1">
+                                <div class="profile-cont2">
+                                    <img id="user-photo" alt="Profile Picture" style="display:none;">
+                                    <div class="profile-cont"></div>
                                     <table class="user-mm">
                                         <tr>
                                             <td>Nombre:</td>
-                                            <td><div id="user-info" style="display: none;"></div></td>
+                                            <td><div id="user-name" style="display: none;"></div></td>
                                         </tr>
                                         <tr>
                                             <td>Correo:</td>
                                             <td><div id="user-mail" style="display: none;"></div></td>
                                         </tr>
                                     </table>
-                                    </div>
                                 </div>
-                           <div id="contenido2" class="content">Este es el contenido 2.</div>
+                                </div>
+                                </div>
+                                <div id="contenido2" class="content">
+                                    <div class="cont-order scroll">
+                                       <div id="table-order" class="table-order">
+                                           <div class="tittle">Detalle del pedido</div>
+                                           <!-- Los detalles del pedido se mostrarán aquí -->
+                                       </div>
+                                    </div>
+                                 </div>
                            <div id="contenido3" class="content">
-                            <h1>User Orders</h1>
-                            <table class="user-registers" id="orders-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Orders will be dynamically added here -->
-                                </tbody>
-                            </table>Este es el contenido 3.</div>
-                           <div id="contenido4" class="content">Este es el contenido 4.</div>
-                           <div id="contenido5" class="content">Este es el contenido 5.</div>
-                           <div id="contenido6" class="content">Este es el contenido 6.</div>
+                            <div class="cont-3">
+                                <div class="tittle">Pedidos en curso</div>
+                                <table class="user-orders">
+                                    <thead>
+                                        <tr>
+                                            <th>Pedido</th>
+                                            <th>Nombre del Usuario</th>
+                                            <th>Email del Usuario</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                </table>  
+                                <div class="content-user-reg"><div class="table-scroll scroll">                        
+                                    <table id="pedidosTable" class="user-orders">
+                                        <tbody>
+                                            <!-- Los pedidos se cargarán aquí dinámicamente -->
+                                        </tbody>
+                                        
+                                    </table></div>
+                                 </div>
+                                 <p>*Aqui se encuentra un registro de los usurios que se encuentran en proceso de compra</p>
+                                </div>
+                           </div>
+                            <div id="contenido4" class="content">
+
+                               </div>
+                           <div id="contenido5" class="content">Este es el contenido 6.</div>
                         </div>
                     </div>
             </div>
@@ -117,7 +141,6 @@
         </div>
      </footer>
      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="js/profile.js"></script>
     <script src="js/clothes-script.js"></script>
 </body>
 </html>

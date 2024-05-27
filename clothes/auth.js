@@ -315,6 +315,7 @@ function obtenerRolUsuario() {
     }
 }
 
+
 // Esperar a que el DOM se cargue completamente antes de añadir el evento click
 document.addEventListener('DOMContentLoaded', function() {
     // Evento click para el perfil
