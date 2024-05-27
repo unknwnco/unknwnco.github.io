@@ -213,20 +213,22 @@ ul{
 }
 
 #user-photo{
-    width: 50%;
+    width: 20%;
+    border-radius: 100px;
+    margin: 30px;
 }
 
 .profile-cont{
-    width: 50%;
-    height: 100%;
+    width: 2px;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #101010;
 }
 .profile-cont2{
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -236,6 +238,7 @@ ul{
     height: 100%;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -489,7 +492,7 @@ ul{
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 1em;
     color: #333;
 }
 
@@ -548,6 +551,10 @@ ul{
 }
 
 .btnmm:hover{
+    background-color: rgb(44, 44, 44);
+}
+
+.btn-active{
     background-color: rgb(44, 44, 44);
 }
 
@@ -610,9 +617,8 @@ ul{
 }
 
 .cont-order{
-    height: 80%;
     padding: 0 5% 0;
-    max-height: 40em;
+    height:  41.7em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -879,6 +885,7 @@ footer a:hover{
     .content1{
         order: 1;
         height: 90%;
+        flex-direction: column;
         width: auto;
     }
     .user-orders th:nth-child(3){
@@ -886,6 +893,54 @@ footer a:hover{
     }
     .user-orders td:nth-child(3){
         display: none;
+    }
+
+    .cont-order{
+        font-size: .7em;
+        height: 49em;
+    }
+    #user-photo {
+        width: 30%;
+    }
+    .content-user-reg {
+        font-size: .7em;
+    }
+    .user-orders th {
+        padding: 10px;
+        font-size: .7em;
+    }
+    .user-orders td {
+        padding: 10px;
+    }
+    .user-registers th, td{
+        padding: 10px;
+    }
+    .profile-cont2 {
+        flex-direction: column;
+    }
+    .user-orders td:nth-child(1) {
+        text-wrap: nowrap;
+    }
+    .user-orders td:nth-child(2) {
+        max-width: 100px;
+        width: 30%;
+        text-wrap:nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .user-registers td:nth-child(1) {
+        max-width: 130px;
+        width: 50%;
+        text-wrap:nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .user-registers td:nth-child(2) {
+        max-width: 100px;
+        width: 50%;
+        text-wrap:nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

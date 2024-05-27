@@ -4,6 +4,7 @@
     function displayUserInfo(user) {
         if (user) {
             document.getElementById('user-info').innerText = user.displayName || 'Nombre no disponible';
+            document.getElementById('user-name').innerText = user.displayName || 'Nombre no disponible';
             document.getElementById('user-mail').innerText = user.email;
             if (user.photoURL) {
                 document.getElementById('user-photo').src = user.photoURL;
@@ -12,12 +13,14 @@
                 document.getElementById('user-photo').style.display = 'none';
             }
             document.getElementById('user-info').style.display = 'block';
+            document.getElementById('user-name').style.display = 'block';
             document.getElementById('user-mail').style.display = 'block';
             document.getElementById('sign-out').style.display = 'block';
             document.getElementById('login').style.display = 'none'; // Oculta el botón de inicio de sesión
         } else {
             // El usuario no está autenticado, oculta la información del usuario y muestra el botón de inicio de sesión
             document.getElementById('user-info').style.display = 'none';
+            document.getElementById('user-name').style.display = 'none';
             document.getElementById('user-mail').style.display = 'none';
             document.getElementById('user-photo').style.display = 'none';
             document.getElementById('sign-out').style.display = 'none';
@@ -395,3 +398,5 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error al obtener las categorías desde la base de datos:", error);
         });
 });
+
+
