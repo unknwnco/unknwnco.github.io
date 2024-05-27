@@ -1,0 +1,845 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    background-color: #000000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 95vh;
+    border-radius: 3px;
+    
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    height: 60vh;
+    width: 95vh;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    /*background-color: rgba(66, 66, 66, 0.24);*/
+  }
+
+  .logo{
+    width: 500px;
+    filter: invert();
+  }
+
+
+.selector {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.selector2 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item{
+    background-color: rgba(58, 58, 58, 0.205);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 1px solid rgba(36, 36, 36, 0.849);
+}
+
+
+
+.selectortext2{
+    display: none;
+}
+
+.decai{
+    display: flex;
+    flex-direction: column;
+}
+
+.decalselect{
+    width: 160px;
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    padding: 4px;
+    width: 100%;
+    cursor: pointer; /* Añadido para mostrar que es un botón interactivo */
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.dropbtn::after {
+content: "\2228"; /* Código Unicode de la flecha hacia abajo */
+font-size: 12px;
+font-weight: bold;
+margin-left: 5px; /* Espacio entre el texto y la flecha */
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 170px;
+    max-height: 220px; /* Altura máxima de la lista */
+    overflow-y: auto; /* Agregar scroll vertical */
+    overflow-x: hidden; /* Ocultar scroll horizontal */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 10px 10px;
+    margin-top: 5px;
+    z-index: 10;
+}
+
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 170px;
+    max-height: 220px; /* Altura máxima de la lista */
+    overflow-y: auto; /* Agregar scroll vertical */
+    overflow-x: hidden; /* Ocultar scroll horizontal */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 10px 10px;
+    margin-top: 5px;
+    z-index: 10;
+}
+
+.decalselect.active .dropdown-content {
+    display: block; 
+}
+.bolselect.active .dropdown-content2 {
+    display: block; 
+}
+
+.decal{
+    width: 100%;
+    margin-bottom: 10px; 
+    cursor: pointer;
+
+    background-color: rgba(211, 211, 211, 0.267);
+}
+.decalprev{
+    width: 100%;
+    margin-bottom: 10px; 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(211, 211, 211, 0.267);
+}
+
+.decaltittle{
+    color: black;
+    padding: 4px;
+}
+
+#custom-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: .7em;
+    margin-bottom: 20px;
+}
+  
+#custom-btn:hover {
+    background-color: #45a049;
+}
+
+.labelupload{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.labelupload span{
+    color: green;
+    font-size: .5em;
+}
+
+.previmg{
+    height: 157px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+  
+
+
+.decalimg{
+    width: 100%;
+    
+}
+.decalimg2{
+    width: 140px;
+    height: 122px; 
+}
+
+.decalref{
+    background-color: white;
+    height: 180px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.bolsilloimg{
+    width: 100%;
+    height: 100%;
+}
+.bolsilloref{
+    height: 150px;
+    margin: 25px;    
+}
+
+
+
+.color{
+    display: flex;
+    flex-direction: column;
+}
+
+.colorselect{
+    display: flex;    
+}
+
+.color1{
+    height: 25px;
+    width: 25px;
+    margin: 4px;
+    border-radius: 1px;
+    cursor: pointer;
+    border: 2px solid white;
+    background-color: black;
+
+}
+
+.color2{
+    height: 25px;
+    width: 25px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 2px solid white;
+    background-color: white;
+
+}
+
+.color3{
+    height: 25px;
+    width: 25px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 2px solid white;
+    background-color: red;
+
+}
+
+.color4{
+    height: 25px;
+    width: 25px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 2px solid white;
+    background-color: blue;
+
+}
+
+.bolsillo{
+    display: flex;
+    flex-direction: column;
+}
+
+.bolselect{
+    width: 160px;
+    position: relative;
+    display: inline-block;
+}
+
+.bolsi{
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: rgba(211, 211, 211, 0.267);
+}
+
+
+.hat{
+    display: flex;
+    flex-direction: column;    
+}
+
+.selectorhat{
+    width: 70%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    cursor: pointer;
+    
+}
+
+.capucha{
+    width: 140px;
+    height: 140px;
+}
+
+
+
+.selectortext{
+    height: 40px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas{
+    height: 400px;
+    width: 300px;
+}
+
+.contcanvas{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
+    outline: 1px solid rgba(36, 36, 36, 0.849);
+    box-shadow: inset rgba(218, 218, 218, 0.37) 0px 0px 90px -12px;
+    z-index: 1;
+}
+
+#item {
+    
+}
+
+.shop{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    position: absolute;
+    align-self: flex-start;
+    right: 0;
+    background-color: rgba(255, 0, 0, 0.623);
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notify{
+    margin: 20px;
+    border-radius: 20px;
+    background-color: white;
+    position: absolute;
+    padding: 0 5px;
+    top: 0;
+    right: 0;
+    color: black;
+    z-index: 200;
+    
+}
+
+#shop{
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+.carshop{
+    display: contents;
+    cursor: pointer;
+}
+
+.close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.compras {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    background-color: rgba(0, 0, 0, 0.37);
+    z-index: 9999;
+}
+
+.tittlecompras{
+    margin: 30PX;
+    font-weight: bold;
+    color: rgb(90, 90, 90);
+}
+
+.listacompras {
+    width: 80%; /* Modifica el ancho según sea necesario */
+    height: 80%;
+    max-width: 900px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px; /* Ajusta el radio de borde según sea necesario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.contmodal{
+    width: auto;
+    height: auto;
+}
+
+.formcont {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    
+    max-width: 900px; /* Ajusta el ancho máximo de la tabla según tus necesidades */
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+}
+
+.form th, .form td {
+    width: 150px; /* Ancho fijo para todas las celdas */
+    border-bottom: 1px solid #dddddd;
+    padding: 16px;
+    text-align: left;
+}
+
+.form th {
+    background-color: #f7f7f7;
+}
+
+.form tr:nth-child(even) {
+    /* Puedes agregar estilos adicionales para filas pares si lo necesitas */
+}
+
+#vaciarOpciones{
+    cursor: pointer;
+    margin: 20px;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    font-size: .8em;
+}
+
+#vaciarOpciones:hover{
+    font-size: .82em;
+}
+
+
+/* Estilos para evitar que el body haga scroll cuando se muestra el modal */
+body.modal-open {
+    overflow: hidden;
+}
+
+#tablaCompras{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#comprasBody{
+    display: flex;
+    flex-direction: column;
+}
+
+.botonera{
+    width: 100%;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    user-select: none;
+}
+
+
+.comprarbtn{
+    width: 100px;
+    height: 40px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+.comprarbtn:hover{
+    outline: 1px solid #000000;
+    background-color: rgb(58, 58, 58);
+}
+
+.btncomprar{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+
+footer{
+    color: rgb(31, 31, 31);
+    height: 40px;
+    font-weight: 300;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    padding: 0 6px 0 6px;
+}
+
+
+.tabla{
+    color: white;
+}
+
+#opcionesGuardadas{
+    color: white;
+}
+
+/* Estilos para el div flotante */
+#login-button {
+    display: none;
+    position: relative;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 10px;
+}
+
+
+#login{
+    width: 95px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#login:hover{
+    background-color: rgb(58, 58, 58);
+}
+
+.barlogin{ 
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#google{
+    background-color: rgb(0, 140, 255);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+#google:hover{
+    background-color: rgb(43, 160, 255);
+}
+
+#login-login{
+    background-color: rgb(177, 177, 177);
+    padding: 5px 8px 5px 8px;
+    border: none;
+    margin: 5px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+#login-login:hover{
+    background-color: rgb(94, 94, 94);
+}
+
+#google-login{
+    background-color: rgb(0, 140, 255);
+    padding: 5px;
+    border: none;
+    margin: 5px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+#google-login:hover{
+    background-color: rgb(43, 160, 255);
+}
+
+.icon{
+    margin: 5px;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-info{
+    color: white;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#sign-out{
+    background-color: rgb(255, 42, 42);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* Estilos básicos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Fondo de color negro con opacidad */
+    z-index: 300;
+}
+.login-modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 200px;
+}
+
+.close2{
+    align-self: flex-end;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+    z-index: 9999;
+    display: flex;
+}
+.modal-content h2{
+    margin: 10px;
+    font-size: 1.3em;
+    color: rgb(121, 121, 121);
+}
+
+
+
+.botonera{
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#tablaOpciones{
+    color: white;
+    text-align: start;
+}
+
+th{
+    text-align: start;
+    width: 100px;
+}
+
+td{
+    width: 140px;
+}
+
+#datos-container{
+    color: white;
+}
+
+
+
+@media screen and (max-width:60em){
+    .container{
+        width: 80%;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: normal;
+    }
+    
+    header{
+        width: 80%;
+        flex-direction: column;
+      }
+    .logo{
+      width: 100%;
+    }
+    .barlogin{
+        height: auto;
+      align-self: flex-end;
+    }
+
+    .selector,.selector2 {
+        display: inline-block;
+        height: 30%;
+        width: 50%;
+        order: 2;
+    }
+
+    .contcanvas{
+        height: auto;
+    }
+
+    .colorselect{
+        justify-content: center;
+        width: 95%;
+        margin: 0;
+    }
+    .selectortext{
+        height: 30px;
+    }
+    
+    .decalselect{
+        width: 140px;
+        flex-wrap: nowrap;
+    }
+
+    .decal{
+        width: 100%;
+        height: 100%;
+    }
+
+    .color1{
+        width: 40px;
+        height: 40px;
+    }
+    .color2{
+        width: 40px;
+        height: 40px;    
+    }
+    .color3{
+        width: 40px;
+        height: 40px;    
+    }
+    .color4{
+        width: 40px;
+        height: 40px;
+    }
+
+    .bolselect{
+        width: 140px;
+    }
+
+    .bolsi{
+        width: 100%;
+    }
+
+
+    .bolsilloref,.decalref{
+        display: none;
+    }
+
+    footer{
+        font-size: 15px;
+    }
+
+    .selectortext{
+        display: none;
+    }
+
+    .selectortext2{
+        display: block;
+        margin: 10px;
+    }
+
+    .dropdown-content {
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
+    }
+    
+    .dropdown-content2 {
+        bottom: calc(100% + 5px); /* Posición desde abajo */
+        top: auto; /* Reiniciar la posición desde arriba */
+    }
+}

@@ -349,13 +349,40 @@ ul{
     padding: 10px;
     border: 1px solid black;
   }
+  .camisetas-table{
+    margin: 20px 0;
+  }
+
+  .camisetas-table td{
+    width: auto;
+    padding: 10px;
+    border: 1px solid black;
+  }
 
   .chaquetas-table td:nth-child(2){
-    min-width: 40px;
+    min-width: 10px;
+  }
+  .camisetas-table td:nth-child(2){
+    min-width: 10px;
   }
   
   .chaquetas-table tr:first-child td:nth-child(2) {
+    min-width: 10px;
     width: auto;
+    font-weight: bold;
+  }
+
+  .opciones-table2{
+    width: 100%;
+  }
+  .opciones-table2 td{
+    width: auto;
+    padding: 10px;
+    border: 1px solid black;
+  }
+  .camisetas-table tr:first-child td:nth-child(2) {
+    width: auto;
+    min-width: 10px;
     font-weight: bold;
   }
 

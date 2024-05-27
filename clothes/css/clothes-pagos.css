@@ -356,11 +356,21 @@ h4{
 }
 
 .opciones-table{
+  margin: 10px 0 40px 0;
+  width: 100%;
+}
+.opciones-table2{
   width: 100%;
 }
 
 .chaquetas-table tr:first-child td:nth-child(2) {
   width: auto;
+  min-width: 10px;
+  font-weight: bold;
+}
+.camisetas-table tr:first-child td:nth-child(2) {
+  width: auto;
+  min-width: 10px;
   font-weight: bold;
 }
 

@@ -160,112 +160,190 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function mostrarDatos(usuario) {
     const chaquetasRef = database.ref('Chaquetas');
+    const camisetasRef = database.ref('Camisetas'); // Referencia para camisetas
     const userId = usuario.uid;
     const opcionesRef = database.ref('usuarios/' + userId + '/Productos/Seleccionados');
 
-    // Obtener las categorías desde la ruta 'Chaquetas' en la base de datos
+    // Obtener las categorías desde la ruta 'Chaquetas' y 'Camisetas' en la base de datos
     chaquetasRef.once('value')
-        .then(snapshot => {
-            const chaquetas = snapshot.val();
+        .then(chaquetasSnapshot => {
+            const chaquetas = chaquetasSnapshot.val();
             if (!chaquetas) {
                 console.log("No se encontraron chaquetas en la base de datos.");
                 return;
             }
 
-            // Obtener los datos específicos del usuario
-            return opcionesRef.once('value').then(snapshot => {
-                const datos = snapshot.val();
-                const datosContainer = document.getElementById('datos-container');
-                if (!datosContainer) {
-                    //console.log("El elemento 'datos-container' no se encontró en el documento.");
+            camisetasRef.once('value').then(camisetasSnapshot => {
+                const camisetas = camisetasSnapshot.val();
+                if (!camisetas) {
+                    console.log("No se encontraron camisetas en la base de datos.");
                     return;
                 }
 
-                datosContainer.innerHTML = ''; // Limpiar el contenedor
+                // Obtener los datos específicos del usuario
+                return opcionesRef.once('value').then(snapshot => {
+                    const datos = snapshot.val();
+                    const datosContainer = document.getElementById('datos-container');
+                    if (!datosContainer) {
+                        //console.log("El elemento 'datos-container' no se encontró en el documento.");
+                        return;
+                    }
 
-                // Crear tabla para el contador de chaquetas
-                const chaquetasTabla = document.createElement('table');
-                chaquetasTabla.classList.add('chaquetas-table');
+                    datosContainer.innerHTML = ''; // Limpiar el contenedor
 
-                // Crear fila para el contador de chaquetas
-                const chaquetasCountRow = document.createElement('tr');
-                const chaquetasCountCell = document.createElement('td');
-                chaquetasCountCell.textContent = 'Número de Chaquetas';
-                chaquetasCountRow.appendChild(chaquetasCountCell);
-                const chaquetasCountValueCell = document.createElement('td');
-                chaquetasCountValueCell.textContent = Object.keys(datos && datos["Chaquetas"] || {}).length;
-                chaquetasCountRow.appendChild(chaquetasCountValueCell);
-                chaquetasTabla.appendChild(chaquetasCountRow);
+                    // Inicio Chaquetas
+                    // Crear tabla para el contador de chaquetas
+                    const chaquetasTabla = document.createElement('table');
+                    chaquetasTabla.classList.add('chaquetas-table');
 
-                // Agregar tabla del contador de chaquetas al contenedor
-                datosContainer.appendChild(chaquetasTabla);
+                    // Crear fila para el contador de chaquetas
+                    const chaquetasCountRow = document.createElement('tr');
+                    const chaquetasCountCell = document.createElement('td');
+                    chaquetasCountCell.textContent = 'Número de Chaquetas';
+                    chaquetasCountRow.appendChild(chaquetasCountCell);
+                    const chaquetasCountValueCell = document.createElement('td');
+                    chaquetasCountValueCell.textContent = Object.keys(datos && datos["Chaquetas"] || {}).length;
+                    chaquetasCountRow.appendChild(chaquetasCountValueCell);
+                    chaquetasTabla.appendChild(chaquetasCountRow);
 
-                // Crear tabla para las opciones guardadas
-                const opcionesTabla = document.createElement('table');
-                opcionesTabla.classList.add('opciones-table');
+                    // Agregar tabla del contador de chaquetas al contenedor
+                    datosContainer.appendChild(chaquetasTabla);
 
-                // Crear fila de categorías
-                const categoriasRow = document.createElement('tr');
-                categoriasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
+                    // Crear tabla para las opciones guardadas de chaquetas
+                    const opcionesChaquetasTabla = document.createElement('table');
+                    opcionesChaquetasTabla.classList.add('opciones-table');
 
-                // Iterar sobre las categorías obtenidas desde 'Chaquetas'
-                Object.keys(chaquetas).forEach(categoria => {
-                    // Crear celda para categoría
-                    const categoriaCell = document.createElement('td');
-                    categoriaCell.textContent = categoria;
-                    categoriasRow.appendChild(categoriaCell);
-                });
+                    // Crear fila de categorías de chaquetas
+                    const categoriasChaquetasRow = document.createElement('tr');
+                    categoriasChaquetasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
 
-                // Agregar fila de categorías a la tabla
-                opcionesTabla.appendChild(categoriasRow);
-
-                // Iterar sobre las chaquetas guardadas del usuario
-                Object.entries(datos && datos["Chaquetas"] || {}).forEach(([nombre, opciones]) => {
-                    // Crear fila para chaqueta
-                    const chaquetaRow = document.createElement('tr');
-                    chaquetaRow.classList.add('chaqueta-row'); // Agregar clase a la fila de chaqueta
-
-                    // Iterar sobre las categorías para mantener el orden
+                    // Iterar sobre las categorías obtenidas desde 'Chaquetas'
                     Object.keys(chaquetas).forEach(categoria => {
-                        // Crear celda para opción
-                        const opcionCell = document.createElement('td');
-                        // Mostrar "N/A" si la opción está vacía
-                        const valor = opciones[categoria] || "N/A";
-                        opcionCell.textContent = valor;
-                        chaquetaRow.appendChild(opcionCell);
+                        // Crear celda para categoría
+                        const categoriaCell = document.createElement('td');
+                        categoriaCell.textContent = categoria;
+                        categoriasChaquetasRow.appendChild(categoriaCell);
                     });
 
-                    // Agregar fila de chaqueta a la tabla
-                    opcionesTabla.appendChild(chaquetaRow);
+                    // Agregar fila de categorías a la tabla de chaquetas
+                    opcionesChaquetasTabla.appendChild(categoriasChaquetasRow);
+
+                    // Iterar sobre las chaquetas guardadas del usuario
+                    Object.entries(datos && datos["Chaquetas"] || {}).forEach(([nombre, opciones]) => {
+                        // Crear fila para chaqueta
+                        const chaquetaRow = document.createElement('tr');
+                        chaquetaRow.classList.add('chaqueta-row'); // Agregar clase a la fila de chaqueta
+
+                        // Iterar sobre las categorías para mantener el orden
+                        Object.keys(chaquetas).forEach(categoria => {
+                            // Crear celda para opción
+                            const opcionCell = document.createElement('td');
+                            // Mostrar "N/A" si la opción está vacía
+                            const valor = opciones[categoria] || "N/A";
+                            opcionCell.textContent = valor;
+                            chaquetaRow.appendChild(opcionCell);
+                        });
+
+                        // Agregar fila de chaqueta a la tabla de chaquetas
+                        opcionesChaquetasTabla.appendChild(chaquetaRow);
+                    });
+
+                    // Agregar tabla de opciones de chaquetas al contenedor
+                    datosContainer.appendChild(opcionesChaquetasTabla);
+
+                    // Fin Chaquetas
+
+                    // Inicio Camisetas
+                    // Crear tabla para el contador de camisetas
+                    const camisetasTabla = document.createElement('table');
+                    camisetasTabla.classList.add('camisetas-table');
+
+                    // Crear fila para el contador de camisetas
+                    const camisetasCountRow = document.createElement('tr');
+                    const camisetasCountCell = document.createElement('td');
+                    camisetasCountCell.textContent = 'Número de Camisetas';
+                    camisetasCountRow.appendChild(camisetasCountCell);
+                    const camisetasCountValueCell = document.createElement('td');
+                    camisetasCountValueCell.textContent = Object.keys(datos && datos["Camisetas"] || {}).length;
+                    camisetasCountRow.appendChild(camisetasCountValueCell);
+                    camisetasTabla.appendChild(camisetasCountRow);
+
+                    // Agregar tabla del contador de camisetas al contenedor
+                    datosContainer.appendChild(camisetasTabla);
+
+                    // Crear tabla para las opciones guardadas de camisetas
+                    const opcionesCamisetasTabla = document.createElement('table');
+                    opcionesCamisetasTabla.classList.add('opciones-table2');
+
+                    // Crear fila de categorías de camisetas
+                    const categoriasCamisetasRow = document.createElement('tr');
+                    categoriasCamisetasRow.classList.add('categorias-row'); // Agregar clase a la fila de categorías
+
+                    // Iterar sobre las categorías obtenidas desde 'Camisetas'
+                    Object.keys(camisetas).forEach(categoria => {
+                        // Crear celda para categoría
+                        const categoriaCell = document.createElement('td');
+                        categoriaCell.textContent = categoria;
+                        categoriasCamisetasRow.appendChild(categoriaCell);
+                    });
+
+                    // Agregar fila de categorías a la tabla de camisetas
+                    opcionesCamisetasTabla.appendChild(categoriasCamisetasRow);
+
+                    // Iterar sobre las camisetas guardadas del usuario
+                    Object.entries(datos && datos["Camisetas"] || {}).forEach(([nombre, opciones]) => {
+                        // Crear fila para camiseta
+                        const camisetaRow = document.createElement('tr');
+                        camisetaRow.classList.add('camiseta-row'); // Agregar clase a la fila de camiseta
+
+                        // Iterar sobre las categorías para mantener el orden
+                        Object.keys(camisetas).forEach(categoria => {
+                            // Crear celda para opción
+                            const opcionCell = document.createElement('td');
+                            // Mostrar "N/A" si la opción está vacía
+                            const valor = opciones[categoria] || "N/A";
+                            opcionCell.textContent = valor;
+                            camisetaRow.appendChild(opcionCell);
+                        });
+
+                        // Agregar fila de camiseta a la tabla de camisetas
+                        opcionesCamisetasTabla.appendChild(camisetaRow);
+                    });
+
+                    // Agregar tabla de opciones de camisetas al contenedor
+                    datosContainer.appendChild(opcionesCamisetasTabla);
+
+                    // Fin Camisetas
+
+                    // Crear tabla adicional para mostrar el costo total
+                    const totalTabla = document.createElement('table');
+                    totalTabla.classList.add('total-table');
+
+                    // Crear fila para el total
+                    const totalRow = document.createElement('tr');
+
+                    // Crear celda para la etiqueta 'Total'
+                    const totalLabelCell = document.createElement('td');
+                    totalLabelCell.textContent = 'Total';
+                    totalRow.appendChild(totalLabelCell);
+
+                    // Crear celda para el valor del costo total
+                    const totalValueCell = document.createElement('td');
+                    // Formatear el valor del costo total
+                    const chaquetasCostoTotal = Object.keys(datos && datos["Chaquetas"] || {}).length * 80000;
+                    const camisetasCostoTotal = Object.keys(datos && datos["Camisetas"] || {}).length * 50000; // Supuesto costo de cada camiseta
+                    const formattedCostoTotal = '$ ' + Intl.NumberFormat('es-ES').format(chaquetasCostoTotal + camisetasCostoTotal);
+                    totalValueCell.textContent = formattedCostoTotal;
+                    totalRow.appendChild(totalValueCell);
+
+                    // Agregar fila de total a la tabla adicional
+                    totalTabla.appendChild(totalRow);
+
+                    // Agregar tabla adicional al contenedor
+                    datosContainer.appendChild(totalTabla);
                 });
-
-                // Agregar tabla de opciones al contenedor
-                datosContainer.appendChild(opcionesTabla);
-
-                // Crear tabla adicional para mostrar el costo total
-                const totalTabla = document.createElement('table');
-                totalTabla.classList.add('total-table');
-
-                // Crear fila para el total
-                const totalRow = document.createElement('tr');
-
-                // Crear celda para la etiqueta 'Total'
-                const totalLabelCell = document.createElement('td');
-                totalLabelCell.textContent = 'Total';
-                totalRow.appendChild(totalLabelCell);
-
-                // Crear celda para el valor del costo total
-                const totalValueCell = document.createElement('td');
-                // Formatear el valor del costo total
-                const formattedCostoTotal = '$ ' + Intl.NumberFormat('es-ES').format(Object.keys(datos && datos["Chaquetas"] || {}).length * 80000);
-                totalValueCell.textContent = formattedCostoTotal;
-                totalRow.appendChild(totalValueCell);
-
-                // Agregar fila de total a la tabla adicional
-                totalTabla.appendChild(totalRow);
-
-                // Agregar tabla adicional al contenedor
-                datosContainer.appendChild(totalTabla);
+            }).catch(error => {
+                console.error("Error al obtener los datos de camisetas desde la base de datos:", error);
             });
         })
         .catch(error => {

@@ -186,6 +186,14 @@
      </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
     <script src="js/clothes-script.js"></script>
+    <script>
+        firebase.auth().onAuthStateChanged((usuario) => {
+            if (!usuario) {
+                // Al hacer clic en la alerta, redirigir a clothes.html
+                window.location.href = 'clothes.html';
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -143,119 +143,123 @@ function loadOrder(pedidoId) {
         return;
     }
     const { usuarioId, estado } = pedidoInfo;
-    const pedidoRef = database.ref(`usuarios/${usuarioId}/Productos/${estado}/${pedidoId}/Chaquetas`);
-    //console.log(`Intentando cargar los detalles del pedido desde la ruta: usuarios/${usuarioId}/Productos/${estado}/${pedidoId}/Chaquetas`);
 
-    pedidoRef.once('value')
-        .then(snapshot => {
-            const chaquetaData = snapshot.val();
-            console.log(`Datos de chaquetas cargados para el pedido ${pedidoId}:`, chaquetaData);
-            const tableOrder = document.getElementById('table-order');
-            if (!tableOrder) {
-                console.error('No se encontró el elemento table-order.');
-                return;
-            }
+    const cargarDetallesPedido = (ref, tipo, costoUnitario, opcionesTablaClase, tableOrder, categoriasRef) => {
+        return ref.once('value')
+            .then(snapshot => {
+                const data = snapshot.val();
+                console.log(`Datos de ${tipo} cargados para el pedido ${pedidoId}:`, data);
+                const tabla = tableOrder.querySelector(`.${tipo.toLowerCase()}-table`);
+                tabla.innerHTML = `
+                    <tr>
+                        <td>Número de ${tipo}</td>
+                        <td>${data ? Object.keys(data).length : 0}</td>
+                    </tr>
+                `;
 
-            // Llenar tabla para el contador de chaquetas
-            const chaquetasTabla = tableOrder.querySelector('.chaquetas-table');
-            chaquetasTabla.innerHTML = `
-                <tr>
-                    <td>Número de Chaquetas</td>
-                    <td>${chaquetaData ? Object.keys(chaquetaData).length : 0}</td>
-                </tr>
-            `;
+                const opcionesTabla = tableOrder.querySelector(`.${opcionesTablaClase}`);
+                return categoriasRef.once('value')
+                    .then(categoriasSnapshot => {
+                        const categorias = categoriasSnapshot.val();
+                        if (!categorias) {
+                            console.error('No se encontraron categorías en la base de datos.');
+                            return { data, total: 0 };
+                        }
 
-            // Obtener y mostrar las categorías
-            const opcionesTabla = tableOrder.querySelector('.opciones-table');
-            const categoriasRef = database.ref('Chaquetas');
-            categoriasRef.once('value')
-                .then(categoriasSnapshot => {
-                    const categorias = categoriasSnapshot.val();
-                    if (!categorias) {
-                        console.error('No se encontraron categorías en la base de datos.');
-                        return;
-                    }
-
-                    // Crear fila de categorías
-                    const categoriasRow = document.createElement('tr');
-                    categoriasRow.classList.add('categorias-row');
-                    Object.keys(categorias).forEach(categoria => {
-                        const categoriaCell = document.createElement('td');
-                        categoriaCell.textContent = categoria;
-                        categoriasRow.appendChild(categoriaCell);
-                    });
-                    opcionesTabla.innerHTML = ''; // Limpiar la tabla antes de llenarla con datos
-                    opcionesTabla.appendChild(categoriasRow);
-
-                    // Llenar la tabla con las opciones guardadas
-                    if (chaquetaData) {
-                        Object.entries(chaquetaData).forEach(([nombre, opciones]) => {
-                            const chaquetaRow = document.createElement('tr');
-                            Object.keys(categorias).forEach(categoria => {
-                                const opcionCell = document.createElement('td');
-                                const valor = opciones[categoria] || "N/A";
-                                opcionCell.textContent = valor;
-                                chaquetaRow.appendChild(opcionCell);
-                            });
-                            opcionesTabla.appendChild(chaquetaRow);
+                        const categoriasRow = document.createElement('tr');
+                        categoriasRow.classList.add('categorias-row');
+                        Object.keys(categorias).forEach(categoria => {
+                            const categoriaCell = document.createElement('td');
+                            categoriaCell.textContent = categoria;
+                            categoriasRow.appendChild(categoriaCell);
                         });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al obtener las categorías desde la base de datos:", error);
-                });
+                        opcionesTabla.innerHTML = ''; 
+                        opcionesTabla.appendChild(categoriasRow);
 
-            // Llenar tabla adicional para mostrar el costo total
-            const totalTabla = tableOrder.querySelector('.total-table');
-            totalTabla.innerHTML = `
-                <tr>
-                    <td>Total</td>
-                    <td>$ ${chaquetaData ? Object.keys(chaquetaData).length * 80000 : 0}</td>
-                </tr>
-            `;
-            setTimeout(function() {
-            // Cambiar la clase "active"
-            document.getElementById('contenido3').classList.remove('active');
-            document.getElementById('contenido2').classList.add('active');
-            }, 100);
+                        if (data) {
+                            Object.entries(data).forEach(([nombre, opciones]) => {
+                                const itemRow = document.createElement('tr');
+                                Object.keys(categorias).forEach(categoria => {
+                                    const opcionCell = document.createElement('td');
+                                    const valor = opciones[categoria] || "N/A";
+                                    opcionCell.textContent = valor;
+                                    itemRow.appendChild(opcionCell);
+                                });
+                                opcionesTabla.appendChild(itemRow);
+                            });
+                        }
 
-        })
-        .catch(error => {
-            console.error("Error al obtener los datos de chaqueta desde la base de datos:", error);
-        });
-}
+                        return { data, total: data ? Object.keys(data).length * costoUnitario : 0 };
+                    });
+            });
+    };
 
-// Esperar a que el DOM esté completamente cargado
-document.addEventListener("DOMContentLoaded", function() {
-    // Crear las tablas vacías y agregarlas al contenedor table-order
     const tableOrder = document.getElementById('table-order');
     if (!tableOrder) {
         console.error('No se encontró el elemento table-order.');
         return;
     }
 
-    // Crear tabla para el contador de chaquetas
-    const chaquetasTabla = document.createElement('table');
-    chaquetasTabla.classList.add('chaquetas-table');
-    chaquetasTabla.innerHTML = `
-        <tr>
-            <td>Número de Chaquetas</td>
-            <td></td>
-        </tr>
-    `;
-    tableOrder.appendChild(chaquetasTabla);
+    const pedidoRefChaquetas = database.ref(`usuarios/${usuarioId}/Productos/${estado}/${pedidoId}/Chaquetas`);
+    const pedidoRefCamisetas = database.ref(`usuarios/${usuarioId}/Productos/${estado}/${pedidoId}/Camisetas`);
 
-    // Crear tabla para las opciones guardadas
-    const opcionesTabla = document.createElement('table');
-    opcionesTabla.classList.add('opciones-table');
-    opcionesTabla.innerHTML = `
-        <tr class="categorias-row">
-            <td>Cargando categorías...</td>
-        </tr>
-    `;
-    tableOrder.appendChild(opcionesTabla);
+    const categoriasRefChaquetas = database.ref('Chaquetas');
+    const categoriasRefCamisetas = database.ref('Camisetas');
 
-    // Crear tabla adicional para mostrar el costo total
+    Promise.all([
+        cargarDetallesPedido(pedidoRefChaquetas, 'Chaquetas', 80000, 'opciones-table', tableOrder, categoriasRefChaquetas),
+        cargarDetallesPedido(pedidoRefCamisetas, 'Camisetas', 50000, 'opciones-table2', tableOrder, categoriasRefCamisetas)
+    ]).then(results => {
+        const total = results.reduce((acc, result) => acc + result.total, 0);
+        const totalTabla = tableOrder.querySelector('.total-table');
+        totalTabla.innerHTML = `
+            <tr>
+                <td>Total</td>
+                <td>$ ${total}</td>
+            </tr>
+        `;
+
+        setTimeout(function() {
+            document.getElementById('contenido3').classList.remove('active');
+            document.getElementById('contenido2').classList.add('active');
+        }, 100);
+
+    }).catch(error => {
+        console.error("Error al obtener los datos del pedido desde la base de datos:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const tableOrder = document.getElementById('table-order');
+    if (!tableOrder) {
+        console.error('No se encontró el elemento table-order.');
+        return;
+    }
+
+    const crearTabla = (tipo, opcionesTablaClase) => {
+        const tabla = document.createElement('table');
+        tabla.classList.add(`${tipo.toLowerCase()}-table`);
+        tabla.innerHTML = `
+            <tr>
+                <td>Número de ${tipo}</td>
+                <td></td>
+            </tr>
+        `;
+        tableOrder.appendChild(tabla);
+
+        const opcionesTabla = document.createElement('table');
+        opcionesTabla.classList.add(opcionesTablaClase);
+        opcionesTabla.innerHTML = `
+            <tr class="categorias-row">
+                <td>Cargando categorías...</td>
+            </tr>
+        `;
+        tableOrder.appendChild(opcionesTabla);
+    };
+
+    crearTabla('Chaquetas', 'opciones-table');
+    crearTabla('Camisetas', 'opciones-table2');
+
     const totalTabla = document.createElement('table');
     totalTabla.classList.add('total-table');
     totalTabla.innerHTML = `
@@ -266,26 +270,31 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
     tableOrder.appendChild(totalTabla);
 
-    // Cargar las categorías desde la raíz de la base de datos
-    const categoriasRef = firebase.database().ref('Chaquetas');
-    categoriasRef.once('value')
-        .then(snapshot => {
-            const categorias = snapshot.val();
-            if (!categorias) {
-                console.error('No se encontraron categorías en la base de datos.');
-                return;
-            }
-            const categoriasRow = tableOrder.querySelector('.categorias-row');
-            categoriasRow.innerHTML = ''; // Limpiar la fila de categorías
-            Object.keys(categorias).forEach(categoria => {
-                const categoriaCell = document.createElement('td');
-                categoriaCell.textContent = categoria;
-                categoriasRow.appendChild(categoriaCell);
+    const cargarCategorias = (ref, opcionesTablaClase) => {
+        ref.once('value')
+            .then(snapshot => {
+                const categorias = snapshot.val();
+                if (!categorias) {
+                    console.error(`No se encontraron categorías en la base de datos.`);
+                    return;
+                }
+                const categoriasRow = tableOrder.querySelector(`.${opcionesTablaClase} .categorias-row`);
+                categoriasRow.innerHTML = '';
+                Object.keys(categorias).forEach(categoria => {
+                    const categoriaCell = document.createElement('td');
+                    categoriaCell.textContent = categoria;
+                    categoriasRow.appendChild(categoriaCell);
+                });
+            })
+            .catch(error => {
+                console.error(`Error al obtener las categorías desde la base de datos:`, error);
             });
-        })
-        .catch(error => {
-            console.error("Error al obtener las categorías desde la base de datos:", error);
-        });
+    };
+
+    cargarCategorias(firebase.database().ref('Chaquetas'), 'opciones-table');
+    cargarCategorias(firebase.database().ref('Camisetas'), 'opciones-table2');
 });
+
+
 
 
