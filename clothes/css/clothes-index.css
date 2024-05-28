@@ -372,10 +372,18 @@ ul{
     font-weight: bold;
   }
 
-  .opciones-table2{
+/*************ocultar camisetas*************/
+.opciones-table2{
+    display: none;
     width: 100%;
   }
-  .opciones-table2 td{
+  
+  .camisetas-table{
+    display: none;
+  }
+/***********camisetas disable************/
+
+.opciones-table2 td{
     width: auto;
     padding: 10px;
     border: 1px solid black;

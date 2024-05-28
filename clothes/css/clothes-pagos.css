@@ -359,9 +359,17 @@ h4{
   margin: 10px 0 40px 0;
   width: 100%;
 }
+
+/*************ocultar camisetas*************/
 .opciones-table2{
+  display: none;
   width: 100%;
 }
+
+.camisetas-table{
+  display: none;
+}
+/***********camisetas disable************/
 
 .chaquetas-table tr:first-child td:nth-child(2) {
   width: auto;
