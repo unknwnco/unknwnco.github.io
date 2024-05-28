@@ -55,7 +55,7 @@ function inicializar() {
     controls.target = new THREE.Vector3(0, 1.3, 0);
     controls.update();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, .4);
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, .6);
@@ -67,7 +67,7 @@ function inicializar() {
 
 
 
-    loader.load('/clothes/3d/jacket.glb', function (gltf) {
+    loader.load('/clothes/3d/shrit.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
 
@@ -112,7 +112,7 @@ function inicializar() {
         });
         // Buscar el mesh con nombre "Decal5"
         gltf.scene.traverse(function (child) {
-            if (child.isMesh && child.name === "Decal5") {
+            if (child.isMesh && child.name === "shirt_decal1") {
                 decal5Mesh = child;
                 decal5Mesh.visible = false;
             }
