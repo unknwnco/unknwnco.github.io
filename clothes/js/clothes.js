@@ -35,6 +35,14 @@ let decal4Mesh;
 let decal4Visible = false;
 let decal5Mesh;
 let decal5Visible = false;
+let decal6Mesh;
+let decal6Visible = false;
+let decal7Mesh;
+let decal7Visible = false;
+let decal8Mesh;
+let decal8Visible = false;
+let decal9Mesh;
+let decal9Visible = false;
 let decal2Bolsillo2Mesh; // Variable para el mesh "Decal2.bolsillo2"
 let decal2Bolsillo3Mesh; // Variable para el mesh "Decal2.bolsillo2"
 // Variable para el estado de visibilidad de bolsillo3
@@ -176,6 +184,35 @@ let decal2Bolsillo3Visible = false;
                 decal5Mesh.visible = false;
             }
         });
+        // Buscar el mesh con nombre "Decal5"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal6") {
+                decal6Mesh = child;
+                decal6Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal5"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal7") {
+                decal7Mesh = child;
+                decal7Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal5"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal8") {
+                decal8Mesh = child;
+                decal8Mesh.visible = false;
+            }
+        });
+        // Buscar el mesh con nombre "Decal5"
+        gltf.scene.traverse(function (child) {
+            if (child.isMesh && child.name === "Decal9") {
+                decal9Mesh = child;
+                decal9Mesh.visible = false;
+            }
+        });
+        
         // Buscar el mesh con nombre "Decal2"
         gltf.scene.traverse(function (child) {
             if (child.isMesh && child.name === "Decal2bolsillo2") {
@@ -511,6 +548,78 @@ decal5.addEventListener('click', function () {
         selectedDecal = "Custom"; // Establecer el decal seleccionado
     } else {
         deactivateDecal(decal5Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
+    }
+    updateSelectedOptions();
+});
+// Escuchar clics en el elemento con id "decal4"
+const decal6 = document.getElementById('decal6');
+decal6.addEventListener('click', function () {
+    //if (!checkAuthentication()) return;
+    
+    if (activeDecal !== decal6Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal6Mesh.visible = true;
+        activeDecal = decal6Mesh;
+        selectedDecal = "Porshe"; // Establecer el decal seleccionado
+    } else {
+        deactivateDecal(decal6Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
+    }
+    updateSelectedOptions();
+});
+// Escuchar clics en el elemento con id "decal4"
+const decal7 = document.getElementById('decal7');
+decal7.addEventListener('click', function () {
+    //if (!checkAuthentication()) return;
+    
+    if (activeDecal !== decal7Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal7Mesh.visible = true;
+        activeDecal = decal7Mesh;
+        selectedDecal = "Toyota"; // Establecer el decal seleccionado
+    } else {
+        deactivateDecal(decal7Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
+    }
+    updateSelectedOptions();
+});
+// Escuchar clics en el elemento con id "decal4"
+const decal8 = document.getElementById('decal8');
+decal8.addEventListener('click', function () {
+    //if (!checkAuthentication()) return;
+    
+    if (activeDecal !== decal8Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal8Mesh.visible = true;
+        activeDecal = decal8Mesh;
+        selectedDecal = "Ferrari"; // Establecer el decal seleccionado
+    } else {
+        deactivateDecal(decal8Mesh);
+        selectedDecal = null; // Vaciar el decal seleccionado
+    }
+    updateSelectedOptions();
+});
+// Escuchar clics en el elemento con id "decal4"
+const decal9 = document.getElementById('decal9');
+decal9.addEventListener('click', function () {
+    //if (!checkAuthentication()) return;
+    
+    if (activeDecal !== decal9Mesh) {
+        if (activeDecal) {
+            activeDecal.visible = false;
+        }
+        decal9Mesh.visible = true;
+        activeDecal = decal9Mesh;
+        selectedDecal = "Volkswagen"; // Establecer el decal seleccionado
+    } else {
+        deactivateDecal(decal9Mesh);
         selectedDecal = null; // Vaciar el decal seleccionado
     }
     updateSelectedOptions();
