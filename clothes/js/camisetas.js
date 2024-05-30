@@ -43,7 +43,7 @@ function inicializar() {
 
     const loader = new THREE.GLTFLoader();
 
-    const camera = new THREE.PerspectiveCamera(15, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(14, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false;
     controls.enablePan = false;

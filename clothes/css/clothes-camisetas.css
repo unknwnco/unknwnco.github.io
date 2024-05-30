@@ -762,7 +762,7 @@ td{
 
     .selector,.selector2 {
         display: inline-block;
-        height: 30%;
+        height: 25%;
         width: 50%;
         order: 2;
     }
