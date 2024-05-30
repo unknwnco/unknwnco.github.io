@@ -883,12 +883,24 @@ footer a:hover{
         background: #3b3b3b;
     }
 
-
-    
+    header{
+        padding: 10px;
+    }
+    .cabezera{
+        width: 60%;
+    }
     .logo{
+        width: 100%;
+    }
+
+    .nav-item2 {
+        font-size: 1em;
+    }
+    
+    .texto{
         display: none;
     }
-    .texto{
+    .texto2{
         display: none;
     }
 

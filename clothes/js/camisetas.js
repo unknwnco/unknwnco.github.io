@@ -84,7 +84,7 @@ function inicializar() {
 
         // Buscar el mesh con nombre "Decal"
         gltf.scene.traverse(function (child) {
-            if (child.isMesh && child.name === "Decal1") {
+            if (child.isMesh && child.name === "shirt_decal2") {
                 decalMesh = child;
                 decalMesh.visible = false;
             }
