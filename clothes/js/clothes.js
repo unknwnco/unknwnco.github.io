@@ -70,7 +70,7 @@ function inicializar() {
     controls.enableDamping = false;
     controls.enablePan = false;
     controls.enableZoom = true;
-    controls.minDistance = 3.6;
+    controls.minDistance = 3;
     controls.maxDistance = 3.6;
     controls.minPolarAngle = 1.6;
     controls.maxPolarAngle = 1.6;

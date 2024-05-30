@@ -782,7 +782,6 @@ td{
 @media screen and (max-width:60em){
     .container{
         width: 80%;
-        height: 80%;
         flex-direction: column;
         align-items: normal;
     }
@@ -804,6 +803,15 @@ td{
         font-size: 1em;
         margin: 10px;
     }
+    .contcanvas {
+        height: 75%;
+    }
+
+    .capucha{
+        width: 100px;
+        height: 100px;
+    }
+    
 
     .canvas{
         order: 1;
