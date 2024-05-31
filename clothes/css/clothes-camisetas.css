@@ -68,14 +68,30 @@ header{
     align-items: center;
     flex-direction: column;
 }
+.selector3 {
+    width: 100%;
+    max-height: 200px;
+}
+
+.stamp-selector{
+    display: none;
+    width: 100%;
+    background-color: rgba(58, 58, 58, 0.205);
+    outline: 1px solid rgba(36, 36, 36, 0.849);
+}
+.cont-stamp{
+    display: flex;
+    overflow-x: auto;
+}
+
 
 .item{
-    background-color: rgba(58, 58, 58, 0.205);
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(58, 58, 58, 0.205);
     outline: 1px solid rgba(36, 36, 36, 0.849);
 }
 
@@ -167,6 +183,47 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     flex-direction: column;
     background-color: rgba(211, 211, 211, 0.267);
 }
+.decalprev2{
+    width: 100%;
+    margin: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(211, 211, 211, 0.267);
+}
+
+/* Tamaño del scroll */
+.scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+   /* Estilos barra (thumb) de scroll */
+  .scroll::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 4px;
+  }
+  
+  .scroll::-webkit-scrollbar-thumb:active {
+    background-color: #383838;
+  }
+  
+  .scroll::-webkit-scrollbar-thumb:hover {
+    background: #383838;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+   /* Estilos track de scroll */
+  .scroll::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+  }
+  
+  .scroll::-webkit-scrollbar-track:hover, 
+  .scroll::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
 
 .decaltittle{
     color: black;
@@ -243,49 +300,40 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
 .colorselect{
     display: flex;    
 }
+.colorselect2{
+    display: none;
+    align-self: flex-end;
+    position: absolute;
+    padding: 20px;
+}
 
-.color1{
+.colorg{
     height: 25px;
     width: 25px;
     margin: 4px;
-    border-radius: 1px;
+    border-radius: 50px;
     cursor: pointer;
     border: 2px solid white;
+    border: inset;
+}
+
+.color1{
     background-color: black;
 
 }
 
 .color2{
-    height: 25px;
-    width: 25px;
-    margin: 4px;
-    cursor: pointer;
-    border-radius: 1px;
-    border: 2px solid white;
     background-color: white;
-
 }
 
 .color3{
-    height: 25px;
-    width: 25px;
-    margin: 4px;
-    cursor: pointer;
-    border-radius: 1px;
-    border: 2px solid white;
+
     background-color: red;
 
 }
 
 .color4{
-    height: 25px;
-    width: 25px;
-    margin: 4px;
-    cursor: pointer;
-    border-radius: 1px;
-    border: 2px solid white;
     background-color: blue;
-
 }
 
 .bolsillo{
@@ -761,7 +809,7 @@ td{
     }
 
     .selector,.selector2 {
-        display: inline-block;
+        display: none;
         height: 25%;
         width: 50%;
         order: 2;
@@ -770,6 +818,13 @@ td{
     .contcanvas{
         height: auto;
     }
+    .stamp-selector{
+        display: block;
+    }
+    .colorselect2{
+        display: flex;
+    }
+
 
     .colorselect{
         justify-content: center;
