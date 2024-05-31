@@ -74,14 +74,17 @@ header{
 }
 
 .stamp-selector{
-    display: none;
-    width: 100%;
+    width: 80%;
+    max-height: 40%;
+
     background-color: rgba(58, 58, 58, 0.205);
     outline: 1px solid rgba(36, 36, 36, 0.849);
 }
 .cont-stamp{
     display: flex;
-    overflow-x: auto;
+    height: 100%;
+    flex-wrap: wrap;
+    overflow-Y: auto;
 }
 
 
@@ -272,6 +275,9 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
 .decalimg2{
     width: 140px;
     height: 122px; 
+}
+.decalimg3{
+    width: 140px;
 }
 
 .decalref{
@@ -790,8 +796,9 @@ td{
 @media screen and (max-width:60em){
     .container{
         width: 80%;
-
+        height: auto;
         display: flex;
+        margin-bottom: 10px;
         flex-wrap: wrap;
         align-items: normal;
     }
@@ -807,8 +814,13 @@ td{
         height: auto;
       align-self: flex-end;
     }
+    .selector{
+        height: 40%;
+        width: 100%;
+        order: 2;        
+    }
 
-    .selector,.selector2 {
+    .selector2 {
         display: none;
         height: 25%;
         width: 50%;
@@ -818,8 +830,19 @@ td{
     .contcanvas{
         height: auto;
     }
+
+
     .stamp-selector{
-        display: block;
+        width: 90%;
+        max-height: 90%;
+        background-color: rgba(58, 58, 58, 0);
+        outline: 1px solid rgba(36, 36, 36, 0);
+    }
+    .cont-stamp{
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        overflow-x: scroll;
     }
     .colorselect2{
         display: flex;
@@ -883,10 +906,10 @@ td{
         display: none;
     }
 
-    .selectortext2{
+    /*.selectortext2{
         display: block;
         margin: 10px;
-    }
+    }*/
 
     .dropdown-content {
         bottom: calc(100% + 5px); /* Posición desde abajo */
