@@ -70,8 +70,8 @@ function inicializar() {
     controls.enableDamping = false;
     controls.enablePan = false;
     controls.enableZoom = true;
-    controls.minDistance = 3;
-    controls.maxDistance = 3.6;
+    controls.minDistance = 2.5;
+    controls.maxDistance = 3.5;
     controls.minPolarAngle = 1.6;
     controls.maxPolarAngle = 1.6;
     controls.target = new THREE.Vector3(0, 1.3, 0);

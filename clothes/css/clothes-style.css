@@ -380,12 +380,13 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
 
 .canvas{
     height: 400px;
-    width: 300px;
+    width: 400px;
 }
 
 .contcanvas{
     height: 100%;
     width: 100%;
+    overflow: hidden;
     position: relative;
     display: flex;
     justify-content: center;
@@ -782,6 +783,7 @@ td{
 @media screen and (max-width:60em){
     .container{
         width: 80%;
+        height: 70vh;
         flex-direction: column;
         align-items: normal;
     }
@@ -803,10 +805,6 @@ td{
         font-size: 1em;
         margin: 10px;
     }
-    .contcanvas {
-        height: 75%;
-    }
-
     .capucha{
         width: 100px;
         height: 100px;
