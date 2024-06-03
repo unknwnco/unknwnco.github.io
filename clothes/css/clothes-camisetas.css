@@ -20,6 +20,7 @@ body {
     flex-direction: column;
     justify-content: center;    
     align-items: center;
+    user-select: none;
 }
 
 header{
@@ -243,6 +244,7 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     border-radius: 5px;
     font-size: .7em;
     margin-bottom: 20px;
+    user-select: none;
 }
   
 #custom-btn:hover {
@@ -342,6 +344,7 @@ margin-left: 5px; /* Espacio entre el texto y la flecha */
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid rgb(80, 80, 80);
+    user-select: none;
 }
 
 

@@ -17,6 +17,7 @@
       line-height: 1.em;
       font-family: 'Roboto';
       background-color: black;
+      user-select: none;
   }
 
   a{
