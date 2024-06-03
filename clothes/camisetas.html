@@ -45,7 +45,7 @@
                 Haz clic aquí para vaciar las opciones
             </div>
             <div class="botonera">
-            <div class="btncomprar"><div class="comprarbtn" id="agregarOpciones">agregar</div></div>
+            <div class="btncomprar"><div class="comprarbtn agregarOpciones">agregar</div></div>
             <div class="btncomprar"><div class="comprarbtn" id="continuar">continuar</div></div>
         </div>
             </div>
@@ -70,53 +70,61 @@
     
 
     <div class="container">  
-        <div class="selector">
-            
-            <div class="item decai">
-                <div class="selectortext2">ESTAMPADOS</div>
-                <img src="img/decal1.png" alt="" class="decalref">
-            <div class="decalselect" onclick="toggleDropdown()">
-                <button class="dropbtn">Seleccionar</button>
-                <div class="dropdown-content">
-                   <div class="decaltittle">Personalizados</div>
-                   <div class="decalprev" id="decal5">
-                    <div class="previmg">
-                    <img src="img/logodecal.png" alt="" class="decalimg2" id="preview-img">
-                    </div>
-                    <div class="labelupload">
-                    
-                    <input type="file" id="actual-btn" accept=".png, .jpg" style="display: none;"/>
-                    <label for="actual-btn" id="custom-btn">Seleccionar Archivo</label>
-                    <!--<span id="file-name"></span>--></div>
-                   </div>
-                   <div class="decaltittle">Predifinitos</div>
-                   <div class="decal" id="decal"><img src="img/decal1.png" alt="" class="decalimg"></div>
-                   <div class="decal" id="decal2"><img src="img/decal2.png" alt="" class="decalimg"></div>
-                   <div class="decal" id="decal3"><img src="img/decal3.png" alt="" class="decalimg"></div>
-                   <div class="decal" id="decal4"><img src="img/decal4.png" alt="" class="decalimg"></div>
-                </div>
-            </div>
-            </div>
-        </div>
+
         <div class="contcanvas">
             <div class="carshop" id="notify">
                 <div class="notify" id="shop" ></div>
                 <div class="shop"><i class="fa-solid fa-bag-shopping fa-2xl"></i>
                 </div>
             </div>
+            <div class="colorselect">
+                <div class="colorg color1" id="color1"></div>
+                <div class="colorg color2" id="color2"></div>
+                <div class="colorg color3" id="color3"></div>
+                <div class="colorg color4" id="color4"></div>
+              </div>
             <div class="canvas" id="item">
 
             </div>
         </div>
-        <div class="selector2">
+        <div class="selector">
             <div class="item color">
-                <div class="colorselect">
-                  <div class="color1" id="color1"></div>
-                  <div class="color2" id="color2"></div>
-                  <div class="color3" id="color3"></div>
-                  <div class="color4" id="color4"></div>
+                <div class="filter-cont">
+                <div class="filtro" id="filters">
+                    <div class="selectortext">Filtrar por</div>
+                    <select id="sortOptions" onchange="sortDecals()">
+                        <option value="recommendation" selected>Recomendados</option>
+                        <option value="price-asc">Precio: Menor a Mayor</option>
+                        <option value="price-desc">Precio: Mayor a Menor</option>
+                    </select>
                 </div>
-            <div class="selectortext">color</div>
+                <div class="btn-add agregarOpciones">agregar</div>
+            </div>
+            </div>
+        </div>
+        <div class="selector">
+            <div class="item decai">
+                <div class="selectortext2">ESTAMPADOS</div>
+                <!--<img src="img/decal1.png" alt="" class="decalref">-->
+                <div class="stamp-selector">
+                    <div class="cont-stamp scroll" id="decalContainer">
+                <!--<div class="decaltittle">Personalizados</div>-->
+                <div class="decalprev2" id="decal5">
+                 <div class="previmg">
+                 <img src="img/logodecal.png" alt="" class="decalimg2" id="preview-img">
+                 </div>
+                 <div class="labelupload">
+                 <input type="file" id="actual-btn" accept=".png, .jpg" style="display: none;"/>
+                 <label for="actual-btn" id="custom-btn">Seleccionar Archivo</label>
+                 <!--<span id="file-name"></span>--></div>
+                </div>
+                <!--<div class="decaltittle">Predifinitos</div>-->
+                <div class="decalprev2" id="decal" data-price="20.00" data-recommendation="5"><img src="img/decal1.png" alt="" class="decalimg3"><p class="price-cont"><span class="price">$ 100.000</span><span class="offert">$ 120.000</span></p></div>
+                <div class="decalprev2" id="decal2" data-price="10.00" data-recommendation="4"><img src="img/decal2.png" alt="" class="decalimg3"><p class="price-cont"><span class="price">$ 100.000</span><span class="offert">$ 120.000</span></p></div>
+                <div class="decalprev2" id="decal3" data-price="5.00" data-recommendation="1"><img src="img/decal3.png" alt="" class="decalimg3"><p class="price-cont"><span class="price">$ 100.000</span><span class="offert">$ 120.000</span></p></div>
+                <div class="decalprev2" id="decal4" data-price="8.00" data-recommendation="3"><img src="img/decal4.png" alt="" class="decalimg3"><p class="price-cont"><span class="price">$ 100.000</span><span class="offert">$ 120.000</span></p></div>
+            </div>
+            </div>
             </div>
         </div>
     </div>

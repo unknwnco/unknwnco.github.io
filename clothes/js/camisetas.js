@@ -645,11 +645,10 @@ document.addEventListener('DOMContentLoaded', function() {
         vaciarOpcionesButton.addEventListener('click', limpiarOpcionesButton);
     }
 
-    // Agregar evento de clic al elemento "Guardar opciones"
-    const agregarOpcionesButton = document.getElementById('agregarOpciones');
-    if (agregarOpcionesButton) {
-        agregarOpcionesButton.addEventListener('click', agregarOpciones);
-    }
+    const agregarOpcionesButtons = document.querySelectorAll('.agregarOpciones');
+    agregarOpcionesButtons.forEach(button => {
+        button.addEventListener('click', agregarOpciones);
+    });
         // Agregar evento de clic al elemento "Guardar opciones"
         const guardarOpcionesButton = document.getElementById('guardarOpciones');
         if (guardarOpcionesButton) {
@@ -788,4 +787,22 @@ document.getElementById('actual-btn').addEventListener('change', function() {
     reader.readAsDataURL(file);
   });
 
-//tabla container
+function sortDecals() {
+    const sortOption = document.getElementById('sortOptions').value;
+    const container = document.getElementById('decalContainer');
+    let decals = Array.from(container.getElementsByClassName('decalprev2'));
+
+    if (sortOption === 'price-asc') {
+        decals.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price')));
+    } else if (sortOption === 'price-desc') {
+        decals.sort((a, b) => parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price')));
+    } else if (sortOption === 'recommendation') {
+        decals.sort((a, b) => parseInt(b.getAttribute('data-recommendation')) - parseInt(a.getAttribute('data-recommendation')));
+    }
+
+    decals.forEach(decal => container.appendChild(decal));
+}
+
+window.onload = function() {
+    sortDecals();
+};
