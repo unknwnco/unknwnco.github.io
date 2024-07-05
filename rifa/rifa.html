@@ -15,7 +15,7 @@
 
         .container {
             max-width: 600px;
-            margin: 50px auto;
+            margin:  auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -106,16 +106,29 @@
             background-color: #007bff;
             color: #fff;
         }
+        h5 {
+            background-color: yellow;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .banner {
+            width: 100%;
+        }
+        img {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Administrar Rifa</h1>
+        <div class="banner"><img src="banner_rifa.png" alt=""></div>
         <table>
             <tbody>
                 <!-- Aquí se generarán las celdas -->
             </tbody>
         </table>
+        <h5>¡JUEGA CON LA LOTERIA DE BOYACA EL 3 DE AGOSTO!</h5>
         <form id="raffleForm">
             <label for="participantName">Nombre del Participante:</label>
             <input type="text" id="participantName" required>
@@ -129,6 +142,7 @@
         <ul id="participantList"></ul>
         <button id="drawWinner">Sacar Ganador</button>
         <p id="winner"></p> -->
+        
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
