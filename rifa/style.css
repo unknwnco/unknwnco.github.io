@@ -1,0 +1,190 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        #drawWinner {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #007bff;
+        }
+
+        #drawWinner:hover {
+            background-color: #0056b3;
+        }
+
+        #winner {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 7px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        h5 {
+            background-color: yellow;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .banner {
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+        }
+
+
+/* Estilos para el div flotante */
+#login-button {
+    display: none;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#login{
+    width: 95px;
+    cursor: pointer;
+    background-color: black;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+}
+
+#login:hover{
+    background-color: rgb(58, 58, 58);
+}
+
+.barlogin{ 
+    display: flex;
+    justify-content: flex-end;
+}
+
+#google{
+    background-color: rgb(0, 140, 255);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+#google:hover{
+    background-color: rgb(43, 160, 255);
+}
+
+.icon{
+    margin: 5px;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-info{
+    margin: 5px;
+    cursor: pointer;
+}
+
+#sign-out{
+    background-color: rgb(255, 42, 42);
+    padding: 5px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.botonera{
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}

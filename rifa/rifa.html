@@ -2,127 +2,20 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Administrar Rifa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin:  auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-
-        label {
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input, select {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            padding: 10px;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 5px;
-        }
-
-        #drawWinner {
-            display: block;
-            width: 100%;
-            margin-top: 20px;
-            background-color: #007bff;
-        }
-
-        #drawWinner:hover {
-            background-color: #0056b3;
-        }
-
-        #winner {
-            margin-top: 20px;
-            font-size: 1.2em;
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 7px;
-            text-align: center;
-            background-color: #f8f9fa;
-        }
-
-        .selected {
-            background-color: #007bff;
-            color: #fff;
-        }
-        h5 {
-            background-color: yellow;
-            text-align: center;
-            padding: 5px;
-            font-weight: bold;
-        }
-        .banner {
-            width: 100%;
-        }
-        img {
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+    <!-- Incluir el archivo auth.js -->
+    <script src="auth.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="banner"><img src="banner_rifa.png" alt=""></div>
+
         <table>
             <tbody>
                 <!-- Aquí se generarán las celdas -->
@@ -138,88 +31,19 @@
             </select>
             <button type="submit">Agregar Participante</button>
         </form>
-        <!--
         <ul id="participantList"></ul>
-        <button id="drawWinner">Sacar Ganador</button>
-        <p id="winner"></p> -->
-        
+        <!-- <button id="drawWinner">Sacar Ganador</button> -->
+        <p id="winner"></p>
+                <div class="barlogin">
+            <div class="user">
+                <div id="login" onclick="showLogin()">Iniciar sesión</div>
+                <div id="user-info" style="display: none;"></div>
+                <button id="sign-out" style="display: none;" onclick="signOut()">Cerrar sesión</button>
+            </div>
+            <div id="login-button">
+                <button onclick="signInWithGoogle()" id="google"><span class="icon"><i class="fab fa-google" style="color: #ffffff;"></i></span>Login con Google</button>
+            </div>
+        </div>  
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const raffleForm = document.getElementById('raffleForm');
-            const participantList = document.getElementById('participantList');
-            const drawWinnerButton = document.getElementById('drawWinner');
-            const winnerDisplay = document.getElementById('winner');
-            const tableBody = document.querySelector('table tbody');
-            const participantNumberSelect = document.getElementById('participantNumber');
-            let participants = [];
-            let assignedNumbers = new Set();
-
-            // Generar la tabla con celdas enumeradas del 00 al 99
-            for (let i = 0; i < 10; i++) {
-                const row = document.createElement('tr');
-                for (let j = 0; j < 10; j++) {
-                    const cell = document.createElement('td');
-                    const number = (i * 10 + j).toString().padStart(2, '0');
-                    cell.textContent = number;
-                    cell.id = `cell-${number}`;
-                    row.appendChild(cell);
-                }
-                tableBody.appendChild(row);
-            }
-
-            // Generar las opciones del selector del 00 al 99
-            for (let i = 0; i < 100; i++) {
-                const option = document.createElement('option');
-                option.value = i.toString().padStart(2, '0');
-                option.textContent = i.toString().padStart(2, '0');
-                participantNumberSelect.appendChild(option);
-            }
-
-            raffleForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const participantName = document.getElementById('participantName').value;
-                const participantNumber = document.getElementById('participantNumber').value;
-                if (participantName && participantNumber && !assignedNumbers.has(participantNumber)) {
-                    participants.push({ name: participantName, number: participantNumber });
-                    assignedNumbers.add(participantNumber);
-                    updateParticipantList();
-                    updateNumberOptions();
-                    raffleForm.reset();
-                }
-            });
-
-            drawWinnerButton.addEventListener('click', () => {
-                if (participants.length > 0) {
-                    const winnerIndex = Math.floor(Math.random() * participants.length);
-                    const winner = participants[winnerIndex];
-                    winnerDisplay.textContent = `El ganador es: ${winner.name} con el número ${winner.number}`;
-                } else {
-                    winnerDisplay.textContent = 'No hay participantes en la rifa.';
-                }
-            });
-
-            function updateParticipantList() {
-                participantList.innerHTML = '';
-                participants.forEach(participant => {
-                    const li = document.createElement('li');
-                    li.textContent = `${participant.name} - Número: ${participant.number}`;
-                    participantList.appendChild(li);
-                    document.getElementById(`cell-${participant.number}`).classList.add('selected');
-                });
-            }
-
-            function updateNumberOptions() {
-                const options = participantNumberSelect.options;
-                for (let i = 0; i < options.length; i++) {
-                    if (assignedNumbers.has(options[i].value)) {
-                        options[i].disabled = true;
-                    } else {
-                        options[i].disabled = false;
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
